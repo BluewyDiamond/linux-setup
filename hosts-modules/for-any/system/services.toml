@@ -1,0 +1,4 @@
+[[units]]
+enable = ["ufw.service", "ananicy-cpp.service"]
+path = "/etc/systemd/system"
+user = "root"

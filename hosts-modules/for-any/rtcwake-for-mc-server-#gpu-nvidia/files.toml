@@ -1,0 +1,20 @@
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../../files/rtcwake-for-mc-server-service-#gpu-nvidia/do-rtcwake-for-mc-server-#gpu-nvidia"
+target = "/usr/local/bin/do-rtcwake-for-mc-server-#gpu-nvidia"
+
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = '../../../files/rtcwake-for-mc-server-service-#gpu-nvidia/rtcwake-for-mc-server-\x23gpu-nvidia.timer'
+target = '/etc/systemd/system/rtcwake-for-mc-server-\x23gpu-nvidia.timer'
+
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = '../../../files/rtcwake-for-mc-server-service-#gpu-nvidia/rtcwake-for-mc-server-\x23gpu-nvidia.service'
+target = '/etc/systemd/system/rtcwake-for-mc-server-\x23gpu-nvidia.service'

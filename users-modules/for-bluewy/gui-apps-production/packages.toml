@@ -1,0 +1,13 @@
+packages = [
+   # [ gui.apps.production ]
+   #
+   { from = "std", name = "vscodium", ignore = true },
+   { from = "aur", name = "obs-pipewire-audio-capture" },
+   { from = "std", name = "obs-studio" },
+   { from = "std", name = "audacity" },
+   { from = "std", name = "krita" },
+   { from = "std", name = "kdenlive" },
+
+   { from = "std", name = "libreoffice-fresh" },
+   { from = "std", name = "hunspell-es_es" },
+]

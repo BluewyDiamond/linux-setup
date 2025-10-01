@@ -1,0 +1,4 @@
+[[units]]
+enable = ["lemurs-es-keymap.service"]
+path = "/etc/systemd/system"
+user = "root"

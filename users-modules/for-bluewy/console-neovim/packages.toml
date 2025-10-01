@@ -1,0 +1,11 @@
+packages = [
+   # [ console.neovim ]
+   #
+   { from = "std", name = "neovim" },
+   { from = "std", name = "stylua" },
+   { from = "std", name = "ripgrep" },
+   { from = "std", name = "fzf" },
+   { from = "std", name = "prettier" },
+   { from = "std", name = "eslint_d" },
+   { from = "std", name = "taplo-cli" },
+]

@@ -1,0 +1,8 @@
+packages = [
+   # [ gui.niri.base ]
+   #
+   { from = "lcl", name = "niri-no-systemd-git", path = "../../../aur/niri-no-systemd" },
+   { from = "std", name = "xwayland-satellite" },
+   { from = "std", name = "xdg-desktop-portal-gnome" },
+   { from = "std", name = "xdg-desktop-portal-gtk" },
+]

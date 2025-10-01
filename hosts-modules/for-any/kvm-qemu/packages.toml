@@ -1,0 +1,13 @@
+packages = [
+   { from = "std", name = "qemu-base" },
+   { from = "std", name = "virt-manager" },
+   { from = "std", name = "virt-viewer" },
+   { from = "std", name = "dnsmasq" },
+   { from = "std", name = "vde2" },
+   { from = "std", name = "bridge-utils" },
+   { from = "std", name = "openbsd-netcat" },
+   { from = "std", name = "spice" },
+   { from = "std", name = "qemu-ui-spice-app" },
+   { from = "std", name = "qemu-audio-spice" },
+   { from = "std", name = "qemu-hw-usb-redirect" },
+]

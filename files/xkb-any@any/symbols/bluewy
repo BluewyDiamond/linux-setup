@@ -1,0 +1,193 @@
+partial alphanumeric_keys modifier_keys
+xkb_symbols "colemak_dh_wide_custom_ansi" {
+   include "us(colemak_dh_wide)"
+   name[Group1] = "English (Colemak-DH Wide Custom ANSI)";
+
+   key <AE06> { [   equal,       plus,          multiply,    division  ] };
+   key <AE07> { [   6,           asciicircum,   hstroke,     Hstroke   ] };
+   key <BKSP> { [   Caps_Lock,   Caps_Lock,     Caps_Lock,   Caps_Lock ] };
+
+   key <CAPS> { [   Return,      Return,        Return,      Return    ] };
+   key <RTRN> { [   BackSpace,   Delete,        BackSpace,   Delete    ] };
+
+   // https://gitlab.freedesktop.org/xkeyboard-config/xkeyboard-config/-/issues/45
+   modifier_map None   { Caps_Lock };
+};
+
+partial alphanumeric_keys modifier_keys
+xkb_symbols "colemak_dh_wide_custom_iso" {
+   include "us(colemak_dh_wide_iso)"
+   name[Group1] = "English (Colemak-DH Wide Custom ISO)";
+
+   key <AE06> { [   equal,        plus,          multiply,       division  ] };
+   key <AE07> { [   6,            asciicircum,   hstroke,        Hstroke   ] };
+   key <BKSP> { [   Caps_Lock,    Caps_Lock,     Caps_Lock,      Caps_Lock ] };
+
+   key <RTRN> { [   BackSpace,    Delete,        BackSpace,      Delete    ] };
+
+   key <CAPS> { [   Return,       Return,        Return,         Return    ] };
+   key <BKSL> { [   BackSpace,    Delete,        BackSpace,      Delete    ] };
+
+   key <AB06> { [   slash,        question,      questiondown,   asciitilde ] };
+
+   // https://gitlab.freedesktop.org/xkeyboard-config/xkeyboard-config/-/issues/45
+   modifier_map None   { Caps_Lock };
+};
+
+partial alphanumeric_keys modifier_keys
+xkb_symbols "colemak_dh_wide_custom_eu_ansi" {
+   include "eu(basic)"
+   name[Group1] = "English (Colemak-DH Wide Custom EU ANSI)";
+
+   key <AE06> { [   equal,         plus,          multiply,               division             ] };
+   key <AE07> { [   6,             asciicircum,   dead_circumflex,        dead_caron           ] };
+   key <AE08> { [   7,             ampersand,     dead_abovering,         dead_macron          ] };
+   key <AE09> { [   8,             asterisk,      doublelowquotemark,     singlelowquotemark   ] };
+   key <AE10> { [   9,             parenleft,     leftdoublequotemark,    leftsinglequotemark  ] };
+   key <AE11> { [   0,             parenright,    rightdoublequotemark,   rightsinglequotemark ] };
+   key <AE12> { [   minus,         underscore,    endash,                 emdash               ] };
+   key <BKSP> { [   Caps_Lock,      Caps_Lock,    Caps_Lock,              Caps_Lock            ] };
+
+   key <AD01> { [   q,              Q,            agrave,                 Agrave               ] };
+   key <AD02> { [   w,              W,            aacute,                 Aacute               ] };
+   key <AD03> { [   f,              F,            U0133,                  U0132                ] };
+   key <AD04> { [   p,              P,            igrave,                 Igrave               ] };
+   key <AD05> { [   b,              B,            iacute,                 Iacute               ] };
+   key <AD06> { [   bracketleft,    braceleft,    guillemotleft,          U2039                ] }; // ‹
+   key <AD07> { [   j,              J,            ugrave,                 Ugrave               ] };
+   key <AD08> { [   l,              L,            uacute,                 Uacute               ] };
+   key <AD09> { [   u,              U,            udiaeresis,             Udiaeresis           ] };
+   key <AD10> { [   y,              Y,            ydiaeresis,             Ydiaeresis           ] };
+   key <AD11> { [   semicolon,      colon,        degree,                 periodcentered       ] };
+   key <AD12> { [   apostrophe,     quotedbl,     dead_acute,             dead_diaeresis       ] };
+
+   key <CAPS> { [   Return,         Return,       Return,                 Return               ] };
+   key <AC02> { [   r,              R,            aring,                  Aring                ] };
+   key <AC03> { [   s,              S,            ssharp,                 U1E9E                ] };
+   key <AC04> { [   t,              T,            thorn,                  Thorn                ] };
+   key <AC05> { [   g,              G,            egrave,                 Egrave               ] };
+   key <AC06> { [   bracketright,   braceright,   guillemotright,         U203A                ] }; // ›
+   key <AC07> { [   m,              M,            eacute,                 Eacute               ] };
+   key <AC08> { [   n,              N,            ntilde,                 Ntilde               ] };
+   key <AC09> { [   e,              E,            ediaeresis,             Ediaeresis           ] };
+   key <AC10> { [   i,              I,            idiaeresis,             Idiaeresis           ] };
+   key <AC11> { [   o,              O,            odiaeresis,             Odiaeresis           ] };
+   key <RTRN> { [   BackSpace,      Delete,       BackSpace,              Delete               ] };
+
+   key <AB01> { [   x,              X,            ae,                     AE                   ] };
+   key <AB02> { [   c,              C,            ccedilla,               Ccedilla             ] };
+   key <AB03> { [   d,              D,            dstroke,                Dstroke              ] };
+   key <AB04> { [   v,              V,            oe,                     OE                   ] };
+   key <AB05> { [   z,              Z,            yacute,                 Yacute               ] };
+   key <AB06> { [   slash,          question,     questiondown,           U2026                ] }; // …
+   key <AB07> { [   k,              K,            dead_greek,             squareroot           ] };
+   key <AB08> { [   h,              H,            oslash,                 Oslash               ] };
+   key <AB09> { [   comma,          less,         ograve,                 Ograve               ] };
+   key <AB10> { [   period,         greater,      oacute,                 Oacute               ] };
+
+   // https://gitlab.freedesktop.org/xkeyboard-config/xkeyboard-config/-/issues/45
+   modifier_map None   { Caps_Lock };
+};
+
+default partial alphanumeric_keys modifier_keys
+xkb_symbols "colemak_dh_wide_custom_eu_iso" {
+   include "bluewy(colemak_dh_wide_custom_eu_ansi)"
+   name[Group1] = "English (Colemak-DH Wide Custom EU ISO)";
+
+   key <RTRN> { [   numbersign,  dead_tilde,   section,     tilde     ] };
+
+   key <CAPS> { [   Return,      Return,       Return,      Return    ] };
+   key <BKSL> { [   BackSpace,   Delete,       BackSpace,   Delete    ] };
+
+   key <LSGT> { [   z,           Z,            yacute,      Yacute    ] };
+   key <AB05> { [   backslash,   bar,          notsign,     brokenbar ] };
+};
+
+partial alphanumeric_keys modifier_keys
+xkb_symbols "gralmak_wide_custom_eu_iso" {
+   include "eu(basic)"
+   name[Group1] = "English (Gralmak Wide Custom EU ISO)";
+
+   key <AE07> { [   backslash,      bar,          notsign,                brokenbar            ] };
+   key <AE08> { [   7,              ampersand,    dead_abovering,         dead_macron          ] };
+   key <AE09> { [   8,              asterisk,     doublelowquotemark,     singlelowquotemark   ] };
+   key <AE10> { [   9,              parenleft,    leftdoublequotemark,    leftsinglequotemark  ] };
+   key <AE11> { [   0,              parenright,   rightdoublequotemark,   rightsinglequotemark ] };
+   key <AE12> { [   equal,          plus,         multiply,               division             ] };
+   key <BKSP> { [   Caps_Lock,      Caps_Lock,    Caps_Lock,              Caps_Lock            ] };
+
+   key <AD01> { [   b,              B,            iacute,                 Iacute               ] };
+   key <AD02> { [   l,              L,            uacute,                 Uacute               ] };
+   key <AD03> { [   d,              D,            dstroke,                Dstroke              ] };
+   key <AD04> { [   w,              W,            aacute,                 Aacute               ] };
+   key <AD05> { [   q,              Q,            agrave,                 Agrave               ] };
+   key <AD06> { [   bracketleft,    braceleft,    guillemotleft,          U2039                ] }; // ‹
+   key <AD07> { [   j,              J,            ugrave,                 Ugrave               ] };
+   key <AD08> { [   f,              F,            U0133,                  U0132                ] };
+   key <AD09> { [   o,              O,            odiaeresis,             Odiaeresis           ] };
+   key <AD10> { [   u,              U,            udiaeresis,             Udiaeresis           ] };
+   key <AD11> { [   semicolon,      colon,        degree,                 periodcentered       ] };
+   key <AD12> { [   apostrophe,     quotedbl,     dead_acute,             dead_diaeresis       ] };
+   key <RTRN> { [   numbersign,     dead_tilde,   section,                tilde                ] };
+
+   key <CAPS> { [   Return,         Return,       Return,                 Return               ] };
+   key <AC01> { [   n,              N,            ntilde,                 Ntilde               ] };
+   key <AC02> { [   r,              R,            aring,                  Aring                ] };
+   key <AC03> { [   t,              T,            thorn,                  Thorn                ] };
+   key <AC04> { [   s,              S,            ssharp,                 U1E9E                ] };
+   key <AC05> { [   g,              G,            egrave,                 Egrave               ] };
+   key <AC06> { [   bracketright,   braceright,   guillemotright,         U203A                ] }; // ›
+   key <AC07> { [   y,              Y,            ydiaeresis,             Ydiaeresis           ] };
+   key <AC08> { [   h,              H,            oslash,                 Oslash               ] };
+   key <AC09> { [   a,              A,            adiaeresis,             Adiaeresis           ] };
+   key <AC10> { [   e,              E,            ediaeresis,             Ediaeresis           ] };
+   key <AC11> { [   i,              I,            idiaeresis,             Idiaeresis           ] };
+   key <BKSL> { [   BackSpace,      Delete,       BackSpace,              Delete               ] };
+
+   key <LSGT> { [   z,              Z,            yacute,                 Yacute               ] };
+   key <AB01> { [   x,              X,            ae,                     AE                   ] };
+   key <AB02> { [   m,              M,            eacute,                 Eacute               ] };
+   key <AB03> { [   c,              C,            ccedilla,               Ccedilla             ] };
+   key <AB04> { [   v,              V,            oe,                     OE                   ] };
+   key <AB05> { [   minus,          underscore,   endash,                 emdash               ] };
+   key <AB06> { [   slash,          question,     questiondown,           U2026                ] };
+   key <AB07> { [   k,              K,            dead_greek,             squareroot           ] };
+   key <AB08> { [   p,              P,            igrave,                 Igrave               ] };
+   key <AB09> { [   comma,          less,         ograve,                 Ograve               ] };
+   key <AB10> { [   period,         greater,      oacute,                 Oacute               ] };
+
+   // https://gitlab.freedesktop.org/xkeyboard-config/xkeyboard-config/-/issues/45
+   modifier_map None   { Caps_Lock };
+};
+
+partial alphanumeric_keys modifier_keys
+xkb_symbols "vanilla_ansi" {
+   include "us(basic)"
+   name[Group1] = "English (Custom ANSI)";
+
+   key <BKSP> { [   BackSpace,   Delete,      BackSpace,   Delete    ], repeats = true };
+
+   key <CAPS> { [   Caps_Lock,   Caps_Lock,   Caps_Lock,   Caps_Lock ] };
+   key <RTRN> { [   Return,      Return,      Return,      Return    ] };
+
+   // https://gitlab.freedesktop.org/xkeyboard-config/xkeyboard-config/-/issues/45
+   modifier_map None   { Caps_Lock };
+};
+
+partial alphanumeric_keys modifier_keys
+xkb_symbols "vanilla_iso" {
+   include "us(basic)"
+   name[Group1] = "English (Custom ISO)";
+
+   key <BKSP> { [   BackSpace,   Delete    ], repeats = true };
+
+   key <RTRN> { [   Return,      Return    ] };
+
+   key <CAPS> { [   Caps_Lock,   Caps_Lock ] };
+   key <BKSL> { [   backslash,   bar       ] };
+
+   key <LSGT> { [   less,        greater   ] };
+
+   // https://gitlab.freedesktop.org/xkeyboard-config/xkeyboard-config/-/issues/45
+   modifier_map None   { Caps_Lock };
+};

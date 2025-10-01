@@ -1,0 +1,78 @@
+alt_is_meta
+charset "iso-8859-15"  # use a ISO-8859-15 font, e.g.: consolechars -f lat9v-14
+keymaps 0-12
+include "qwerty-layout"
+include "linux-with-alt-and-altgr"
+strings as usual
+
+keycode  41  =  grave         asciitilde   dead_grave       dead_tilde     nul
+keycode  2   =  one           exclam       exclamdown       onesuperior
+keycode  3   =  two           at           ordfeminine      twosuperior    nul
+keycode  4   =  three         numbersign   masculine        threesuperior  Escape
+keycode  5   =  four          dollar       sterling         yen            Control_backslash
+keycode  6   =  five          percent      euro             cent           Control_bracketright
+keycode  7   =  equal         plus         multiply         division
+keycode  8   =  six           asciicircum  dead_circumflex  dead_caron     Control_asciicircum
+keycode  9   =  seven         ampersand    dead_abovering   dead_macron    Control_underscore
+keycode  10  =  eight         asterisk     U+201E U+201A Delete
+keycode  11  =  nine          parenleft    U+201C U+2018
+keycode  12  =  zero          parenright   U+201D U+2019
+keycode  13  =  minus         underscore   endash           emdash     Control_underscore
+
+keycode  16  =  q             Q            agrave           Agrave     Control_q
+keycode  17  =  w             W            aacute           Aacute          Control_w
+keycode  18  =  f             F            U+0133            U+0132         Control_f
+keycode  19  =  p             P            igrave           Igrave       Control_p
+keycode  20  =  b             B            iacute           Iacute     Control_b
+keycode  21  =  bracketleft   braceleft    guillemotleft    U+2039  Escape
+keycode  22  =  j             J            ugrave           Ugrave     Control_j
+keycode  23  =  l             L            uacute           Uacute     Control_l
+keycode  24  =  u             U            udiaeresis       Udiaeresis         Control_u
+keycode  25  =  y             Y            ydiaeresis       Ydiaeresis     Control_y
+keycode  26  =  semicolon     colon        degree           periodcentered
+keycode  27  =  apostrophe    quotedbl     dead_acute       dead_diaeresis
+keycode  43  =  backslash     bar          asciitilde       asciitilde     Control_backslash
+
+keycode  30  =  a             A            adiaeresis           Adiaeresis         Control_a
+keycode  31  =  r             R            aring       Aring     Control_r
+keycode  32  =  s             S            ssharp           U+1E9E     Control_s
+keycode  33  =  t             T            thorn       THORN     Control_t
+keycode  34  =  g             G            egrave       Egrave     Control_g
+keycode  35  =  bracketright  braceright   guillemotright       U+203A Control_bracketright
+keycode  36  =  m             M            eacute       Eacute     Control_m
+keycode  37  =  n             N            ntilde           Ntilde         Control_n
+keycode  38  =  e             E            ediaeresis           Ediaeresis         Control_e
+keycode  39  =  i             I            idiaeresis           Idiaeresis         Control_i
+keycode  40  =  o             O            odiaeresis          Odiaeresis         Control_o
+
+keycode  86  =  minus         underscore   asciitilde       asciitilde     Control_underscore
+keycode  44  =  x             X            ae  AE     Control_x
+keycode  45  =  c             C            ccedilla         Ccedilla       Control_c
+keycode  46  =  d             D            dstroke   Dstroke     Control_d
+keycode  47  =  v             V            oe               OE             Control_v
+keycode  48  =  z             Z            yacute               Yacute             Control_z
+keycode  49  =  slash         question     questiondown     U+2026     Delete
+keycode  50  =  k             K            dead_greek       U+221A     Control_k
+keycode  51  =  h             H            oslash       Oslash     Control_h
+keycode  52  =  comma         less         ograve     Ograve
+keycode  53  =  period        greater      oacute       Oacute
+
+! Important Keys
+
+keycode  57  =  space         space        space            nobreakspace   nul
+
+! BackSpace/Delete
+keycode  14  =  Caps_Lock
+
+! Caps Lock
+keycode  58  =  Return        Return       Return           Return
+alt keycode  58 =  Meta_Control_m
+
+keycode   1  =  Escape
+keycode  15  =  Tab
+keycode  28  =  Delete Delete Delete Delete
+keycode  29  =  Control
+keycode  42  =  Shift
+keycode  54  =  Shift
+keycode  56  =  Alt
+keycode  97  =  Control

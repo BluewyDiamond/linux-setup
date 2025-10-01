@@ -1,0 +1,6 @@
+[Unit]
+Description=Suspend at 01:30+UTC and wake at 07:00+UTC.
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/do-rtcwake-for-mc-server

@@ -1,0 +1,38 @@
+/* -----------------------------------------------------
+ * One Dark Collection - Dark Theme
+ * ----------------------------------------------------- */
+
+@define-color onedarkpro-dark-chalky #e5c07b;
+@define-color onedarkpro-dark-coral #e06c75;
+@define-color onedarkpro-dark-dark #5c6370;
+@define-color onedarkpro-dark-error #f44747;
+@define-color onedarkpro-dark-fountain-blue #56b6c2;
+@define-color onedarkpro-dark-green #98c379;
+@define-color onedarkpro-dark-invalid #ffffff;
+@define-color onedarkpro-dark-light-dark #7f848e;
+@define-color onedarkpro-dark-light-white #abb2bf;
+@define-color onedarkpro-dark-malibu #61afef;
+@define-color onedarkpro-dark-purple #c678dd;
+@define-color onedarkpro-dark-whiskey #d19a66;
+@define-color onedarkpro-dark-deep-red #be5046;
+
+@define-color onedarkpro-dark-background #21252B;
+@define-color onedarkpro-dark-background-2 #282C34;
+
+@define-color gogh-dark-background #1E2127;
+@define-color gogh-dark-bright-white #FFFEFE;
+
+/* -----------------------------------------------------
+ * One Dark Collection - Light Theme
+ * ----------------------------------------------------- */
+
+@define-color gogh-light-red #DA3E39;
+@define-color gogh-light-green #41933E;
+@define-color gogh-light-yellow #855504;
+@define-color gogh-light-blue #315EEE;
+@define-color gogh-light-magenta #930092;
+@define-color gogh-light-cyan #0E6FAD;
+@define-color gogh-light-white #8E8F96;
+@define-color gogh-light-bright-white #FFFEFE;
+@define-color gogh-light-background #F8F8F8;
+@define-color gogh-light-foreground #2A2B32;

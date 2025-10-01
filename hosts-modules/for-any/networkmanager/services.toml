@@ -1,0 +1,7 @@
+[[units]]
+enable = [
+   "NetworkManager.service",
+   "systemd-resolved.service",
+]
+path = "/etc/systemd/system"
+user = "root"

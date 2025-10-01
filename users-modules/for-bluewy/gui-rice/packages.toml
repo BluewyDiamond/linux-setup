@@ -1,0 +1,14 @@
+packages = [
+   # [ gui.rice ]
+   #
+   { from = "aur", name = "qt6ct-kde" },
+   { from = "aur", name = "qt5ct-kde" },
+   { from = "aur", name = "bibata-cursor-theme-bin" },
+   { from = "aur", name = "candy-icons-git" },
+   { from = "aur", name = "sweet-folders-icons-git" },
+   { from = "std", name = "font-manager" },
+   { from = "std", name = "ttf-iosevkaterm-nerd" },
+   { from = "std", name = "kvantum" },
+   { from = "std", name = "kvantum-qt5" },
+   { from = "std", name = "nwg-look" },
+]

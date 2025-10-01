@@ -1,0 +1,6 @@
+include = [
+   "./packages.toml",
+   "./services.toml",
+
+   "../../../users-modules/for-bluewy/gui-gaming/packages.toml",
+]

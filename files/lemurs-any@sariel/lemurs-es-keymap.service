@@ -1,0 +1,16 @@
+[Unit]
+Description=Lemurs (ES Keymap)
+After=systemd-user-sessions.service plymouth-quit-wait.service
+After=getty@tty1.service
+
+[Service]
+ExecStartPre=/usr/bin/loadkeys es
+ExecStart=/usr/bin/lemurs
+StandardInput=tty
+TTYPath=/dev/tty2
+TTYReset=yes
+TTYVHangup=yes
+Type=idle
+
+[Install]
+Alias=display-manager.service

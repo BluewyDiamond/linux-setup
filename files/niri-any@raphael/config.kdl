@@ -1,0 +1,333 @@
+// [ Inputs & Outputs ]
+//
+input {
+   keyboard {
+      xkb {
+         layout "bluewy,bluewy"
+         variant "colemak_dh_wide_custom_eu_iso,vanilla_iso"
+         // options "grp:win_space_toggle" // or through binds
+      }
+
+      numlock
+   }
+
+   touchpad {
+      tap
+      natural-scroll
+   }
+
+   mouse {
+      accel-profile "flat"
+      accel-speed -0.75
+   }
+
+   warp-mouse-to-focus
+}
+
+output "HDMI-A-2" {
+   mode "1920x1080@239.964"
+   focus-at-startup
+   variable-refresh-rate
+}
+
+// [ Behaviours & Aesthetics ]
+//
+prefer-no-csd
+
+overview {
+   backdrop-color "#1E2127"
+
+   workspace-shadow {
+      off
+   }
+}
+
+window-rule {
+   geometry-corner-radius 0
+   clip-to-geometry true
+   open-fullscreen false
+   open-maximized true
+}
+
+window-rule {
+   match is-window-cast-target=true
+
+   border {
+      inactive-color "#5a2d32"
+   }
+
+   tab-indicator {
+      inactive-color "#5a2d32"
+   }
+}
+
+window-rule {
+   match is-active=true is-window-cast-target=true
+
+   border {
+      active-color "#E06C75"
+      inactive-color "#5a2d32"
+   }
+
+   tab-indicator {
+      active-color "#E06C75"
+      inactive-color "#5a2d32"
+   }
+}
+
+window-rule {
+   match at-startup=true app-id="org.keepassxc.KeePassXC"
+   open-on-workspace "scratchpad"
+   open-focused true
+}
+
+window-rule {
+   match app-id="org.keepassxc.KeePassXC"
+   block-out-from "screencast"
+}
+
+layout {
+   background-color "#21252B"
+   gaps 16
+   center-focused-column "never"
+
+   preset-column-widths {
+      proportion 0.33333
+      proportion 0.5
+      proportion 0.66667
+   }
+
+   default-column-width { proportion 0.5; }
+
+   focus-ring {
+      off
+   }
+
+   border {
+      width 2
+      active-color "#61AFEF"
+      inactive-color "#27445a"
+      urgent-color "#E5C07B"
+   }
+
+   tab-indicator {
+      length total-proportion=1.0
+      place-within-column
+      gap 0
+      gaps-between-tabs 16
+      width 16
+   }
+}
+
+hotkey-overlay {
+   skip-at-startup
+}
+
+cursor {
+   xcursor-theme "Bibata-Modern-Classic"
+   xcursor-size 24
+}
+
+screenshot-path "~/media/screenshots/%Y-%m-%d_%H-%M-%S.png"
+
+// static workspaces, lets go!
+workspace "one"
+workspace "two"
+workspace "three"
+workspace "four"
+workspace "eight"
+workspace "nine"
+workspace "zero"
+
+// scratchpad workspaces
+workspace "scratchpad"
+
+// [ Binds ]
+//
+binds {
+   // [[ WM ]]
+   //
+   Mod+Shift+Slash { show-hotkey-overlay; }
+   Mod+O repeat=false { toggle-overview; }
+
+   // Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+   Mod+Shift+Alt+Escape { quit; }
+
+   Print { screenshot; }
+   Ctrl+Print { screenshot-screen; }
+   Alt+Print { screenshot-window; }
+   Mod+Shift+P { power-off-monitors; }
+
+   Mod+Space { switch-layout "next"; }
+   Mod+Shift+Space { switch-layout "prev"; }
+
+   // [[ Window ]]
+   //
+   Mod+Q { close-window; }
+
+   Mod+Left  { focus-column-left; }
+   Mod+Down  { focus-window-down; }
+   Mod+Up    { focus-window-up; }
+   Mod+Right { focus-column-right; }
+   Mod+U     { focus-window-up; }
+   Mod+I     { focus-column-right; }
+   Mod+E     { focus-window-down; }
+   Mod+N     { focus-column-left; }
+
+   Mod+Home { focus-column-first; }
+   Mod+End  { focus-column-last; }
+   Mod+Ctrl+Home { move-column-to-first; }
+   Mod+Ctrl+End  { move-column-to-last; }
+
+   Mod+Alt+U { set-window-height "+10%"; }
+   Mod+Alt+I { set-column-width "+10%"; }
+   Mod+Alt+E { set-window-height "-10%"; }
+   Mod+Alt+N { set-column-width "-10%"; }
+
+   Mod+M { maximize-column; }
+   Mod+F { fullscreen-window; }
+   Mod+Shift+F { toggle-windowed-fullscreen; }
+
+   Mod+Ctrl+F { expand-column-to-available-width; }
+
+   Mod+C { center-column; }
+   Mod+Ctrl+C { center-visible-columns; }
+
+   Mod+V       { toggle-window-floating; }
+   Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+   Mod+W { toggle-column-tabbed-display; }
+
+   Mod+Ctrl+N { consume-or-expel-window-left; }
+   Mod+Ctrl+E { move-window-down; }
+   Mod+Ctrl+U { move-window-up; }
+   Mod+Ctrl+I { consume-or-expel-window-right; }
+
+   Mod+WheelScrollRight      { focus-column-right; }
+   Mod+WheelScrollLeft       { focus-column-left; }
+   Mod+Ctrl+WheelScrollRight { move-column-right; }
+   Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+
+   Mod+Shift+WheelScrollDown      { focus-column-right; }
+   Mod+Shift+WheelScrollUp        { focus-column-left; }
+   Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
+   Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+ 
+   Mod+R { switch-preset-column-width; }
+   Mod+Shift+R { switch-preset-window-height; }
+   Mod+Ctrl+R { reset-window-height; }
+
+  
+   // [[ Workspace ]]
+   //
+   Mod+1 { focus-workspace "one"; }
+   Mod+2 { focus-workspace "two"; }
+   Mod+3 { focus-workspace "three"; }
+   Mod+4 { focus-workspace "four"; }
+   Mod+8 { focus-workspace "eight"; }
+   Mod+9 { focus-workspace "nine"; }
+   Mod+0 { focus-workspace "zero"; }
+
+   Mod+Ctrl+1 { move-window-to-workspace "one"; }
+   Mod+Ctrl+2 { move-window-to-workspace "two"; }
+   Mod+Ctrl+3 { move-window-to-workspace "three"; }
+   Mod+Ctrl+4 { move-window-to-workspace "four"; }
+   Mod+Ctrl+8 { move-window-to-workspace "eight"; }
+   Mod+Ctrl+9 { move-window-to-workspace "nine"; }
+   Mod+Ctrl+0 { move-window-to-workspace "zero"; }
+
+   Mod+Page_Down      { focus-workspace-down; }
+   Mod+Page_Up        { focus-workspace-up; }
+   Mod+Y              { focus-workspace-down; }
+   Mod+L              { focus-workspace-up; }
+   Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
+   Mod+Ctrl+Page_Up   { move-window-to-workspace-up; }
+   Mod+Ctrl+Y         { move-window-to-workspace-down; }
+   Mod+Ctrl+L         { move-window-to-workspace-up; }
+
+   Mod+Shift+Page_Down { move-workspace-down; }
+   Mod+Shift+Page_Up   { move-workspace-up; }
+   Mod+Shift+Y         { move-workspace-down; }
+   Mod+Shift+L         { move-workspace-up; }
+
+   Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+   Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+   Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-window-to-workspace-down; }
+   Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-window-to-workspace-up; }
+
+   // [[ Monitor Binds ]]
+   //
+   Mod+Shift+Left  { focus-monitor-left; }
+   Mod+Shift+Down  { focus-monitor-down; }
+   Mod+Shift+Up    { focus-monitor-up; }
+   Mod+Shift+Right { focus-monitor-right; }
+   Mod+Shift+N     { focus-monitor-left; }
+   Mod+Shift+E     { focus-monitor-down; }
+   Mod+Shift+U     { focus-monitor-up; }
+   Mod+Shift+I     { focus-monitor-right; }
+
+   Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
+   Mod+Shift+Ctrl+Down  { move-window-to-monitor-down; }
+   Mod+Shift+Ctrl+Up    { move-window-to-monitor-up; }
+   Mod+Shift+Ctrl+Right { move-window-to-monitor-right; }
+   Mod+Shift+Ctrl+N     { move-window-to-monitor-left; }
+   Mod+Shift+Ctrl+E     { move-window-to-monitor-down; }
+   Mod+Shift+Ctrl+U     { move-window-to-monitor-up; }
+   Mod+Shift+Ctrl+I     { move-window-to-monitor-right; }
+
+   // [[ Other ]]
+   //
+   Mod+Shift+Escape { spawn "uwsm" "stop"; }
+   // in this setup prefers manual integration with systemd via uwsm
+   // this is done so that i can do logic in a shell
+   // without the shell itself being tracked by niri systemd integration as a scope
+   Mod+T hotkey-overlay-title="Open a Terminal: wezterm" { spawn "uwsm" "app" "--" "wezterm"; }
+   Mod+D hotkey-overlay-title="Open App Launcher: fuzzel" { spawn "uwsm" "app" "--" "fuzzel" "--launch-prefix=uwsm app -- "; }
+
+   Mod+X { spawn "fish" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
+   Mod+Alt+L allow-when-locked=true { spawn "uwsm" "app" "--" "hyprlock"; }
+
+   Mod+B { spawn "fish" "-c" "$HOME/.local/share/scripts/quick_menu.fish"; }
+
+   XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+   XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+   XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+   XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+}
+
+// [ Environment ]
+//
+// externally managed with uwsm
+
+// [ Autostart ]
+//
+// [[ Rice ]]
+//
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "one_dark_adwaita"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Sweet-Rainbow"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "cursor-theme" "Bibata-Modern-Classic"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "cursor-size" "24"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
+
+// [[ Polkit ]]
+//
+spawn-at-startup "nu" "-c" "try { pidof io.elementary.desktop.agent-polkit } catch { exec uwsm app -- /usr/lib/policykit-1-pantheon/io.elementary.desktop.agent-polkit }"
+
+// [[ Idle Listener ]]
+//
+spawn-at-startup "nu" "-c" "try { pidof hypridle } catch { exec uwsm app -- hypridle }"
+spawn-at-startup "nu" "-c" "try { pidof wayland-pipewire-idle-inhibit } catch { exec uwsm app -- wayland-pipewire-idle-inhibit }"
+
+// [[ Clipboard ]]
+//
+spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type text --watch cliphist store' } catch { exec uwsm app -- wl-paste --type text --watch cliphist store }"
+spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type image --watch cliphist store'} catch { exec uwsm app -- wl-paste --type image --watch cliphist store }"
+
+// [[ Widget ]]
+//
+spawn-at-startup "nu" "-c" r#"exec uwsm app -- $"($env.HOME)/.config/ags/cli.nu" run"#
+
+// [[ Other ]]
+//
+spawn-at-startup "nu" "-c" "try { pidof keepassxc } catch { exec uwsm app -- keepassxc }"

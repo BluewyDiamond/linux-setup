@@ -1,0 +1,46 @@
+@use "./_theme.scss" as *;
+@use "./_variables.scss" as *;
+
+window.notification-toasts-window {
+   .notification-toast-box {
+      background: $surface;
+      border: $border-size solid $outline-variant;
+      min-width: 400px;
+
+      margin-bottom: $spacing;
+
+      .notification-header-box {
+         padding: $spacing;
+
+         .notification-close-button {
+            min-width: 10px;
+            background: red;
+         }
+      }
+
+      .notification-content-box {
+         padding: $spacing;
+
+         .notification-body-image {
+            -gtk-icon-size: 100px;
+         }
+
+         .notification-body-label {
+            background: $surface-container;
+         }
+      }
+
+      .notification-action-area-box {
+         padding: $spacing;
+
+         .notification-action-button {
+            background: $surface-container;
+            margin-right: $spacing;
+
+            &:last-child {
+               margin-right: 0;
+            }
+         }
+      }
+   }
+}

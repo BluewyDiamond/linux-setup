@@ -1,0 +1,9 @@
+packages = [
+   # [ console.hardware ]
+   #
+   { from = "std", name = "power-profiles-daemon" },
+   { from = "std", name = "python-gobject" },
+
+   { from = "std", name = "wiremix" },
+   { from = "std", name = "bluetui" },
+]

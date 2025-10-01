@@ -1,0 +1,28 @@
+[[units]]
+enable = [
+   # needed for proper env
+   #
+   "systemd-timesyncd.service",
+
+   # by me
+   #
+   "acer-battery-limiter.service",
+
+   # for user interaction
+   #
+   "getty@tty1.service",
+
+   # other
+   #
+   "sshd.service",
+
+   # by chwd
+   #
+   "nvidia-resume.service",
+   "nvidia-suspend.service",
+   "nvidia-powerd.service",
+   "nvidia-hibernate.service",
+   "switcheroo-control.service",
+]
+path = "/etc/systemd/system"
+user = "root"

@@ -1,0 +1,136 @@
+{
+   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+   "logo": {
+      "padding": {
+         "top": 0,
+         "right": 10,
+         "left": 10,
+         "bottom": 0,
+      },
+      "type": "kitty",
+      "source": "$HOME/.config/fastfetch/rsc/cachyos.png",
+   },
+   "display": {
+      "separator": "",
+   },
+   "modules": [
+      {
+         "type": "custom",
+         "format": "────────────────────── DateTime ──────────────────────",
+         "outputColor": "red",
+      },
+      {
+         "type": "DateTime",
+         "format": "{weekday-short} {day-pretty} {month-name-short} {year} | {day-pretty}/{month-pretty}/{year}",
+         "key": "   DATE     => ",
+         "keyColor": "magenta",
+      },
+      {
+         "type": "DateTime",
+         "format": "                | {hour-pretty}:{minute-pretty}:{second-pretty}",
+         "key": "  󰥔 TIME     => ",
+         "keyColor": "magenta",
+      },
+      "break",
+      {
+         "type": "custom",
+         "format": "────────────────────── Hardware ──────────────────────",
+         "outputColor": "red",
+      },
+      {
+         "type": "cpu",
+         "key": "   CPU      => ",
+         "keyColor": "green",
+      },
+      {
+         "type": "memory",
+         "key": "  󰑭 RAM      => ",
+         "keyColor": "green",
+      },
+      {
+         "type": "swap",
+         "key": "  󰓡 SWAP     => ",
+         "keyColor": "green",
+      },
+      {
+         "type": "gpu",
+         "key": "  󰈐 GPU      => ",
+         "keyColor": "green",
+      },
+      {
+         "type": "disk",
+         "key": "   ROOT     => ",
+         "keyColor": "green",
+         "folders": "/",
+      },
+      {
+         "type": "display",
+         "key": "  󰍹 DISPLAY  => ",
+         "keyColor": "green",
+      },
+      {
+         "type": "battery",
+         "key": "   BATTERY  => ",
+         "keyColor": "green",
+      },
+      "break",
+      {
+         "type": "custom",
+         "format": "────────────────────── Software ──────────────────────",
+         "outputColor": "red",
+      },
+      {
+         "type": "os",
+         "key": "   OS       => ",
+         "keyColor": "yellow",
+         "format": "{2}",
+      },
+      {
+         "type": "kernel",
+         "key": "   KERNEL   => ",
+         "keyColor": "yellow",
+      },
+      {
+         "type": "title",
+         "key": "   HOSTNAME => ",
+         "keyColor": "yellow",
+      },
+      {
+         "type": "packages",
+         "key": "  󰏖 PACKAGES => ",
+         "keyColor": "yellow",
+      },
+      {
+         "type": "shell",
+         "key": "   SHELL    => ",
+         "keyColor": "yellow",
+      },
+      "break",
+      {
+         "type": "lm",
+         "key": "  󰧨 DM       => ",
+         "keyColor": "blue",
+      },
+      {
+         "type": "wm",
+         "key": "   WM       => ",
+         "keyColor": "blue",
+      },
+      {
+         "type": "terminal",
+         "key": "   TERM     => ",
+         "keyColor": "blue",
+      },
+      "break",
+      {
+         "type": "custom",
+         "key": "   COLORS   => ",
+         "format": "\u001b[30m███\u001b[31m███\u001b[32m███\u001b[33m███\u001b[34m███\u001b[35m███\u001b[36m███\u001b[37m███",
+      },
+      {
+         "type": "custom",
+         "key": "                ",
+         "format": "\u001b[90m███\u001b[91m███\u001b[92m███\u001b[93m███\u001b[94m███\u001b[95m███\u001b[96m███\u001b[97m███",
+      },
+   ],
+}

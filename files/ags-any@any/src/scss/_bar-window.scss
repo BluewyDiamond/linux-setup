@@ -1,0 +1,90 @@
+@use "./_theme.scss" as *;
+@use "./_variables.scss" as *;
+
+@mixin bar-button {
+   background: $surface-container;
+   padding: $spacing;
+}
+
+$states: (
+   occupied: $secondary-container,
+   focused: $primary-container,
+   urgent: $warning-container,
+   active: $primary-container,
+);
+
+@mixin state-styles {
+   @each $state, $color in $states {
+      &.#{$state} {
+         background: $color;
+      }
+   }
+}
+
+window.bar-window {
+   background: $surface;
+   margin: 16px 16px 0 16px;
+   border: 2px solid $outline-variant;
+
+   // Right Side
+   //
+   .workspaces-button {
+      @include bar-button;
+      // first one needs to include spacing to the left
+      margin: $spacing;
+
+      .workspace-label {
+         @include state-styles;
+         background: $surface;
+         margin-right: $spacing;
+         min-width: 12px;
+         font-size: 0;
+
+         &:last-child {
+            margin-right: 0;
+         }
+      }
+   }
+
+   .taskbar-box {
+      margin: $spacing $spacing $spacing 0;
+
+      .taskbar-client-button {
+         @include bar-button;
+         @include state-styles;
+         margin-right: $spacing;
+      }
+   }
+
+   // Center
+   //
+   .date-time-menubutton {
+      @include bar-button;
+      // currently it is the only widget at the center
+      margin: $spacing;
+   }
+
+   // Left Side
+   //
+   .tray-box {
+      image {
+         @include bar-button;
+         margin: $spacing 0 $spacing $spacing;
+      }
+   }
+
+   .indicators-button {
+      @include bar-button;
+      @include state-styles;
+      // first widget at the right side
+      margin: $spacing;
+
+      .indicator-widget {
+         margin-left: $spacing;
+
+         &:first-child {
+            margin-left: 0;
+         }
+      }
+   }
+}

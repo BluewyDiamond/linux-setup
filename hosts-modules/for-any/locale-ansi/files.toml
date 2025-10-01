@@ -1,0 +1,65 @@
+[[files-spawn]]
+# en_US is here for compatability reasons (ehem steam)
+content = """
+en_IE.UTF-8 UTF-8
+en_US.UTF-8 UTF-8
+"""
+group = "root"
+owner = "root"
+target = "/etc/locale.gen"
+
+[[files-spawn]]
+content = """
+LANG=en_IE.UTF-8
+LC_ADDRESS=en_IE.UTF-8
+LC_IDENTIFICATION=en_IE.UTF-8
+LC_MEASUREMENT=en_IE.UTF-8
+LC_MONETARY=en_IE.UTF-8
+LC_NAME=en_IE.UTF-8
+LC_NUMERIC=en_IE.UTF-8
+LC_PAPER=en_IE.UTF-8
+LC_TELEPHONE=en_IE.UTF-8
+LC_TIME=en_IE.UTF-8
+"""
+group = "root"
+owner = "root"
+target = "/etc/locale.conf"
+
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../../files/kbd-any@any/colemak-dh-wide-custom-eu-ansi.map"
+target = "/usr/share/kbd/keymaps/colemak-dh-wide-custom-eu-ansi.map"
+
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../../files/kbd-any@any/colemak-dh-wide-custom-eu-ansi.map"
+target = "/usr/share/kbd/keymaps/colemak-dh-wide-custom-eu-ansi.map"
+
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../../files/xkb-any@any/symbols/bluewy"
+target = "/etc/xkb/symbols/bluewy"
+
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../../files/xkb-any@any/rules/evdev.xml"
+target = "/etc/xkb/rules/evdev.xml"
+
+[[files-spawn]]
+content = """
+XKBLAYOUT=bluewy,us
+FONT=ter-124n
+XKBMODEL=colemak_dh_wide_custom_eu_ansi,
+KEYMAP=colemak-dh-wide-custom-eu-ansi
+"""
+group = "root"
+owner = "root"
+target = "/etc/vconsole.conf"

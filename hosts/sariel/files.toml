@@ -1,0 +1,34 @@
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../files/refind-any@sariel/refind.conf"
+target = "/boot/EFI/refind/refind.conf"
+
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../files/refind-any@sariel/extra.conf"
+target = "/boot/EFI/refind/extra.conf"
+
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../files/lenovo-battery-limit-service-any@sariel/limit-lenovo-battery"
+target = "/usr/local/bin/lenovo-battery-limit"
+
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../files/lenovo-battery-limit-service-any@sariel/lenovo-battery-limiter.service"
+target = "/etc/systemd/system/lenovo-battery-limiter.service"
+
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../files/libinput-any@any/local-overrides.quirks"
+target = "/etc/libinput/local-overrides.quirks"

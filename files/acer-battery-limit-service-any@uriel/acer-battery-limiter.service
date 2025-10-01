@@ -1,0 +1,12 @@
+[Unit]
+Description=On supported lenovo laptops, enables battery limit (conservation mode). https://www.reddit.com/r/Ubuntu/comments/p2so5n/how_to_limit_battery_charging_to_60_in_ubuntu/
+
+[Service]
+Type=oneshot
+Environment=TERM=linux
+StandardOutput=tty
+TTYPath=/dev/console
+ExecStart=/usr/local/bin/limit-acer-battery
+
+[Install]
+WantedBy=multi-user.target

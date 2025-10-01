@@ -1,0 +1,6 @@
+packages = [
+   # [ gui.android ]
+   #
+   { from = "aur", name = "waydroid-image-gapps", ignore = true },
+   { from = "std", name = "waydroid", ignore = true },
+]

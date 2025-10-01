@@ -1,0 +1,165 @@
+[[install_files]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/niri-any@raphael"
+target = "/home/bluewy/.config/niri"
+
+[[install_files]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/hypr-any@raphael"
+target = "/home/bluewy/.config/hypr"
+
+# # # # # # #
+
+[[files-spawn]]
+content = """
+[D-BUS Service]
+Name=org.freedesktop.secrets
+Exec=/usr/bin/keepassxc
+"""
+group = "bluewy"
+owner = "bluewy"
+target = "/home/bluewy/.local/share/dbus-1/services/org.freedesktop.secrets.service"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/ags-any@any"
+target = "/home/bluewy/.config/ags"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/applications-any@any/obs.desktop"
+target = "/home/bluewy/.local/share/applications/obs.desktop"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/bin-any@raphael/gamescope-stuff"
+target = "/home/bluewy/.local/bin/gamescope-stuff"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/bin-any@any/steam-stuff"
+target = "/home/bluewy/.local/bin/steam-stuff"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/bin-any@any/proton-stuff"
+target = "/home/bluewy/.local/bin/proton-stuff"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/electron-any@any/electron-flags.conf"
+target = "/home/bluewy/.config/electron-flags.conf"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/fastfetch-any@any"
+target = "/home/bluewy/.config/fastfetch"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/fuzzel-any@any"
+target = "/home/bluewy/.config/fuzzel"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/librewolf-any@any/librewolf.overrides.cfg"
+target = "/home/bluewy/.librewolf/librewolf.overrides.cfg"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/mangohud-any@any"
+target = "/home/bluewy/.config/MangoHud"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/nushell-any@any"
+target = "/home/bluewy/.config/nushell"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/nvim-any@any"
+target = "/home/bluewy/.config/nvim"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/pipewire-any@any"
+target = "/home/bluewy/.config/pipewire"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/scripts-any@any"
+target = "/home/bluewy/.local/share/scripts"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/speech-dispatcher-any@any"
+target = "/home/bluewy/.config/speech-dispatcher"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/starship-any@any/starship.toml"
+target = "/home/bluewy/.config/starship.toml"
+
+[[items-install]]
+group = "bluewy"
+operation = "copy"
+owner = "bluewy"
+source = "../../../files/user-dirs-any@any/user-dirs.dirs"
+target = "/home/bluewy/.config/user-dirs.dirs"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/uwsm-any@any"
+target = "/home/bluewy/.config/uwsm"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/wezterm-any@any"
+target = "/home/bluewy/.config/wezterm"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/xkb-any@any"
+target = "/home/bluewy/.config/xkb"

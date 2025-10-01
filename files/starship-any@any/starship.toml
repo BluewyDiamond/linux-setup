@@ -1,0 +1,85 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+continuation_prompt = ':: '
+
+format = """
+$time\
+$username\
+[@](fg:yellow)\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$cmd_duration\
+$status\
+$line_break\
+$character"""
+
+[time]
+disabled = false
+time_format = "%R"
+format = """
+[$time](fg:cyan)\
+"""
+
+[username]
+show_always = true
+style_user = "fg:yellow"
+style_root = "fg:yellow"
+format = """
+[ $user]($style)\
+"""
+
+[hostname]
+ssh_only = false
+ssh_symbol= "+ssh"
+format = """
+[$hostname$ssh_symbol](fg:yellow)\
+"""
+
+[directory]
+truncation_length = 9
+truncate_to_repo = false
+truncation_symbol = "…/"
+format = """
+[ $path](fg:blue)\
+"""
+
+[git_branch]
+symbol = ""
+format = """
+[ ($symbol)($branch)](fg:green)\
+"""
+
+[git_status]
+format = """
+[ ($stashed$deleted$renamed$typechanged$staged$modified$conflicted$untracked$ahead_behind)](bg:surface_container fg:yellow)($style)\
+"""
+ahead = "[⇡$count](bg:surface_container fg:green)"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+
+untracked = "?${count} "
+stashed = "S${count} "
+modified = "!${count} "
+staged = "+${count} "
+renamed = "R${count} "
+deleted = "D${count} "
+
+[cmd_duration]
+format = """
+[( $duration)](fg:green)\
+"""
+style = "bg:surface_container"
+
+[status]
+disabled = false
+symbol = "E"
+format = """
+[( $symbol$status)](fg:red)\
+"""
+
+[character]
+disabled = false
+success_symbol = '[➜](bold fg:green)'
+error_symbol = '[➜](bold fg:red)'

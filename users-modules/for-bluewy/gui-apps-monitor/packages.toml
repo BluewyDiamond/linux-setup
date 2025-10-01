@@ -1,0 +1,6 @@
+packages = [
+   # [ gui.apps.monitor ]
+   #
+   { from = "std", name = "mission-center" },
+   { from = "std", name = "qpwgraph" },
+]

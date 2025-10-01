@@ -1,0 +1,34 @@
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/fastfetch-any@any"
+target = "/home/bluewy/.config/fastfetch"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/nushell-any@any"
+target = "/home/bluewy/.config/nushell"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/nvim-any@any"
+target = "/home/bluewy/.config/nvim"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/starship-any@any/starship.toml"
+target = "/home/bluewy/.config/starship.toml"
+
+[[items-install]]
+group = "bluewy"
+operation = "copy"
+owner = "bluewy"
+source = "../../../files/user-dirs-any@any/user-dirs.dirs"
+target = "/home/bluewy/.config/user-dirs.dirs"

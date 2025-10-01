@@ -1,0 +1,22 @@
+packages = [
+   # [ gui.widgets ]
+   #
+   { from = "aur", name = "libastal-io-git" },
+   { from = "aur", name = "libastal-git" },
+   { from = "aur", name = "libastal-4-git" },
+   { from = "aur", name = "libastal-gjs-git" },
+   { from = "aur", name = "libastal-hyprland-git" },
+   { from = "aur", name = "libastal-battery-git" },
+   { from = "aur", name = "libastal-notifd-git" },
+   { from = "aur", name = "libastal-wireplumber-git" },
+   { from = "aur", name = "libastal-apps-git" },
+   { from = "aur", name = "libastal-powerprofiles-git" },
+   { from = "aur", name = "libastal-tray-git" },
+   { from = "aur", name = "libastal-niri-git" },
+   { from = "aur", name = "aylurs-gtk-shell-git" },
+   { from = "std", name = "dart-sass" },
+   { from = "std", name = "fd" },
+   { from = "std", name = "bun-bin" },
+   { from = "std", name = "gjs" },
+   { from = "std", name = "gtk4-layer-shell" },
+]

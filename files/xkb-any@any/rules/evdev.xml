@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xkbConfigRegistry SYSTEM "xkb.dtd">
+<xkbConfigRegistry version="1.1">
+   <layoutList>
+      <layout>
+         <configItem>
+            <name>bluewy</name>
+            <shortDescription>bl</shortDescription>
+            <description>English (Bluewy Custom Layouts)</description>
+            <languageList>
+               <iso639Id>en</iso639Id>
+            </languageList>
+         </configItem>
+         <variantList>
+            <variant>
+               <configItem>
+                  <name>colemak_dh_wide_custom_eu_ansi</name>
+                  <description>English (Colemak-DH Wide Custom EU ANSI)</description>
+               </configItem>
+            </variant>
+            <variant>
+               <configItem>
+                  <name>colemak_dh_wide_custom_eu_iso</name>
+                  <description>English (Colemak-DH Wide Custom EU ISO)</description>
+               </configItem>
+            </variant>
+            <variant>
+               <configItem>
+                  <name>gralmak_wide_custom_eu_iso</name>
+                  <description>English (Gralmak Wide Custom EU ISO)</description>
+               </configItem>
+            </variant>
+            <variant>
+               <configItem>
+                  <name>vanilla_ansi</name>
+                  <description>English (Custom ANSI)</description>
+               </configItem>
+            </variant>
+            <variant>
+               <configItem>
+                  <name>vanilla_iso</name>
+                  <description>English (Custom ISO)</description>
+               </configItem>
+            </variant>
+         </variantList>
+      </layout>
+   </layoutList>
+</xkbConfigRegistry>

@@ -1,0 +1,7 @@
+packages = [
+   # [ console.rice ]
+   #
+   { from = "std", name = "terminus-font" },
+   { from = "std", name = "fastfetch" },
+   { from = "std", name = "starship" },
+]

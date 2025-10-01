@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Godot Engine Mono (Wayland)
+Comment=Multi-platform 2D and 3D game engine with a feature-rich editor
+Exec=godot-mono --display-driver wayland
+Icon=godot-mono.svg
+Terminal=false
+PrefersNonDefaultGPU=true
+Type=Application
+MimeType=application/x-godot-project;
+Categories=Development;IDE;
+StartupWMClass=Godot

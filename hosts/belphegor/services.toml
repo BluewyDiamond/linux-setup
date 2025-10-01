@@ -1,0 +1,4 @@
+[[units]]
+enable = ["getty@tty1.service", "systemd-timesyncd.service", "sshd.service"]
+path = "/etc/systemd/system"
+user = "root"

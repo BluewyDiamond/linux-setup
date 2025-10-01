@@ -1,0 +1,4 @@
+packages = [
+   { from = "std", name = "bluez" },
+   { from = "std", name = "bluez-utils" },
+]

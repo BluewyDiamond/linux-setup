@@ -1,0 +1,6 @@
+packages = [
+   # [ console.other ]
+   #
+   { from = "aur", name = "xdg-ninja-git", ignore = true },
+   { from = "std", name = "flatpak" },
+]

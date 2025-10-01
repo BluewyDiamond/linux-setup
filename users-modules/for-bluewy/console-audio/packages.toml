@@ -1,0 +1,9 @@
+packages = [
+   # [ console.audio ]
+   #
+   { from = "std", name = "pipewire" },
+   { from = "std", name = "pipewire-alsa" },
+   { from = "std", name = "pipewire-pulse" },
+   { from = "std", name = "pipewire-jack" },
+   { from = "std", name = "wireplumber" },
+]

@@ -1,0 +1,3 @@
+#!/usr/bin/env nu
+
+1 | save -f /sys/bus/wmi/drivers/acer-wmi-battery/health_mode

@@ -1,0 +1,19 @@
+packages = [
+   # [ gui.niri.extra ]
+   #
+   { from = "aur", name = "wayshot" },
+   { from = "std", name = "hyprlock" },
+   { from = "std", name = "hypridle" },
+   { from = "std", name = "hyprpicker" },
+   { from = "std", name = "wayland-pipewire-idle-inhibit" },
+   { from = "std", name = "pantheon-polkit-agent" },
+   { from = "std", name = "keepassxc" },
+   { from = "std", name = "uwsm" },
+   { from = "std", name = "fuzzel" },
+   { from = "std", name = "slurp" },
+   { from = "std", name = "satty" },
+   { from = "std", name = "cliphist" },
+
+   { from = "aur", name = "wezterm-git" },
+   { from = "std", name = "libgit2" },
+]

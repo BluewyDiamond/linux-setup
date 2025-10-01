@@ -1,0 +1,19 @@
+#!/usr/bin/env nu
+
+let date_utc_now = date now | date to-timezone UTC
+let date_utc_0700 = $date_utc_now | format date "%Y-%m-%d 07:00:00 %z" | into datetime
+
+let date_utc_next_0700 = if $date_utc_now < $date_utc_0700 {
+   $date_utc_0700
+} else {
+   $date_utc_0700 + 1day
+}
+
+let unix_time = (
+   $date_utc_next_0700
+   | format date "%s"
+   | into int
+)
+
+rtcwake -u -m no -t $unix_time
+systemctl suspend

@@ -1,0 +1,4 @@
+packages = [
+   { from = "std", name = "networkmanager" },
+   { from = "std", name = "iwd" },
+]
