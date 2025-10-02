@@ -1,0 +1,6 @@
+[[items-install]]
+group = "elisa"
+operation = "copy"
+owner = "elisa"
+source = "../../files/logind-any@raphael/frequency.conf"
+target = "/home/elisa/.config/systemd/user/psd-resync.timer.d/frequency.conf"
