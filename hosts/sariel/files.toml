@@ -32,3 +32,10 @@ operation = "copy"
 owner = "root"
 source = "../../files/libinput-any@any/local-overrides.quirks"
 target = "/etc/libinput/local-overrides.quirks"
+
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../files/logind-any@raphael/logind.conf"
+target = "/etc/systemd/logind.conf.d/logind.conf"
