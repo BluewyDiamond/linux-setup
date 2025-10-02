@@ -100,22 +100,46 @@ alias nu-ls = ls
 #
 # List the filenames, sizes, and modification times of items in a directory.
 def ls [
-   --all (-a) # Show hidden files
+   --hidden (-H) # Show hidden files
    --long (-l) # Get all available columns for each entry (slower; columns are platform-dependent)
    --short-names (-s) # Only print the file names, and not the path
    --full-paths (-f) # display paths as absolute paths
    --du (-d) # Display the apparent directory size ("disk usage") in place of the directory metadata size
    --directory (-D) # List the specified directory itself instead of its contents
    --mime-type (-m) # Show mime-type in type column instead of 'file' (based on filenames only; files' contents are not examined)
+   --plain (-p) # Show plain files
    --threads (-t) # Use multiple threads to list contents. Output will be non-deterministic.
-   ...pattern: oneof<glob, string> # The glob pattern to use.
+   ...patterns: oneof<glob, string> # The glob pattern to use.
 ]: [nothing -> table] {
-   let pattern = if ($pattern | is-empty) { ['.'] } else { $pattern }
+   let patterns = if ($patterns | is-empty) {
+      [('.*' | into glob) ('*' | into glob)]
+   } else {
+      $patterns | each {|pattern|
+         match ($pattern | describe) {
+            string => {
+               if $hidden {
+                  [($"($pattern)/.*" | into glob)]
+               } else if $plain {
+                  [($"($pattern)/*" | into glob)]
+               } else {
+                  [('.*' | into glob) ('*' | into glob)]
+               }
+            }
+
+            glob => {
+               $pattern
+            }
+
+            null => {
+               [('.*' | into glob) ('*' | into glob)]
+            }
+         }
+      } | flatten
+   }
 
    let cmd = {||
       (
          nu-ls
-         --all=$all
          --long=true
          --short-names=$short_names
          --full-paths=$full_paths
@@ -123,15 +147,17 @@ def ls [
          --directory=$directory
          --mime-type=$mime_type
          --threads=$threads
-         ...$pattern
-      )
+         ...$patterns
+      ) | sort-by {|e|
+         not ($e.type == dir)
+      } name
    }
 
    if $long {
-      do $cmd
-   } else {
-      do $cmd | select name type mode user group size modified
+      return (do $cmd)
    }
+
+   do $cmd | select name type mode user group size modified
 }
 
 # [ Autostart ]

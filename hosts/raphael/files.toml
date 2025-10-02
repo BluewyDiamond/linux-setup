@@ -57,3 +57,10 @@ FallbackDNS=1.0.0.1
 group = "root"
 owner = "root"
 target = "/etc/resolved.conf"
+
+[[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../files/logind-any@raphael/logind.conf"
+target = "/etc/systemd/logind.conf.d/logind.conf"
