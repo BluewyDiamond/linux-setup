@@ -1,0 +1,6 @@
+[[items-install]]
+group = "bluewy"
+operation = "copy"
+owner = "bluewy"
+source = "../../files/logind-any@raphael/frequency.conf"
+target = "/home/bluewy/.config/systemd/user/psd-resync.timer.d/frequency.conf"
