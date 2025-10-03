@@ -95,8 +95,7 @@ def --wrapped aura [...args] {
 
 alias nu-ls = ls
 
-# This is an alias. More help available at the link below.
-# https://www.nushell.sh/commands/docs/ls.html
+# The original built-in command 'ls' has been renamed to 'nu-ls'.
 #
 # List the filenames, sizes, and modification times of items in a directory.
 def ls [
@@ -112,52 +111,39 @@ def ls [
    ...patterns: oneof<glob, string> # The glob pattern to use.
 ]: [nothing -> table] {
    let patterns = if ($patterns | is-empty) {
-      [('.*' | into glob) ('*' | into glob)]
-   } else {
-      $patterns | each {|pattern|
-         match ($pattern | describe) {
-            string => {
-               if $hidden {
-                  [($"($pattern)/.*" | into glob)]
-               } else if $plain {
-                  [($"($pattern)/*" | into glob)]
-               } else {
-                  [('.*' | into glob) ('*' | into glob)]
-               }
-            }
-
-            glob => {
-               $pattern
-            }
-
-            null => {
-               [('.*' | into glob) ('*' | into glob)]
-            }
-         }
-      } | flatten
+      [.]
    }
 
-   let cmd = {||
-      (
-         nu-ls
-         --long=true
-         --short-names=$short_names
-         --full-paths=$full_paths
-         --du=$du
-         --directory=$directory
-         --mime-type=$mime_type
-         --threads=$threads
-         ...$patterns
-      ) | sort-by {|e|
-         not ($e.type == dir)
-      } name
+   mut output = (
+      nu-ls
+      --all=true
+      --long=true
+      --short-names=$short_names
+      --full-paths=$full_paths
+      --du=$du
+      --directory=$directory
+      --mime-type=$mime_type
+      --threads=$threads
+      ...$patterns
+   )
+
+   if (not $long) {
+      $output = $output | select name type mode user group size modified
    }
 
-   if $long {
-      return (do $cmd)
+   if $hidden and not $plain {
+      $output = $output | where {|item| $item.name | str starts-with '.' }
+   } else if $plain and not $hidden {
+      $output = $output | where {|item| not ($item.name | str starts-with '.') }
+   } else if $plain and $hidden {
+      error make {msg: "hidden and plain flags can not coexist"}
    }
 
-   do $cmd | select name type mode user group size modified
+   paint-ls $output
+}
+
+def paint-ls [table] {
+   $table
 }
 
 # [ Autostart ]
