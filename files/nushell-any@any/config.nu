@@ -1,23 +1,3 @@
-# [ Helper Functions ]
-#
-# def build-args [flags: list<record<flag: string, value: any>>] {
-#    print $"($flags)"
-#    $flags
-#    | where {|record|
-#       $record.value != null and (
-#          ($record.value | describe) != "bool" or
-#          $record.value == true
-#       )
-#    }
-#    | each {|record|
-#       if ($record.value | describe) == "bool" {
-#          $record.flag
-#       } else {
-#          $"($record.flag)=($record.value)"
-#       }
-#    }
-# }
-
 # [ Env ]
 #
 $env.config.show_banner = false
