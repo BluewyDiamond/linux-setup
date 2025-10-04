@@ -150,10 +150,7 @@ def paint-ls [table] {
 #
 # for autoloading scripts
 let nu_autoload = ($nu.data-dir | path join "vendor/autoload")
-
-if not ($nu_autoload | path exists) {
-   mkdir $nu_autoload
-}
+mkdir $nu_autoload
 
 # [[ Prompt (Starship) ]]
 #
