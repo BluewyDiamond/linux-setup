@@ -3,10 +3,10 @@
 
 window.notifications-window {
    .notifications-box {
-      margin-top: $gaps;
    }
 
    .notification-box {
+      margin: $gaps $gaps 0 $gaps;
       background: $surface;
       border: $border-size solid $outline-variant;
       min-width: 400px;
