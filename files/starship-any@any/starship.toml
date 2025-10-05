@@ -53,7 +53,7 @@ format = """
 
 [git_status]
 format = """
-( $stashed$deleted$renamed$typechanged$staged$modified$conflicted$untracked$ahead$behind)\
+( $stashed$deleted$renamed$typechanged$staged$modified$conflicted$untracked$ahead_count$behind)\
 """
 ahead = "[⇡{$count}](fg:green)"
 behind = "[⇣${count}](fg:yellow)"
