@@ -48,14 +48,14 @@ format = """
 [git_branch]
 symbol = ""
 format = """
-[ ($symbol)($branch)](fg:green)\
+[( $symbol)( $branch)](fg:green)\
 """
 
 [git_status]
 format = """
-[ ($stashed$deleted$renamed$typechanged$staged$modified$conflicted$untracked$ahead_behind)](bg:surface_container fg:yellow)($style)\
+[( $stashed$deleted$renamed$typechanged$staged$modified$conflicted$untracked$ahead_behind)](fg:yellow)($style)\
 """
-ahead = "[⇡$count](bg:surface_container fg:green)"
+ahead = "[⇡$count]"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 
@@ -70,7 +70,6 @@ deleted = "D${count} "
 format = """
 [( $duration)](fg:green)\
 """
-style = "bg:surface_container"
 
 [status]
 disabled = false
