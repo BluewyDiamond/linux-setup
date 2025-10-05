@@ -1,13 +1,15 @@
 @use "./_theme.scss" as *;
 @use "./_variables.scss" as *;
 
-window.notification-toasts-window {
-   .notification-toast-box {
+window.notifications-window {
+   .notifications-box {
+      margin-top: $gaps;
+   }
+
+   .notification-box {
       background: $surface;
       border: $border-size solid $outline-variant;
       min-width: 400px;
-
-      margin-bottom: $spacing;
 
       .notification-header-box {
          padding: $spacing;

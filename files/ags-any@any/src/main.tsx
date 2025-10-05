@@ -2,15 +2,11 @@ import app from "ags/gtk4/app";
 // @ts-expect-error stop_complaining
 import style from "./scss/main.scss";
 import BarWindow from "./ui/windows/bar/BarWindow.tsx";
-import NotificationToastsWindow from "./ui/windows/notificationToasts/NotificationToastsWindow.tsx";
 import ControlCenterWindow from "./ui/windows/controlCenter/ControlCenterWindow.tsx";
-import {
-   createExternal,
-   For,
-   This,
-} from "ags";
+import { createExternal, For, This } from "ags";
 import { timeout } from "ags/time.ts";
 import Gdk from "gi://Gdk";
+import NotificationsWindow from "./ui/windows/notifications/NotificationsWindow.tsx";
 
 app.start({
    css: style,
@@ -62,7 +58,7 @@ function five() {
             <This this={app}>
                <BarWindow gdkmonitor={monitor} />
                <ControlCenterWindow gdkmonitor={monitor} />
-               <NotificationToastsWindow gdkmonitor={monitor} />
+               <NotificationsWindow gdkmonitor={monitor} />
             </This>
          )}
       </For>

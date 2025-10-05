@@ -1,12 +1,9 @@
 import { Accessor, createBinding, For, onCleanup } from "ags";
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import app from "ags/gtk4/app";
-import Adw from "gi://Adw";
 import AstalNotifd from "gi://AstalNotifd";
-import { checkIconExists } from "../../../utils";
-import icons from "../../../lib/icons";
 import options from "../../../options";
-import { NotificationToastBox } from "../composables/NotificationToastBox";
+import { NotificationBox } from "../composables/NotificationsBox";
 
 const notifd = AstalNotifd.get_default();
 
@@ -79,7 +76,7 @@ export default function ({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
                <For each={notificationsBinding}>
                   {(notification) => (
                      <box orientation={Gtk.Orientation.VERTICAL}>
-                        <NotificationToastBox
+                        <NotificationBox
                            notification={notification}
                            nuke={() => {
                               notification.dismiss();

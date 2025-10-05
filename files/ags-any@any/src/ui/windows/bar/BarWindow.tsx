@@ -13,13 +13,14 @@ export default function BarWindow({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
 
    return (
       <window
-         $={(self) => onCleanup(() => self.destroy())}
+         cssClasses={["bar-window"]}
          gdkmonitor={gdkmonitor}
          name={options.bar.name}
          namespace={options.bar.name}
-         cssClasses={["bar-window"]}
+         layer={Astal.Layer.TOP}
          anchor={TOP | LEFT | RIGHT}
          exclusivity={Astal.Exclusivity.EXCLUSIVE}
+         keymode={Astal.Keymode.NONE}
          application={app}
          visible
       >

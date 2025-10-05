@@ -5,7 +5,7 @@ import { Gtk } from "ags/gtk4";
 import icons from "../../../lib/icons";
 import options from "../../../options";
 
-export function NotificationToastBox({
+export function NotificationBox({
    notification,
    nuke,
 }: {
@@ -17,7 +17,7 @@ export function NotificationToastBox({
          maximumSize={options.notificationToasts.notification.maximumSize}
       >
          <box
-            cssClasses={["notification-toast-box"]}
+            cssClasses={["notification-box"]}
             orientation={Gtk.Orientation.VERTICAL}
          >
             <box cssClasses={["notification-header-box"]} hexpand>

@@ -4,10 +4,7 @@ import app from "ags/gtk4/app";
 import { timeout } from "ags/time";
 import AstalNotifd from "gi://AstalNotifd";
 import options from "../../../options";
-import icons from "../../../lib/icons";
-import { checkIconExists } from "../../../utils";
-import Adw from "gi://Adw";
-import { NotificationToastBox } from "../composables/NotificationToastBox";
+import { NotificationBox } from "../composables/NotificationsBox";
 
 const notifd = AstalNotifd.get_default();
 
@@ -51,23 +48,24 @@ export default function ({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
 
    return (
       <window
-         $={(self) => onCleanup(() => self.destroy())}
+         cssClasses={["notifications-window"]}
          gdkmonitor={gdkmonitor}
          name={options.notificationToasts.name}
          namespace={options.notificationToasts.name}
-         cssClasses={["notification-toasts-window"]}
+         layer={Astal.Layer.OVERLAY}
          anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
-         exclusivity={Astal.Exclusivity.EXCLUSIVE}
+         exclusivity={Astal.Exclusivity.NORMAL}
+         keymode={Astal.Keymode.NONE}
          application={app}
          visible={visible}
       >
          <box
-            cssClasses={["notification-toasts-box"]}
+            cssClasses={["notifications-box"]}
             orientation={Gtk.Orientation.VERTICAL}
          >
             <For each={notificationsState}>
                {(notification) => (
-                  <NotificationToastBox
+                  <NotificationBox
                      notification={notification}
                      nuke={() =>
                         setNotificationsState((previousNotifications) =>
