@@ -55,7 +55,7 @@ format = """
 format = """
 [( $stashed$deleted$renamed$typechanged$staged$modified$conflicted$untracked$ahead$behind)](fg:yellow)($style)\
 """
-ahead = "[⇡$count]"
+ahead = "⇡{$count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 
