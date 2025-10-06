@@ -2,5 +2,5 @@
 group = "bluewy"
 operation = "link"
 owner = "bluewy"
-source = "../../../files/logind-any@raphael/frequency.conf"
+source = "../../../files/psd-any@any/frequency.conf"
 target = "/home/bluewy/.config/systemd/user/psd-resync.timer.d/frequency.conf"
