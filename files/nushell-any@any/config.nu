@@ -116,6 +116,8 @@ def ls [
 ]: [nothing -> table] {
    let patterns = if ($patterns | is-empty) {
       [.]
+   } else {
+      $patterns
    }
 
    mut ls_output = (
