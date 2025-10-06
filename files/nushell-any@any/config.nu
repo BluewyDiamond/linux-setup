@@ -112,9 +112,13 @@ def ls [
    }
 
    if $hidden and not $plain {
-      $output = $output | where {|item| $item.name | str starts-with '.' }
+      $output = $output | par-each {|item|
+         if ($item.name | str starts-with '.') { $item }
+      }
    } else if $plain and not $hidden {
-      $output = $output | where {|item| not ($item.name | str starts-with '.') }
+      $output = $output | par-each {|item|
+         if not ($item.name | str starts-with '.') { $item }
+      }
    } else if $plain and $hidden {
       error make {msg: "hidden and plain flags can not coexist"}
    }
@@ -124,6 +128,23 @@ def ls [
 
 def paint-ls [table] {
    $table
+   | par-each {|row|
+      let name = if $row.type == dir {
+         $"(ansi blue_bold)($row.name)(ansi reset)"
+      } else if $row.type == symlink {
+         $"(ansi cyan_bold)($row.name)(ansi reset)"
+      } else if ($row.mode | str contains 'x') {
+         $"(ansi red_bold)($row.name)(ansi reset)"
+      } else {
+         null
+      }
+
+      if $name == null {
+         return $row
+      }
+
+      $row | upsert name $name
+   }
 }
 
 # [ Autostart ]
