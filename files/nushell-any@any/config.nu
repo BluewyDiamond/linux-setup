@@ -1,4 +1,5 @@
-# [ fns ]
+# [ Fns ]
+#
 def "compact column" [
    --empty (-e) # Also compact empty items like "", {}, and []
    ...rest: string # The columns to compact from the table
