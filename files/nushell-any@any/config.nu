@@ -59,11 +59,9 @@ $env.WINEPREFIX = ($env.XDG_DATA_HOME | path join "wine")
 $env.EDITOR = "nvim"
 
 # [ Alias ]
+# note: for some reason, the rename of the original built-in command will have
+# its help info replaced by the new one
 #
-# replacing built-in commands kinda broken rn
-# while technically working,
-# the alias --help is calling the replacer --help
-# this only happens when replacing built-in commands
 alias nu-clear = clear
 
 # This is an alias. More help available at the link below.
@@ -100,7 +98,8 @@ def --wrapped aura [...args] {
 
 alias nu-ls = ls
 
-# The original built-in command 'ls' has been renamed to 'nu-ls'.
+# This is an alias. More help available at the link below.
+# https://www.nushell.sh/commands/docs/ls.html
 #
 # List the filenames, sizes, and modification times of items in a directory.
 def ls [
@@ -119,7 +118,7 @@ def ls [
       [.]
    }
 
-   mut output = (
+   mut ls_output = (
       nu-ls
       --all=true
       --long=true
@@ -133,26 +132,26 @@ def ls [
    )
 
    if (not $long) {
-      $output = $output | select -o name type target mode user group size modified | compact column
+      $ls_output = $ls_output | select -o name type target mode user group size modified | compact column
    }
 
    if $hidden and not $plain {
-      $output = $output | par-each {|item|
+      $ls_output = $ls_output | par-each {|item|
          if ($item.name | str starts-with '.') { $item }
       }
    } else if $plain and not $hidden {
-      $output = $output | par-each {|item|
+      $ls_output = $ls_output | par-each {|item|
          if not ($item.name | str starts-with '.') { $item }
       }
    } else if $plain and $hidden {
       error make {msg: "hidden and plain flags can not coexist"}
    }
 
-   paint-ls $output | table --width (term size | get columns)
+   $ls_output | paint-ls-output | table --width (term size | get columns)
 }
 
-def paint-ls [table] {
-   $table
+def paint-ls-output []: table -> table {
+   $in
    | par-each {|row|
       let name = if $row.type == dir {
          $"(ansi blue_bold)($row.name)(ansi reset)"
