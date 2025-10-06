@@ -1,3 +1,20 @@
+# [ fns ]
+def "compact column" [
+   --empty (-e) # Also compact empty items like "", {}, and []
+   ...rest: string # The columns to compact from the table
+] {
+   mut result = $in
+   let cols = if ($rest | length) > 0 { $rest } else { $result | columns }
+
+   for col in $cols {
+      if ($result | get $col | compact --empty=$empty | length) == 0 {
+         $result = ($result | reject $col)
+      }
+   }
+
+   return $result
+}
+
 # [ Env ]
 #
 $env.config.show_banner = false
@@ -108,7 +125,7 @@ def ls [
    )
 
    if (not $long) {
-      $output = $output | select name type mode user group size modified
+      $output = $output | select -o name type target mode user group size modified | compact column
    }
 
    if $hidden and not $plain {
@@ -123,7 +140,7 @@ def ls [
       error make {msg: "hidden and plain flags can not coexist"}
    }
 
-   paint-ls $output
+   paint-ls $output | table --width (term size | get columns)
 }
 
 def paint-ls [table] {
@@ -139,11 +156,27 @@ def paint-ls [table] {
          null
       }
 
-      if $name == null {
-         return $row
+      let target = if $row.target? != null {
+         if not ($row.target | path exists) {
+            $"(ansi red_bold)($row.target)(ansi reset)"
+         } else {
+            $row.target
+         }
+      } else {
+         null
       }
 
-      $row | upsert name $name
+      mut row = $row
+
+      if $name != null {
+         $row = $row | upsert name $name
+      }
+
+      if $target != null {
+         $row = $row | upsert target $target
+      }
+
+      $row
    }
 }
 
