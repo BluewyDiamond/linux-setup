@@ -119,13 +119,6 @@ target = "/home/bluewy/.config/pipewire"
 group = "bluewy"
 operation = "link"
 owner = "bluewy"
-source = "../../../files/scripts-any@any"
-target = "/home/bluewy/.local/share/scripts"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
 source = "../../../files/speech-dispatcher-any@any"
 target = "/home/bluewy/.config/speech-dispatcher"
 
