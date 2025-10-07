@@ -45,8 +45,10 @@ overview {
 window-rule {
    geometry-corner-radius 0
    clip-to-geometry true
+
+   open-focused true
    open-fullscreen false
-   open-maximized true
+   open-floating false
 }
 
 window-rule {
@@ -73,6 +75,11 @@ window-rule {
       active-color "#E06C75"
       inactive-color "#5a2d32"
    }
+}
+
+window-rule {
+   match at-startup=true
+   open-maximized true
 }
 
 window-rule {
@@ -147,78 +154,66 @@ workspace "scratchpad"
 binds {
    // [[ WM ]]
    //
-   Mod+Shift+Slash { show-hotkey-overlay; }
+   Mod+Slash { show-hotkey-overlay; }
    Mod+O repeat=false { toggle-overview; }
-
-   // Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-
-   Mod+Shift+Alt+Escape { quit; }
-
-   Print { screenshot; }
-   Ctrl+Print { screenshot-screen; }
-   Alt+Print { screenshot-window; }
    Mod+Shift+P { power-off-monitors; }
 
+   Mod+Shift+Escape { spawn "uwsm" "stop"; } // preserve the shift in case of accidental press
+
+   // [[ Keyboard ]]
+   //
    Mod+Space { switch-layout "next"; }
    Mod+Shift+Space { switch-layout "prev"; }
 
+   // [[ Screenshot ]]
+   //
+   Print { screenshot; }
+   Ctrl+Print { screenshot-screen; }
+   Alt+Print { screenshot-window; }
+
    // [[ Window ]]
    //
-   Mod+Q { close-window; }
-
-   Mod+Left  { focus-column-left; }
-   Mod+Down  { focus-window-down; }
-   Mod+Up    { focus-window-up; }
-   Mod+Right { focus-column-right; }
    Mod+U     { focus-window-up; }
    Mod+I     { focus-column-right; }
    Mod+E     { focus-window-down; }
    Mod+N     { focus-column-left; }
 
+   Mod+Ctrl+U { move-window-up; }
+   Mod+Ctrl+I { consume-or-expel-window-right; }
+   Mod+Ctrl+E { move-window-down; }
+   Mod+Ctrl+N { consume-or-expel-window-left; }
+
    Mod+Home { focus-column-first; }
    Mod+End  { focus-column-last; }
+
    Mod+Ctrl+Home { move-column-to-first; }
    Mod+Ctrl+End  { move-column-to-last; }
+
+   Mod+C { center-column; }
+   Mod+Shift+C { center-visible-columns; }
 
    Mod+Alt+U { set-window-height "+10%"; }
    Mod+Alt+I { set-column-width "+10%"; }
    Mod+Alt+E { set-window-height "-10%"; }
    Mod+Alt+N { set-column-width "-10%"; }
 
-   Mod+M { maximize-column; }
-   Mod+F { fullscreen-window; }
-   Mod+Shift+F { toggle-windowed-fullscreen; }
+   Mod+R { switch-preset-column-width; }
+   Mod+Shift+R { switch-preset-window-height; }
+   Mod+Ctrl+R { reset-window-height; }
 
    Mod+Ctrl+F { expand-column-to-available-width; }
+   Mod+M { maximize-column; }
 
-   Mod+C { center-column; }
-   Mod+Ctrl+C { center-visible-columns; }
+   Mod+F { toggle-windowed-fullscreen; }
+   Mod+Shift+F { fullscreen-window; }
 
    Mod+V       { toggle-window-floating; }
    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
    Mod+W { toggle-column-tabbed-display; }
 
-   Mod+Ctrl+N { consume-or-expel-window-left; }
-   Mod+Ctrl+E { move-window-down; }
-   Mod+Ctrl+U { move-window-up; }
-   Mod+Ctrl+I { consume-or-expel-window-right; }
+   Mod+Q { close-window; }
 
-   Mod+WheelScrollRight      { focus-column-right; }
-   Mod+WheelScrollLeft       { focus-column-left; }
-   Mod+Ctrl+WheelScrollRight { move-column-right; }
-   Mod+Ctrl+WheelScrollLeft  { move-column-left; }
-
-   Mod+Shift+WheelScrollDown      { focus-column-right; }
-   Mod+Shift+WheelScrollUp        { focus-column-left; }
-   Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
-   Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
- 
-   Mod+R { switch-preset-column-width; }
-   Mod+Shift+R { switch-preset-window-height; }
-   Mod+Ctrl+R { reset-window-height; }
-
-  
    // [[ Workspace ]]
    //
    Mod+1 { focus-workspace "one"; }
@@ -237,58 +232,36 @@ binds {
    Mod+Ctrl+9 { move-window-to-workspace "nine"; }
    Mod+Ctrl+0 { move-window-to-workspace "zero"; }
 
-   Mod+Page_Down      { focus-workspace-down; }
-   Mod+Page_Up        { focus-workspace-up; }
    Mod+Y              { focus-workspace-down; }
    Mod+L              { focus-workspace-up; }
-   Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
-   Mod+Ctrl+Page_Up   { move-window-to-workspace-up; }
-   Mod+Ctrl+Y         { move-window-to-workspace-down; }
-   Mod+Ctrl+L         { move-window-to-workspace-up; }
 
-   Mod+Shift+Page_Down { move-workspace-down; }
-   Mod+Shift+Page_Up   { move-workspace-up; }
    Mod+Shift+Y         { move-workspace-down; }
    Mod+Shift+L         { move-workspace-up; }
 
-   Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-   Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
-   Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-window-to-workspace-down; }
-   Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-window-to-workspace-up; }
+   Mod+Ctrl+Alt+U         { move-window-to-workspace-up; }
+   Mod+Ctrl+Alt+E         { move-window-to-workspace-down; }
 
    // [[ Monitor Binds ]]
    //
-   Mod+Shift+Left  { focus-monitor-left; }
-   Mod+Shift+Down  { focus-monitor-down; }
-   Mod+Shift+Up    { focus-monitor-up; }
-   Mod+Shift+Right { focus-monitor-right; }
-   Mod+Shift+N     { focus-monitor-left; }
-   Mod+Shift+E     { focus-monitor-down; }
    Mod+Shift+U     { focus-monitor-up; }
    Mod+Shift+I     { focus-monitor-right; }
+   Mod+Shift+E     { focus-monitor-down; }
+   Mod+Shift+N     { focus-monitor-left; }
 
-   Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-   Mod+Shift+Ctrl+Down  { move-window-to-monitor-down; }
-   Mod+Shift+Ctrl+Up    { move-window-to-monitor-up; }
-   Mod+Shift+Ctrl+Right { move-window-to-monitor-right; }
-   Mod+Shift+Ctrl+N     { move-window-to-monitor-left; }
-   Mod+Shift+Ctrl+E     { move-window-to-monitor-down; }
    Mod+Shift+Ctrl+U     { move-window-to-monitor-up; }
    Mod+Shift+Ctrl+I     { move-window-to-monitor-right; }
+   Mod+Shift+Ctrl+E     { move-window-to-monitor-down; }
+   Mod+Shift+Ctrl+N     { move-window-to-monitor-left; }
 
    // [[ Other ]]
+   // assuming not compiled with systemd support
    //
-   Mod+Shift+Escape { spawn "uwsm" "stop"; }
-   // in this setup prefers manual integration with systemd via uwsm
-   // this is done so that i can do logic in a shell
-   // without the shell itself being tracked by niri systemd integration as a scope
    Mod+T hotkey-overlay-title="Open a Terminal: wezterm" { spawn "uwsm" "app" "--" "wezterm"; }
    Mod+D hotkey-overlay-title="Open App Launcher: fuzzel" { spawn "uwsm" "app" "--" "fuzzel" "--launch-prefix=uwsm app -- "; }
+   Mod+B allow-when-locked=true { spawn "uwsm" "app" "--" "hyprlock"; }
 
+   Mod+A { spawn "fish" "-c" "$HOME/.config/niri/dmenu/do-dmenu.nu"; }
    Mod+X { spawn "fish" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
-   Mod+Alt+L allow-when-locked=true { spawn "uwsm" "app" "--" "hyprlock"; }
-
-   Mod+B { spawn "fish" "-c" "$HOME/.local/share/scripts/quick_menu.fish"; }
 
    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
