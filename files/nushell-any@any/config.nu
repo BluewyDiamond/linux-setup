@@ -27,6 +27,10 @@ def "compact column" [
 #
 $env.config.show_banner = false
 
+$env.config.hooks.display_output = '
+   table --width (term size | get columns)
+'
+
 # [[ Path ]]
 #
 let path_list = [
@@ -149,7 +153,7 @@ def ls [
       error make {msg: "hidden and plain flags can not coexist"}
    }
 
-   $ls_output | paint-ls-output | table --width (term size | get columns)
+   $ls_output | paint-ls-output
 }
 
 def paint-ls-output []: table -> table {
