@@ -24,7 +24,6 @@ return {
          end
       end
 
-      lspconfig.fish_lsp.setup({})
       lspconfig.nushell.setup({})
    end,
 }
