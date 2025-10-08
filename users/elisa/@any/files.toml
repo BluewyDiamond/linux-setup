@@ -2,5 +2,5 @@
 group = "elisa"
 operation = "copy"
 owner = "elisa"
-source = "../../files/logind-any@raphael/frequency.conf"
+source = "../../../files/psd-any@any/frequency.conf"
 target = "/home/elisa/.config/systemd/user/psd-resync.timer.d/frequency.conf"
