@@ -46,9 +46,10 @@ window-rule {
    geometry-corner-radius 0
    clip-to-geometry true
 
-   open-focused true
    open-fullscreen false
+   open-maximized true
    open-floating false
+   open-focused true
 }
 
 window-rule {
@@ -260,8 +261,8 @@ binds {
    Mod+D hotkey-overlay-title="Open App Launcher: fuzzel" { spawn "uwsm" "app" "--" "fuzzel" "--launch-prefix=uwsm app -- "; }
    Mod+B allow-when-locked=true { spawn "uwsm" "app" "--" "hyprlock"; }
 
-   Mod+A { spawn "fish" "-c" "$HOME/.config/niri/dmenu/do-dmenu.nu"; }
-   Mod+X { spawn "fish" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
+   Mod+A { spawn "~/.config/niri/dmenu/do-dmenu.nu"; }
+   Mod+X { spawn "nu" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
 
    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
