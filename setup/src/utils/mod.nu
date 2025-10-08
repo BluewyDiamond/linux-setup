@@ -42,6 +42,8 @@ export def check-what-error [error texts_to_search: list<string>]: nothing -> bo
    | get text
    | any {|text|
       $texts_to_search
-      | any {|search| str contains $search $text }
+      | any {|text_to_search|
+         $text | str contains $text_to_search
+      }
    }
 }
