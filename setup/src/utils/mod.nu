@@ -35,11 +35,13 @@ export def collect-values-by-key [
    $found_item_list | flatten
 }
 
-export def check-what-error [error texts_to_search: list<string>] {
-   $error.json | from json | get labels | get text | where {|text|
-      $texts_to_search | each {|text_to_search|
-         $text | str contains $text_to_search
-         $text_to_search
-      } | is-not-empty
+export def check-what-error [error texts_to_search: list<string>]: nothing -> bool {
+   $error.json
+   | from json
+   | get labels
+   | get text
+   | any {|text|
+      $texts_to_search
+      | any {|search| str contains $search $text }
    }
 }

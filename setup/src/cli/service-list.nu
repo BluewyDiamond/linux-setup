@@ -123,9 +123,9 @@ def get-unit-enabled-list-or-null [service_dir_abs_path: string] {
          $item | path basename
       }
    } catch {|$error|
-      if (check-what-error $error ["Permission denied"] | is-empty) {
+      if (check-what-error $error ["Permission denied"]) {
          return null
-      } else if (check-what-error $error ["Pattern, file or folder not found"] | is-empty) {
+      } else if (check-what-error $error ["Pattern, file or folder not found"]) {
          return []
       } else {
          error make {msg: here}
