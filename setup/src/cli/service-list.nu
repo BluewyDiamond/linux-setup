@@ -118,10 +118,6 @@ export def cleanup-service-list [unit_group_list] {
 def get-unit-enabled-list-or-null [service_dir_abs_path: string] {
    let g = $"($service_dir_abs_path)/*.wants/*"
 
-   # if (glob $g | is-empty) {
-   #    return []
-   # }
-
    try {
       ls ($g | into glob) | get name | each {|item|
          $item | path basename

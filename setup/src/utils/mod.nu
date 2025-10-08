@@ -40,7 +40,7 @@ export def check-what-error [error texts_to_search: list<string>] {
       $texts_to_search | each {|text_to_search|
          let i = $text | str contains $text_to_search
       
-         $"compared ($text) with ($text_to_search) with result ($i)"
+         $"compared ($text) with ($text_to_search) with result ($i)" | print
 
          $i
       }
