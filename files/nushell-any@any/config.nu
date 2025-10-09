@@ -163,7 +163,7 @@ def ls [
       }
    }
 
-   if $for_pipe {
+   if not $for_pipe {
       $ls_output = $ls_output | paint-ls-output
    }
 
