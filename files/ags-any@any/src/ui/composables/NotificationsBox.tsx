@@ -1,9 +1,9 @@
 import Adw from "gi://Adw";
 import AstalNotifd from "gi://AstalNotifd";
-import { checkIconExists } from "../../../utils";
+import { checkIconExists } from "../../utils";
 import { Gtk } from "ags/gtk4";
-import icons from "../../../lib/icons";
-import options from "../../../options";
+import icons from "../../lib/icons";
+import options from "../../options";
 
 export function NotificationBox({
    notification,

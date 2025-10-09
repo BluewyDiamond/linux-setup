@@ -3,7 +3,7 @@ import { Astal, Gdk, Gtk } from "ags/gtk4";
 import app from "ags/gtk4/app";
 import AstalNotifd from "gi://AstalNotifd";
 import options from "../../../options";
-import { NotificationBox } from "../composables/NotificationsBox";
+import { NotificationBox } from "../../composables/NotificationsBox";
 
 const notifd = AstalNotifd.get_default();
 
