@@ -108,12 +108,13 @@ def ls [
    --hidden (-H) # Show hidden files
    --long (-l) # Get all available columns for each entry (slower; columns are platform-dependent)
    --short-names (-s) # Only print the file names, and not the path
-   --full-paths (-f) # display paths as absolute paths
+   --full-paths (-f) # Display paths as absolute paths
    --du (-d) # Display the apparent directory size ("disk usage") in place of the directory metadata size
    --directory (-D) # List the specified directory itself instead of its contents
    --mime-type (-m) # Show mime-type in type column instead of 'file' (based on filenames only; files' contents are not examined)
    --plain (-p) # Show plain files
    --threads (-t) # Use multiple threads to list contents. Output will be non-deterministic.
+   --group-dir # Group directories together
    ...patterns: oneof<glob, string> # The glob pattern to use.
 ]: [nothing -> table] {
    let patterns = if ($patterns | is-empty) {
@@ -149,6 +150,16 @@ def ls [
       }
    } else if $plain and $hidden {
       error make {msg: "hidden and plain flags can not coexist"}
+   }
+
+   if $group_dir {
+      let grouped_ls_output = $ls_output | group-by {|it|
+         if $it.type == 'dir' { 'dir' } else { 'other' }
+      }
+
+      if $grouped_ls_output.dir? != null and $grouped_ls_output.other? != null {
+         $ls_output = $grouped_ls_output.dir | append $grouped_ls_output.other
+      }
    }
 
    $ls_output | paint-ls-output
