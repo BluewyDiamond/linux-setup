@@ -115,6 +115,7 @@ def ls [
    --plain (-p) # Show plain files
    --threads (-t) # Use multiple threads to list contents. Output will be non-deterministic.
    --group-dir # Group directories together
+   --for-pipe (-P) # Do not apply things that might be unwanted with pipes
    ...patterns: oneof<glob, string> # The glob pattern to use.
 ]: [nothing -> table] {
    let patterns = if ($patterns | is-empty) {
@@ -162,7 +163,11 @@ def ls [
       }
    }
 
-   $ls_output | paint-ls-output
+   if $for_pipe {
+      $ls_output = $ls_output | paint-ls-output
+   }
+
+   $ls_output
 }
 
 def paint-ls-output []: table -> table {
