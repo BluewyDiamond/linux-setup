@@ -151,7 +151,9 @@ def ls [
    )
 
    if (not $long) {
-      $ls_output = $ls_output | select -o name type target mode user group size modified | compact column
+      $ls_output = $ls_output
+      | select -o name type target mode user group size modified
+      | compact column
    }
 
    if $hidden and not $plain {
@@ -163,12 +165,16 @@ def ls [
          if not ($item.name | str starts-with '.') { $item }
       }
    } else if $plain and $hidden {
-      error make {msg: "hidden and plain flags can not coexist"}
+      error make {msg: 'hidden and plain flags can not coexist'}
    }
 
    if $group_dir {
       let grouped_ls_output = $ls_output | group-by {|it|
-         if $it.type == 'dir' { 'dir' } else { 'other' }
+         if $it.type == dir {
+            'dir'
+         } else {
+            'other'
+         }
       }
 
       if $grouped_ls_output.dir? != null and $grouped_ls_output.other? != null {
@@ -220,11 +226,15 @@ def paint-ls-output []: table -> table {
    }
 }
 
+def 'git plog' [] {
+   git log --graph --oneline --decorate --color
+}
+
 # [ Autostart ]
 #
 # for autoloading scripts
-let nu_autoload = ($nu.data-dir | path join "vendor/autoload")
-mkdir $nu_autoload
+let nu_autoload_dir_abs_path = ($nu.data-dir | path join 'vendor' 'autoload')
+mkdir $nu_autoload_dir_abs_path
 
 # [[ Prompt (Starship) ]]
 #
@@ -233,7 +243,10 @@ do {||
       return
    }
 
-   let starship_init_file_abs_path = ($nu_autoload | path join "starship.nu")
+   let starship_init_file_abs_path = (
+      $nu_autoload_dir_abs_path | path join 'starship.nu'
+   )
+
    let starship_init_file = starship init nu
 
    if (
@@ -252,4 +265,4 @@ do {||
 # + consider the time it takes to reach here
 sleep 0.15sec
 tput cup (term size | get rows)
-fastfetch -c ($env.HOME | path join ".config" "fastfetch" "wezterm.jsonc")
+fastfetch -c ($env.HOME | path join '.config' 'fastfetch' 'wezterm.jsonc')
