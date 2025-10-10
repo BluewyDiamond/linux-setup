@@ -85,13 +85,16 @@ def --wrapped aura [...args] {
       if not ($arg =~ "^-[a-zA-Z]+$") {
          $cmd | append $arg
       } else {
-         $arg | split chars | skip 1 | reduce --fold $cmd {|char flag|
+         $arg
+         | split chars
+         | skip 1
+         | reduce --fold $cmd {|char flag|
             $flag | append (
                match $char {
                   "S" => ["-S" "--repo"]
                   "A" => ["-S" "--aur"]
                   "W" => ["-S"]
-                  _ => [$"-($char)"]
+                  _ => [('-' + $char)]
                }
             )
          }
