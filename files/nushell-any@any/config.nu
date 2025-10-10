@@ -5,11 +5,18 @@ def "compact column" [
    ...rest: string # The columns to compact from the table
 ] {
    let input = $in
-   let column_names = if ($rest | length) > 0 { $rest } else { $input | columns }
 
-   let column_names_to_drop = $column_names
-   | par-each {|column_name|
-      if ($input | get $column_name | compact --empty=$empty | length) != 0 {
+   let column_names = if ($rest | length) > 0 {
+      $rest
+   } else {
+      $input | columns
+   }
+
+   let column_names_to_drop = $column_names | par-each {|column_name|
+      let column = $input | get $column_name
+      let column_length = $column | compact --empty=$empty | length
+
+      if ($column_length) != 0 {
          return null
       }
 
@@ -80,28 +87,28 @@ def clear [
    tput cup (term size | get rows)
 }
 
-def --wrapped aura [...args] {
-   let cmd = $args | reduce --fold ["paru"] {|arg cmd|
-      if not ($arg =~ "^-[a-zA-Z]+$") {
-         $cmd | append $arg
-      } else {
-         $arg
-         | split chars
-         | skip 1
-         | reduce --fold $cmd {|char flag|
-            $flag | append (
-               match $char {
-                  "S" => ["-S" "--repo"]
-                  "A" => ["-S" "--aur"]
-                  "W" => ["-S"]
-                  _ => [('-' + $char)]
-               }
-            )
-         }
+def --wrapped aura [...arguments] {
+   let command = $arguments | reduce --fold ["paru"] {|argument command|
+      if not ($argument =~ "^-[a-zA-Z]+$") {
+         return $command | append $argument
+      }
+
+      $argument
+      | split chars
+      | skip 1
+      | reduce --fold $command {|char flag|
+         $flag | append (
+            match $char {
+               "S" => ["-S" "--repo"]
+               "A" => ["-S" "--aur"]
+               "W" => ["-S"]
+               _ => [('-' + $char)]
+            }
+         )
       }
    }
 
-   run-external ...$cmd
+   run-external ...$command
 }
 
 alias nu-ls = ls
