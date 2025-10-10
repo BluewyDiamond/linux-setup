@@ -22,6 +22,7 @@ include = [
    "../../../users-modules/for-bluewy/gui-fix/packages.toml",
    "../../../users-modules/for-bluewy/gui-gaming/packages.toml",
    "../../../users-modules/for-bluewy/gui-niri-base/packages.toml",
+   "../../../users-modules/for-bluewy/gui-niri-extra/files.toml",
    "../../../users-modules/for-bluewy/gui-niri-extra/packages.toml",
    "../../../users-modules/for-bluewy/gui-rice/packages.toml",
    "../../../users-modules/for-bluewy/gui-widgets/packages.toml",

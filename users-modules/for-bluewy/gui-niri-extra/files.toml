@@ -1,0 +1,6 @@
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/hypr-any@raphael"
+target = "/home/bluewy/.config/hypr"
