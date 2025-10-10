@@ -17,7 +17,7 @@ def 'compact column' [
       let column_length = $column | compact --empty=$empty | length
 
       if ($column_length) != 0 {
-         return null
+         return
       }
 
       $column_name
@@ -90,7 +90,7 @@ def clear [
 def --wrapped aura [...arguments] {
    let command = $arguments | reduce --fold ["paru"] {|argument command|
       if not ($argument =~ "^-[a-zA-Z]+$") {
-         return $command | append $argument
+         return ($command | append $argument)
       }
 
       $argument
