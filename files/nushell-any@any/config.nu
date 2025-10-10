@@ -1,6 +1,6 @@
 # [ Fns ]
-#
-def "compact column" [
+
+def 'compact column' [
    --empty (-e) # Also compact empty items like "", {}, and []
    ...rest: string # The columns to compact from the table
 ] {
@@ -31,7 +31,7 @@ def "compact column" [
 }
 
 # [ Env ]
-#
+
 $env.config.show_banner = false
 
 $env.config.hooks.display_output = {
@@ -39,21 +39,21 @@ $env.config.hooks.display_output = {
 }
 
 # [[ Path ]]
-#
+
 $env.PATH = $env.PATH | append [
    ($env.HOME | path join ".cargo" "bin")
    ($env.HOME | path join ".local" "bin")
 ]
 
 # [[ XDG ]]
-#
+
 $env.XDG_CONFIG_HOME = $env.HOME | path join ".config"
 $env.XDG_DATA_HOME = $env.HOME | path join ".local" "share"
 $env.XDG_STATE_HOME = $env.HOME | path join ".local" "state"
 $env.XDG_CACHE_HOME = $env.HOME | path join ".cache"
 
 # [[ xdg-ninja ]]
-#
+
 $env.GOPATH = $env.XDG_DATA_HOME | path join "go"
 $env.GTK2_RC_FILES = $env.XDG_CONFIG_HOME | path join "gtk-2.0" "gtkrc"
 $env.NODE_REPL_HISTORY = $env.XDG_STATE_HOME | path join "node_repl_history"
@@ -67,13 +67,13 @@ $env.RUSTUP_HOME = $env.XDG_DATA_HOME | path join "rustup"
 $env.WINEPREFIX = $env.XDG_DATA_HOME | path join "wine"
 
 # [[ Other ]]
-#
+
 $env.EDITOR = "nvim"
 
 # [ Alias ]
 # note: for some reason, the rename of the original built-in command will have
 # its help info replaced by the new one
-#
+
 alias nu-clear = clear
 
 # This is an alias. More help available at the link below.
@@ -231,13 +231,12 @@ def 'git plog' [] {
 }
 
 # [ Autostart ]
-#
-# for autoloading scripts
+
 let nu_autoload_dir_abs_path = ($nu.data-dir | path join 'vendor' 'autoload')
 mkdir $nu_autoload_dir_abs_path
 
 # [[ Prompt (Starship) ]]
-#
+
 do {||
    if (which starship | is-empty) {
       return
@@ -260,7 +259,7 @@ do {||
 }
 
 # [[ Visuals ]]
-#
+
 # wait for window animations (usually lasts around 0.15sec)
 # + consider the time it takes to reach here
 sleep 0.15sec
