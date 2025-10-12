@@ -1,4 +1,6 @@
 include = [
+   "../#minimal/index.toml",
+
    "./files.toml",
 
    "../../../users-modules/for-bluewy/console-audio/packages.toml",

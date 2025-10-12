@@ -3,9 +3,11 @@ include = [
 
    "../../../users-modules/for-bluewy/console-dev/packages.toml",
    "../../../users-modules/for-bluewy/console-tools/packages.toml",
+   "../../../users-modules/for-bluewy/console-rice/files.toml",
    "../../../users-modules/for-bluewy/console-rice/packages.toml",
    "../../../users-modules/for-bluewy/console-hardware/packages.toml",
    "../../../users-modules/for-bluewy/console-monitor/packages.toml",
    "../../../users-modules/for-bluewy/console-network/packages.toml",
+   "../../../users-modules/for-bluewy/console-neovim/files.toml",
    "../../../users-modules/for-bluewy/console-neovim/packages.toml",
 ]

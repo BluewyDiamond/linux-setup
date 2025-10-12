@@ -54,13 +54,6 @@ target = "/home/bluewy/.config/electron-flags.conf"
 group = "bluewy"
 operation = "link"
 owner = "bluewy"
-source = "../../../files/fastfetch-any@any"
-target = "/home/bluewy/.config/fastfetch"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
 source = "../../../files/fuzzel-any@any"
 target = "/home/bluewy/.config/fuzzel"
 
@@ -82,20 +75,6 @@ target = "/home/bluewy/.config/MangoHud"
 group = "bluewy"
 operation = "link"
 owner = "bluewy"
-source = "../../../files/nushell-any@any"
-target = "/home/bluewy/.config/nushell"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/nvim-any@any"
-target = "/home/bluewy/.config/nvim"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
 source = "../../../files/pipewire-any@any"
 target = "/home/bluewy/.config/pipewire"
 
@@ -105,20 +84,6 @@ operation = "link"
 owner = "bluewy"
 source = "../../../files/speech-dispatcher-any@any"
 target = "/home/bluewy/.config/speech-dispatcher"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/starship-any@any/starship.toml"
-target = "/home/bluewy/.config/starship.toml"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/user-dirs-any@any/user-dirs.dirs"
-target = "/home/bluewy/.config/user-dirs.dirs"
 
 [[items-install]]
 group = "bluewy"

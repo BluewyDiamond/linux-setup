@@ -1,0 +1,13 @@
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/fastfetch-any@any"
+target = "/home/bluewy/.config/fastfetch"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/starship-any@any/starship.toml"
+target = "/home/bluewy/.config/starship.toml"
