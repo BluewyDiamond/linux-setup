@@ -20,6 +20,6 @@ include = [
    "../../hosts-modules/for-bluewy/rtcwake-for-mc-server-#gpu-nvidia/services.toml",
 
    "../../users/bluewy/@uriel/index.toml",
-   "../../users/yellowy/#server/index.toml",
+   "../../users/yellowy/#minimal/index.toml",
    "../../users/elisa/@any/index.toml",
 ]

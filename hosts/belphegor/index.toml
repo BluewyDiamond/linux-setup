@@ -17,6 +17,6 @@ include = [
    "../../hosts-modules/for-bluewy/bluetooth/packages.toml",
    "../../hosts-modules/for-bluewy/bluetooth/services.toml",
 
-   "../../users/bluewy/#server/index.toml",
-   "../../users/yellowy/#server/index.toml",
+   "../../users/bluewy/#minimal/index.toml",
+   "../../users/yellowy/#minimal/index.toml",
 ]
