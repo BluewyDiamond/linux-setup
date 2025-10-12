@@ -38,13 +38,6 @@ $env.config.hooks.display_output = {
    table --theme psql --width (term size | get columns)
 }
 
-# [[ Path ]]
-
-$env.PATH = $env.PATH | append [
-   ($env.HOME | path join ".cargo" "bin")
-   ($env.HOME | path join ".local" "bin")
-]
-
 # [[ XDG ]]
 
 $env.XDG_CONFIG_HOME = $env.HOME | path join '.config'
@@ -54,6 +47,7 @@ $env.XDG_CACHE_HOME = $env.HOME | path join '.cache'
 
 # [[ xdg-ninja ]]
 
+$env.HISTFILE = $env.XDG_STATE_HOME | path join 'bash' 'history'
 $env.CARGO_HOME = $env.XDG_DATA_HOME | path join 'cargo'
 $env.GOPATH = $env.XDG_DATA_HOME | path join 'go'
 $env.GTK2_RC_FILES = $env.XDG_CONFIG_HOME | path join 'gtk-2.0' 'gtkrc'
@@ -66,6 +60,13 @@ $env.NPM_CONFIG_CACHE = $env.XDG_CACHE_HOME | path join 'npm'
 $env.NPM_CONFIG_TMP = $env.XDG_RUNTIME_DIR | path join 'npm'
 $env.RUSTUP_HOME = $env.XDG_DATA_HOME | path join 'rustup'
 $env.WINEPREFIX = $env.XDG_DATA_HOME | path join 'wine'
+
+# [[ Path ]]
+
+$env.PATH = $env.PATH | append [
+   ($env.HOME | path join $env.XDG_DATA_HOME '.cargo' 'bin')
+   ($env.HOME | path join '.local' 'bin')
+]
 
 # [[ Other ]]
 
