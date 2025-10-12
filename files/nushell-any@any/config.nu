@@ -47,24 +47,25 @@ $env.PATH = $env.PATH | append [
 
 # [[ XDG ]]
 
-$env.XDG_CONFIG_HOME = $env.HOME | path join ".config"
-$env.XDG_DATA_HOME = $env.HOME | path join ".local" "share"
-$env.XDG_STATE_HOME = $env.HOME | path join ".local" "state"
-$env.XDG_CACHE_HOME = $env.HOME | path join ".cache"
+$env.XDG_CONFIG_HOME = $env.HOME | path join '.config'
+$env.XDG_DATA_HOME = $env.HOME | path join '.local' 'share'
+$env.XDG_STATE_HOME = $env.HOME | path join '.local' 'state'
+$env.XDG_CACHE_HOME = $env.HOME | path join '.cache'
 
 # [[ xdg-ninja ]]
 
-$env.GOPATH = $env.XDG_DATA_HOME | path join "go"
-$env.GTK2_RC_FILES = $env.XDG_CONFIG_HOME | path join "gtk-2.0" "gtkrc"
-$env.NODE_REPL_HISTORY = $env.XDG_STATE_HOME | path join "node_repl_history"
+$env.CARGO_HOME = $env.XDG_DATA_HOME | path join 'cargo'
+$env.GOPATH = $env.XDG_DATA_HOME | path join 'go'
+$env.GTK2_RC_FILES = $env.XDG_CONFIG_HOME | path join 'gtk-2.0' 'gtkrc'
+$env.NODE_REPL_HISTORY = $env.XDG_STATE_HOME | path join 'node_repl_history'
 
 $env.NPM_CONFIG_INIT_MODULE = $env.XDG_CONFIG_HOME
 | path join "npm" "config" "npm-init.js"
 
-$env.NPM_CONFIG_CACHE = $env.XDG_CACHE_HOME | path join "npm"
-$env.NPM_CONFIG_TMP = $env.XDG_RUNTIME_DIR | path join "npm"
-$env.RUSTUP_HOME = $env.XDG_DATA_HOME | path join "rustup"
-$env.WINEPREFIX = $env.XDG_DATA_HOME | path join "wine"
+$env.NPM_CONFIG_CACHE = $env.XDG_CACHE_HOME | path join 'npm'
+$env.NPM_CONFIG_TMP = $env.XDG_RUNTIME_DIR | path join 'npm'
+$env.RUSTUP_HOME = $env.XDG_DATA_HOME | path join 'rustup'
+$env.WINEPREFIX = $env.XDG_DATA_HOME | path join 'wine'
 
 # [[ Other ]]
 
