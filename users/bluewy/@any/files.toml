@@ -115,7 +115,7 @@ target = "/home/bluewy/.config/starship.toml"
 
 [[items-install]]
 group = "bluewy"
-operation = "copy"
+operation = "link"
 owner = "bluewy"
 source = "../../../files/user-dirs-any@any/user-dirs.dirs"
 target = "/home/bluewy/.config/user-dirs.dirs"
