@@ -48,7 +48,6 @@ window-rule {
 
    open-fullscreen false
    open-maximized true
-   open-floating false
    open-focused true
 }
 
