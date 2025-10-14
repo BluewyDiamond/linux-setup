@@ -11,28 +11,28 @@ export def is-package-a-dependency []: string -> bool {
 
 export def collect-values-by-key [
    on_record_or_table: closure
-   item_list: list = []
+   items: list = []
 ]: any -> list<any> {
    let input = $in
-   mut found_item_list = $item_list
-   mut item_to_process_list = [$input]
+   mut found_items = $items
+   mut items_to_process = [$input]
 
-   while ($item_to_process_list | is-not-empty) {
-      let current_item = $item_to_process_list | first
-      $item_to_process_list = $item_to_process_list | skip 1
+   while ($items_to_process | is-not-empty) {
+      let current_item = $items_to_process | first
+      $items_to_process = $items_to_process | skip 1
 
       if (not (($current_item | describe) =~ "record|table")) {
          continue
       }
 
       let on_record_or_table_result = (do $on_record_or_table $current_item)
-      $found_item_list = $found_item_list | append [$on_record_or_table_result]
+      $found_items = $found_items | append [$on_record_or_table_result]
 
       let current_item_values = $current_item | values
-      $item_to_process_list = $item_to_process_list | append $current_item_values
+      $items_to_process = $items_to_process | append $current_item_values
    }
 
-   $found_item_list | flatten
+   $found_items | flatten
 }
 
 export def check-what-error [error texts_to_search: list<string>]: nothing -> bool {

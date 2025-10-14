@@ -1,39 +1,39 @@
 use ../utils *
 
-export def enable-unit-list [unit_group_list] {
-   $unit_group_list | each {|unit_group|
+export def enable-units [unit_groups] {
+   $unit_groups | each {|unit_group|
       try {
          log info $"checking services with user=($unit_group.user) and dir_abs_path=($unit_group.dir_abs_path)"
 
-         let unit_enabled_list = (
-            let unit_enabled_list_or_null = get-unit-enabled-list-or-null $unit_group.dir_abs_path;
+         let units_enabled = (
+            let units_enabled = get-units-enabled $unit_group.dir_abs_path;
 
-            if $unit_enabled_list_or_null == null {
+            if $units_enabled == null {
                log error $"skipping as most likely permissions are insufficient"
                return
             } else {
-               $unit_enabled_list_or_null
+               $units_enabled
             }
          )
 
-         let unit_enable_list = $unit_group.enable_list | where {|unit_enable|
-            $unit_enable not-in $unit_enabled_list
+         let units_to_enable = $unit_group.enable_list | where {|unit_to_enable|
+            $unit_to_enable not-in $units_enabled
          }
 
-         if ($unit_enable_list | is-empty) {
+         if ($units_to_enable | is-empty) {
             log info $"skipping as there is no services to enable"
             return
          }
 
-         $unit_enable_list | each {|unit_enable|
-            log info $"attempting to enable service=($unit_enable) with user=($unit_group.user)"
+         $units_to_enable | each {|unit_to_enable|
+            log info $"attempting to enable service=($unit_to_enable) with user=($unit_group.user)"
 
             if (is-admin) and ($unit_group.user == root) {
-               systemctl enable $unit_enable
+               systemctl enable $unit_to_enable
             } else if (is-admin) {
-               systemctl --user -M $"($unit_group.user)@" enable $unit_enable
+               systemctl --user -M $"($unit_group.user)@" enable $unit_to_enable
             } else if ($unit_group.user == $env.LOGNAME) {
-               systemctl --user enable $unit_enable
+               systemctl --user enable $unit_to_enable
             } else {
                log error "skipped as there is no means to do so"
             }
@@ -44,35 +44,35 @@ export def enable-unit-list [unit_group_list] {
    } | ignore
 }
 
-export def cleanup-service-list [unit_group_list] {
-   $unit_group_list | each {|unit_group|
+export def cleanup-units [unit_groups] {
+   $unit_groups | each {|unit_group|
       try {
          log info $"checking units with user=($unit_group.user) and dir_abs_path=($unit_group.dir_abs_path)"
 
-         let unit_enabled_list = (
-            let unit_enabled_list_or_null = get-unit-enabled-list-or-null $unit_group.dir_abs_path;
+         let units_enabled = (
+            let enabled_units = get-units-enabled $unit_group.dir_abs_path;
 
-            if $unit_enabled_list_or_null == null {
+            if $enabled_units == null {
                log error $"skipping as most likely permissions are insufficient"
                return
             } else {
-               $unit_enabled_list_or_null
+               $enabled_units
             }
          )
 
-         let units_ignore_list = $unit_group.enable_list | each {|unit_enable|
+         let units_ignore_list = $unit_group.enable_list | each {|unit_to_enable|
             if (is-admin) and ($unit_group.user == root) {
-               systemctl list-dependencies --plain --no-pager $unit_enable
+               systemctl list-dependencies --plain --no-pager $unit_to_enable
                | lines
                | str trim
                | where $it =~ '\.service$|\.socket$|\.timer$'
             } else if (is-admin) {
-               systemctl --user -M $"($unit_group.user)@" list-dependencies --plain --no-pager $unit_enable
+               systemctl --user -M $"($unit_group.user)@" list-dependencies --plain --no-pager $unit_to_enable
                | lines
                | str trim
                | where $it =~ '\.service$|\.socket$|\.timer$'
             } else if ($unit_group.user == $env.LOGNAME) {
-               systemctl --user list-dependencies --plain --no-pager $unit_enable
+               systemctl --user list-dependencies --plain --no-pager $unit_to_enable
                | lines
                | str trim
                | where $it =~ '\.service$|\.socket$|\.timer$'
@@ -84,27 +84,27 @@ export def cleanup-service-list [unit_group_list] {
          | flatten
          | uniq
 
-         let unit_disable_list = $unit_enabled_list | where {|unit_enabled|
+         let units_to_disable = $units_enabled | where {|unit_to_enabled|
             (
-               ($unit_enabled not-in $unit_group.enable_list) and
-               ($unit_enabled not-in $units_ignore_list)
+               ($unit_to_enabled not-in $unit_group.enable_list) and
+               ($unit_to_enabled not-in $units_ignore_list)
             )
          }
 
-         if ($unit_disable_list | is-empty) {
+         if ($units_to_disable | is-empty) {
             log info $"skipping as there is no services to cleanup"
             return
          }
 
-         $unit_disable_list | each {|unit_disable|
-            log info $"attempting to disable unit=($unit_disable) with user=($unit_group.user)"
+         $units_to_disable | each {|unit_to_disable|
+            log info $"attempting to disable unit=($unit_to_disable) with user=($unit_group.user)"
 
             if (is-admin) and ($unit_group.user == root) {
-               systemctl disable $unit_disable
+               systemctl disable $unit_to_disable
             } else if (is-admin) {
-               systemctl --user -M $"($unit_group.user)@" disable $unit_disable
+               systemctl --user -M $"($unit_group.user)@" disable $unit_to_disable
             } else if ($unit_group.user == $env.LOGNAME) {
-               systemctl --user disable $unit_disable
+               systemctl --user disable $unit_to_disable
             } else {
                log error "skipped as there is no means to do so"
             }
@@ -115,7 +115,7 @@ export def cleanup-service-list [unit_group_list] {
    } | ignore
 }
 
-def get-unit-enabled-list-or-null [service_dir_abs_path: string] {
+def get-units-enabled [service_dir_abs_path: string] {
    let g = $"($service_dir_abs_path)/*.wants/*"
 
    try {

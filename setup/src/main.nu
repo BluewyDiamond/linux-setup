@@ -2,9 +2,9 @@
 
 use std/log
 
-use ./cli/file-list.nu *
-use ./cli/package-list.nu *
-use ./cli/service-list.nu *
+use ./cli/files.nu *
+use ./cli/packages.nu *
+use ./cli/units.nu *
 use ./fns *
 
 # TODO: fix requirements
@@ -17,15 +17,15 @@ def main [config_file_rel_path: path] {
 def "main install" [config_file_rel_path: path] {
    let config = build-config ($config_file_rel_path | path expand)
 
-   install-package-list $config.package_group_list
-   spawn-file-list $config.file_spawn_list
-   install-item-list $config.item_install_list
-   enable-unit-list $config.unit_group_list
+   install-packages $config.package_group_list
+   spawn-files $config.file_spawn_list
+   install-items $config.item_install_list
+   enable-units $config.unit_group_list
 }
 
 def "main cleanup" [config_file_rel_path: path] {
    let config = build-config ($config_file_rel_path | path expand)
 
-   cleanup-package-list $config.package_group_list
-   cleanup-service-list $config.unit_group_list
+   cleanup-packages $config.package_group_list
+   cleanup-units $config.unit_group_list
 }
