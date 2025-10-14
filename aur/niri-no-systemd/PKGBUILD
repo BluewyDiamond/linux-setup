@@ -1,0 +1,69 @@
+pkgname=niri-no-systemd
+_pkgname=niri
+pkgver=25.08
+_tag="v$pkgver"
+pkgrel=1
+pkgdesc='A scrollable-tiling Wayland compositor'
+arch=(x86_64 aarch64)
+url="https://github.com/YaLTeR/$_pkgname"
+license=(GPL-3.0-or-later)
+depends=(
+   cairo
+   glib2
+   libdisplay-info
+   libinput
+   libpipewire
+   libxkbcommon
+   mesa
+   pango
+   pixman
+   seatd
+)
+makedepends=(
+   clang
+   rust
+   git
+   makepkg-git-lfs-proto
+)
+optdepends=(
+  'alacritty: suggested cross-platform OpenGL terminal emulator'
+  'fuzzel: suggested Wayland application launcher'
+  'gnome-keyring: org.freedesktop.secrets portal implementation'
+  'mako: suggested Wayland notification daemon'
+  'swaybg: suggested Wayland wallpaper tool'
+  'swaylock: suggested Wayland screen locking utility'
+  'swayidle: suggested Wayland idle management daemon'
+  'waybar: suggested Wayland highly customizable desktop bar'
+  'xdg-desktop-portal-gtk: XDG desktop portal that implements most functionality'
+  'xdg-desktop-portal-gnome: XDG desktop portal that supports screencasting'
+)
+provides=($_pkgname)
+conflicts=($_pkgname $_pkgname-bin $_pkgname-git)
+options=(!lto)
+source=("$_pkgname::git-lfs+${url}.git#tag=${_tag}")
+sha256sums=('SKIP')
+
+prepare() {
+    cd "$srcdir/$_pkgname"
+    export RUSTUP_TOOLCHAIN=stable
+    export CARGO_HOME="$srcdir/$_pkgname/.cargo"
+    cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+}
+
+build() {
+    cd "$srcdir/$_pkgname"
+    export RUSTFLAGS="--remap-path-prefix=$srcdir=/"
+    export RUSTUP_TOOLCHAIN=stable
+    export CARGO_HOME="$srcdir/$_pkgname/.cargo"
+    export CARGO_TARGET_DIR=target
+    cargo build --frozen --release --no-default-features --features='dbus,xdp-gnome-screencast'
+}
+
+package() {
+    cd "$srcdir/$_pkgname"
+    install -Dm755 "target/release/$_pkgname"                -t "${pkgdir}/usr/bin/"
+    install -Dm755 "resources/$_pkgname-session"             -t "${pkgdir}/usr/bin/"
+    install -Dm644 "resources/default-config.kdl"            -t "${pkgdir}/usr/share/doc/$_pkgname"
+    install -Dm644 "resources/$_pkgname.desktop"             -t "${pkgdir}/usr/share/wayland-sessions/"
+    install -Dm644 "resources/$_pkgname-portals.conf"        -t "${pkgdir}/usr/share/xdg-desktop-portal/"
+}
