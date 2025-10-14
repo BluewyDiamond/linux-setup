@@ -14,7 +14,7 @@ return {
       end
 
       local my_lsp_names_to_enable = { "nushell" }
-      local my_lsp_names_to_disable = { "rust" }
+      local my_lsp_names_to_disable = { "rust", "typescript" }
       local mason_lsp_names_to_enable = mason_lspconfig.get_installed_servers()
 
       local lsp_names_to_enable = vim.list_extend(my_lsp_names_to_enable, mason_lsp_names_to_enable)
