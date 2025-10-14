@@ -1,6 +1,6 @@
 pkgname=mshell-git
 _pkgname=mshell
-pkgver=r3.ece8f93
+pkgver=r4.075d1fe
 pkgrel=1
 pkgdesc='Material Shell'
 arch=(x86_64)
@@ -8,6 +8,7 @@ url="https://github.com/BluewyDiamond/$_pkgname"
 depends=(nushell gjs gtk4-layer-shell)
 makedepends=(
    bun
+   aylurs-gtk-shell-git
    libastal-4-git
    libastal-apps-git
    libastal-battery-git
@@ -37,6 +38,6 @@ build() {
 
 package() {
    cd "$srcdir/$_pkgname"
-   install -Dm644 build/main.js -t "$pkgdir/usr/share/$_pkgname"
+   install -Dm644 target/debug/main.js -t "$pkgdir/usr/share/$_pkgname"
    install -Dm755 rsc/mshell -t "$pkgdir/usr/bin"
 }
