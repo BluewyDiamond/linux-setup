@@ -90,8 +90,8 @@ def clear [
 }
 
 def --wrapped aura [...arguments] {
-   let command = $arguments | reduce --fold ["paru"] {|argument command|
-      if not ($argument =~ "^-[a-zA-Z]+$") {
+   let command = $arguments | reduce --fold ['paru'] {|argument command|
+      if not ($argument =~ '^-[a-zA-Z]+$') {
          return ($command | append $argument)
       }
 
@@ -101,9 +101,9 @@ def --wrapped aura [...arguments] {
       | reduce --fold $command {|char flag|
          $flag | append (
             match $char {
-               "S" => ["-S" "--repo"]
-               "A" => ["-S" "--aur"]
-               "W" => ["-S"]
+               'S' => ['-S' '--repo']
+               'A' => ['-S' '--aur']
+               'W' => ['-S']
                _ => [('-' + $char)]
             }
          )
