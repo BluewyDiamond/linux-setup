@@ -1,6 +1,6 @@
 packages = [
-   # [ console.dev ]
-   #
+   { from = "std", name = "nushell" },
+
    { from = "std", name = "rustup" },
    { from = "std", name = "jdk21-openjdk" },
 

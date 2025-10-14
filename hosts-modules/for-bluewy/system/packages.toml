@@ -5,8 +5,6 @@ packages = [
    { from = "std", name = "base" },
    { from = "std", name = "base-devel" },
 
-   { from = "std", name = "nushell" },
-
    { from = "std", name = "ufw" },
 
    # by cachyos

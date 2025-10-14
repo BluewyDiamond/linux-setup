@@ -2,6 +2,7 @@ include = [
    "./files.toml",
 
    "../../../users-modules/for-bluewy/console-dev/packages.toml",
+   "../../../users-modules/for-bluewy/console-tools/files.toml",
    "../../../users-modules/for-bluewy/console-tools/packages.toml",
    "../../../users-modules/for-bluewy/console-rice/files.toml",
    "../../../users-modules/for-bluewy/console-rice/packages.toml",

@@ -102,19 +102,19 @@ export def cleanup-packages [package_groups] {
    let installed_packages = pacman -Qqee | lines
 
    let std_packages_to_install = $package_groups | where {|package_group|
-      $package_group.from == "std" and ($package_group.ignore_or_null == null or $package_group.ignore_or_null == false)
+      $package_group.from == "std" and ($package_group.ignore == null or $package_group.ignore == false)
    } | each {|std_package_group_to_install| $std_package_group_to_install.name }
 
    let aur_packages_to_install = $package_groups | where {|package_group|
-      $package_group.from == "aur" and ($package_group.ignore_or_null == null or $package_group.ignore_or_null == false)
+      $package_group.from == "aur" and ($package_group.ignore == null or $package_group.ignore == false)
    } | each {|aur_package_group_to_install| $aur_package_group_to_install.name }
 
    let local_packages_to_install = $package_groups | where {|package_group|
-      $package_group.from == "lcl" and ($package_group.ignore_or_null == null or $package_group.ignore_or_null == false)
+      $package_group.from == "lcl" and ($package_group.ignore == null or $package_group.ignore == false)
    } | each {|local_package_group_to_install| $local_package_group_to_install.name }
 
    let ignore_packages_to_install = $package_groups | where {|package_group|
-      $package_group.ignore_or_null != null and $package_group.ignore_or_null == true
+      $package_group.ignore != null and $package_group.ignore == true
    } | each {|ignore_package_group_to_install| $ignore_package_group_to_install.name }
 
    let packages_to_install = [
