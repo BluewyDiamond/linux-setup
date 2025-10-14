@@ -5,8 +5,9 @@ pkgrel=1
 pkgdesc='Material Shell'
 arch=(x86_64)
 url="https://github.com/BluewyDiamond/$_pkgname"
-depends=(gjs gtk4-layer-shell)
+depends=(nushell gjs gtk4-layer-shell)
 makedepends=(
+   bun
    libastal-4-git
    libastal-apps-git
    libastal-battery-git
@@ -18,7 +19,6 @@ makedepends=(
    libastal-powerprofiles-git
    libastal-tray-git
    libastal-wireplumber-git
-   nushell
 )
 provides=($_pkgname)
 conflicts=($_pkgname $_pkgname-bin $_pkgname-git)

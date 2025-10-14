@@ -300,7 +300,7 @@ spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type image --watch cliph
 
 // [[ Widget ]]
 //
-spawn-at-startup "nu" "-c" r#"exec uwsm app -- $"($env.HOME)/.config/ags/cli.nu" run"#
+spawn-at-startup "nu" "-c" "ps --long | par-each {|row| if $row.command == '/usr/bin/gjs -m /usr/share/mshell/main.js' {$row}} | is-empty | if $in { exec uwsm app -- mshell }"
 
 // [[ Other ]]
 //
