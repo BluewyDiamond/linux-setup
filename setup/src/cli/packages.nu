@@ -4,15 +4,15 @@ export def install-packages [package_groups] {
    let packages_installed = pacman -Qq | lines
 
    let std_package_groups_to_install = $package_groups | where {|package_group|
-      $package_group.from == "std" and ($package_group.ignore_or_null == null or $package_group.ignore_or_null == false)
+      $package_group.from == "std" and ($package_group.ignore == null or $package_group.ignore == false)
    }
 
    let aur_package_groups_to_install = $package_groups | where {|package_group|
-      $package_group.from == "aur" and ($package_group.ignore_or_null == null or $package_group.ignore_or_null == false)
+      $package_group.from == "aur" and ($package_group.ignore == null or $package_group.ignore == false)
    }
 
    let local_package_groups_to_install = $package_groups | where {|package_group|
-      $package_group.from == "lcl" and ($package_group.ignore_or_null == null or $package_group.ignore_or_null == false)
+      $package_group.from == "lcl" and ($package_group.ignore == null or $package_group.ignore == false)
    }
 
    (
