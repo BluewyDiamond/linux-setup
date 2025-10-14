@@ -17,15 +17,15 @@ def main [config_file_rel_path: path] {
 def "main install" [config_file_rel_path: path] {
    let config = build-config ($config_file_rel_path | path expand)
 
-   install-packages $config.package_group_list
-   spawn-files $config.file_spawn_list
-   install-items $config.item_install_list
-   enable-units $config.unit_group_list
+   install-packages $config.package_groups
+   spawn-files $config.files_to_spawn
+   install-items $config.items_to_install
+   enable-units $config.unit_groups
 }
 
 def "main cleanup" [config_file_rel_path: path] {
    let config = build-config ($config_file_rel_path | path expand)
 
-   cleanup-packages $config.package_group_list
-   cleanup-units $config.unit_group_list
+   cleanup-packages $config.package_groups
+   cleanup-units $config.unit_groups
 }

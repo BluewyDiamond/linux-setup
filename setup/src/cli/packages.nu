@@ -3,21 +3,21 @@ use ../utils *
 export def install-packages [package_groups] {
    let packages_installed = pacman -Qq | lines
 
-   let std_package_groups_for_install = $package_groups | where {|package_group|
+   let std_package_groups_to_install = $package_groups | where {|package_group|
       $package_group.from == "std" and ($package_group.ignore_or_null == null or $package_group.ignore_or_null == false)
    }
 
-   let aur_package_groups_for_install = $package_groups | where {|package_group|
+   let aur_package_groups_to_install = $package_groups | where {|package_group|
       $package_group.from == "aur" and ($package_group.ignore_or_null == null or $package_group.ignore_or_null == false)
    }
 
-   let local_package_groups_for_install = $package_groups | where {|package_group|
+   let local_package_groups_to_install = $package_groups | where {|package_group|
       $package_group.from == "lcl" and ($package_group.ignore_or_null == null or $package_group.ignore_or_null == false)
    }
 
    (
       _install-packages
-      $std_package_groups_for_install
+      $std_package_groups_to_install
       $packages_installed
       "std"
 
@@ -37,7 +37,7 @@ export def install-packages [package_groups] {
 
    (
       _install-packages
-      $aur_package_groups_for_install
+      $aur_package_groups_to_install
       $packages_installed
       "aur"
 
@@ -57,7 +57,7 @@ export def install-packages [package_groups] {
 
    (
       _install-packages
-      $local_package_groups_for_install
+      $local_package_groups_to_install
       $packages_installed
       "local"
 
@@ -77,15 +77,15 @@ export def install-packages [package_groups] {
 }
 
 def _install-packages [
-   package_groups_for_install
+   package_groups_to_install
    packages_installed: list<string>
    label: string
    on_install: closure
 ] {
    log info $"checking ($label) packages to install"
 
-   let missing_package_groups = $package_groups_for_install | where {|package_group_for_install|
-      $package_group_for_install.name not-in $packages_installed
+   let missing_package_groups = $package_groups_to_install | where {|package_group_to_install|
+      $package_group_to_install.name not-in $packages_installed
    }
 
    if ($missing_package_groups | is-empty) {
@@ -98,36 +98,36 @@ def _install-packages [
 }
 
 export def cleanup-packages [package_groups] {
-   log info 'checking for packages to cleanup'
+   log info 'checking to packages to cleanup'
    let installed_packages = pacman -Qqee | lines
 
-   let std_packages_for_install = $package_groups | where {|package_group|
+   let std_packages_to_install = $package_groups | where {|package_group|
       $package_group.from == "std" and ($package_group.ignore_or_null == null or $package_group.ignore_or_null == false)
-   } | each {|std_package_group_for_install| $std_package_group_for_install.name }
+   } | each {|std_package_group_to_install| $std_package_group_to_install.name }
 
-   let aur_packages_for_install = $package_groups | where {|package_group|
+   let aur_packages_to_install = $package_groups | where {|package_group|
       $package_group.from == "aur" and ($package_group.ignore_or_null == null or $package_group.ignore_or_null == false)
-   } | each {|aur_package_group_for_install| $aur_package_group_for_install.name }
+   } | each {|aur_package_group_to_install| $aur_package_group_to_install.name }
 
-   let local_packages_for_install = $package_groups | where {|package_group|
+   let local_packages_to_install = $package_groups | where {|package_group|
       $package_group.from == "lcl" and ($package_group.ignore_or_null == null or $package_group.ignore_or_null == false)
-   } | each {|local_package_group_for_install| $local_package_group_for_install.name }
+   } | each {|local_package_group_to_install| $local_package_group_to_install.name }
 
-   let ignore_packages_for_install = $package_groups | where {|package_group|
+   let ignore_packages_to_install = $package_groups | where {|package_group|
       $package_group.ignore_or_null != null and $package_group.ignore_or_null == true
-   } | each {|ignore_package_group_for_install| $ignore_package_group_for_install.name }
+   } | each {|ignore_package_group_to_install| $ignore_package_group_to_install.name }
 
-   let packages_for_install = [
-      ...$std_packages_for_install
-      ...$aur_packages_for_install
-      ...$local_packages_for_install
-      ...$ignore_packages_for_install
+   let packages_to_install = [
+      ...$std_packages_to_install
+      ...$aur_packages_to_install
+      ...$local_packages_to_install
+      ...$ignore_packages_to_install
    ]
 
    let unlisted_packages = $installed_packages | par-each {|installed_package|
       if ($installed_package | is-package-a-dependency) {
          null
-      } else if ($installed_package not-in $packages_for_install) {
+      } else if ($installed_package not-in $packages_to_install) {
          $installed_package
       } else {
          null
