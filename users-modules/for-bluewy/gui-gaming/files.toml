@@ -1,0 +1,6 @@
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/mangohud-any@any"
+target = "/home/bluewy/.config/MangoHud"

@@ -2,5 +2,12 @@
 group = "bluewy"
 operation = "link"
 owner = "bluewy"
+source = "../../../files/librewolf-any@any/librewolf.overrides.cfg"
+target = "/home/bluewy/.librewolf/librewolf.overrides.cfg"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
 source = "../../../files/psd-any@any/frequency.conf"
 target = "/home/bluewy/.config/systemd/user/psd-resync.timer.d/frequency.conf"

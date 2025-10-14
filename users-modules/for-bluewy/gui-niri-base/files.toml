@@ -1,0 +1,6 @@
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/uwsm-any@any"
+target = "/home/bluewy/.config/uwsm"

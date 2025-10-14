@@ -1,27 +1,3 @@
-[[files-spawn]]
-content = """
-[D-BUS Service]
-Name=org.freedesktop.secrets
-Exec=/usr/bin/keepassxc
-"""
-group = "bluewy"
-owner = "bluewy"
-target = "/home/bluewy/.local/share/dbus-1/services/org.freedesktop.secrets.service"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/ags-any@any"
-target = "/home/bluewy/.config/ags"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/applications-any@any/obs.desktop"
-target = "/home/bluewy/.local/share/applications/obs.desktop"
-
 [[items-install]]
 group = "bluewy"
 operation = "link"
@@ -49,55 +25,6 @@ operation = "link"
 owner = "bluewy"
 source = "../../../files/electron-any@any/electron-flags.conf"
 target = "/home/bluewy/.config/electron-flags.conf"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/fuzzel-any@any"
-target = "/home/bluewy/.config/fuzzel"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/librewolf-any@any/librewolf.overrides.cfg"
-target = "/home/bluewy/.librewolf/librewolf.overrides.cfg"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/mangohud-any@any"
-target = "/home/bluewy/.config/MangoHud"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/pipewire-any@any"
-target = "/home/bluewy/.config/pipewire"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/speech-dispatcher-any@any"
-target = "/home/bluewy/.config/speech-dispatcher"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/uwsm-any@any"
-target = "/home/bluewy/.config/uwsm"
-
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/wezterm-any@any"
-target = "/home/bluewy/.config/wezterm"
 
 [[items-install]]
 group = "bluewy"
