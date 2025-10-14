@@ -120,17 +120,17 @@ alias nu-ls = ls
 #
 # List the filenames, sizes, and modification times of items in a directory.
 def ls [
+   --directory (-D) # List the specified directory itself instead of its contents
+   --du (-d) # Display the apparent directory size ("disk usage") in place of the directory metadata size
+   --full-paths (-f) # Display paths as absolute paths
+   --group-dir (-g) # Group directories together
    --hidden (-H) # Show hidden files
    --long (-l) # Get all available columns for each entry (slower; columns are platform-dependent)
-   --short-names (-s) # Only print the file names, and not the path
-   --full-paths (-f) # Display paths as absolute paths
-   --du (-d) # Display the apparent directory size ("disk usage") in place of the directory metadata size
-   --directory (-D) # List the specified directory itself instead of its contents
    --mime-type (-m) # Show mime-type in type column instead of 'file' (based on filenames only; files' contents are not examined)
-   --plain (-p) # Show plain files
-   --threads (-t) # Use multiple threads to list contents. Output will be non-deterministic.
-   --group-dir # Group directories together
    --pipe-mode (-P) # Do not apply things that might be unwanted with pipes
+   --plain (-p) # Show plain files
+   --short-names (-s) # Only print the file names, and not the path
+   --threads (-t) # Use multiple threads to list contents. Output will be non-deterministic.
    ...patterns: oneof<glob, string> # The glob pattern to use.
 ]: [nothing -> table] {
    let patterns = if ($patterns | is-empty) {
