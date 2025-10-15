@@ -277,10 +277,16 @@ binds {
 
 // [ Environment ]
 //
-// externally managed with uwsm
+environment {
+   // workaround for being removed if set before compositor start
+   DISPLAY ":0"
+}
 
 // [ Autostart ]
 //
+// i thought uwsm would pick it up automatically i guess not though
+spawn-at-startup "uwsm" "finalize"
+
 // [[ Rice ]]
 //
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "one_dark_adwaita"
