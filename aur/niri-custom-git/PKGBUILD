@@ -60,6 +60,9 @@ build() {
     export RUSTUP_TOOLCHAIN=stable
     export CARGO_HOME="$srcdir/$_pkgname/.cargo"
     export CARGO_TARGET_DIR=target
+    # xdp-gnome-screencast will enable dbus due to being its dependency
+    # however it shouldn't be an issue though ideally this whole thing
+    # should be handled cleanly by upstream
     cargo build --frozen --release --no-default-features --features='xdp-gnome-screencast'
 }
 

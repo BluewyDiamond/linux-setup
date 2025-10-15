@@ -12,5 +12,5 @@ with-env {
 
    _JAVA_AWT_WM_NONREPARENTING: '1'
 } {
-   exec uwsm start -- /home/bluewy/git/public/niri/target/release/niri --session
+   exec uwsm start -- niri --session
 }
