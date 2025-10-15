@@ -1,4 +1,4 @@
-pkgname=niri-no-systemd
+pkgname=niri-custom
 _pkgname=niri
 pkgver=25.08
 _tag="v$pkgver"
@@ -56,7 +56,7 @@ build() {
     export RUSTUP_TOOLCHAIN=stable
     export CARGO_HOME="$srcdir/$_pkgname/.cargo"
     export CARGO_TARGET_DIR=target
-    cargo build --frozen --release --no-default-features --features='dbus,xdp-gnome-screencast'
+    cargo build --frozen --release --no-default-features --features='xdp-gnome-screencast'
 }
 
 package() {
