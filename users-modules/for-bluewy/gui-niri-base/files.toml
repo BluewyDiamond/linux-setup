@@ -2,5 +2,5 @@
 group = "bluewy"
 operation = "link"
 owner = "bluewy"
-source = "../../../files/uwsm-any@any"
-target = "/home/bluewy/.config/uwsm"
+source = "../../../files/bin-any@raphael/niri-custom"
+target = "/home/bluewy/.local/bin/niri-custom"

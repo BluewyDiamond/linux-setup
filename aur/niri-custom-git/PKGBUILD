@@ -1,4 +1,4 @@
-pkgname=niri-no-systemd-git
+pkgname=niri-custom-git
 _pkgname=niri
 pkgver=r2409.e837e39
 pkgrel=1
@@ -60,7 +60,7 @@ build() {
     export RUSTUP_TOOLCHAIN=stable
     export CARGO_HOME="$srcdir/$_pkgname/.cargo"
     export CARGO_TARGET_DIR=target
-    cargo build --frozen --release --no-default-features --features='dbus,xdp-gnome-screencast'
+    cargo build --frozen --release --no-default-features --features='xdp-gnome-screencast'
 }
 
 package() {

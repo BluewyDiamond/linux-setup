@@ -1,0 +1,18 @@
+#!/usr/bin/env nu
+
+with-env {
+   NIRI_DISABLE_SYSTEM_MANAGER_NOTIFY: 1
+
+   # for xwayland-satellite
+   DISPLAY: ':0'
+
+   SDL_VIDEODRIVER: "wayland,x11"
+   CLUTTER_BACKEND: "wayland"
+   QT_QPA_PLATFORM: "wayland;xcb"
+
+   QT_QPA_PLATFORMTHEME: "qt6ct"
+
+   _JAVA_AWT_WM_NONREPARENTING: "1"
+} {
+   exec uwsm start -- niri --session
+}

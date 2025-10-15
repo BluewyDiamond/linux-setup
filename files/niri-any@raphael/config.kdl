@@ -150,6 +150,11 @@ workspace "zero"
 // scratchpad workspaces
 workspace "scratchpad"
 
+// externally managed
+xwayland-satellite {
+   off
+}
+
 // [ Binds ]
 //
 binds {
