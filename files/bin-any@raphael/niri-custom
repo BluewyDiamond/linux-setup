@@ -2,10 +2,7 @@
 
 with-env {
    NIRI_DISABLE_SYSTEM_MANAGER_NOTIFY: 1
-
-   # managed by niri
-   # XDG_CURRENT_DESKTOP: 'niri'
-   # XDG_SESSION_TYPE: 'wayland'
+   UWSM_FINALIZE_VARNAMES: 'WAYLAND_DISPLAY DISPLAY NIRI_SOCKET XDG_CURRENT_DESKTOP XDG_SESSION_TYPE'
 
    SDL_VIDEODRIVER: 'wayland,x11'
    CLUTTER_BACKEND: 'wayland'
@@ -15,5 +12,5 @@ with-env {
 
    _JAVA_AWT_WM_NONREPARENTING: '1'
 } {
-   exec uwsm start -- niri
+   exec uwsm start -- /home/bluewy/git/public/niri/target/release/niri --session
 }
