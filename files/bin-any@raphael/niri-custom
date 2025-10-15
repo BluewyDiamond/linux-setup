@@ -3,8 +3,9 @@
 with-env {
    NIRI_DISABLE_SYSTEM_MANAGER_NOTIFY: 1
 
-   XDG_CURRENT_DESKTOP: 'niri'
-   XDG_SESSION_TYPE: 'wayland'
+   # managed by niri
+   # XDG_CURRENT_DESKTOP: 'niri'
+   # XDG_SESSION_TYPE: 'wayland'
 
    SDL_VIDEODRIVER: 'wayland,x11'
    CLUTTER_BACKEND: 'wayland'
