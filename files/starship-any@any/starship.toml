@@ -57,7 +57,7 @@ format = """
 """
 ahead = "[⇡$count](fg:green)"
 behind = "[⇣$count](fg:yellow)"
-diverged = "⇕[⇡$ahead_count](fg:green) [⇣$behind_count](fg:yellow)"
+diverged = "⇕ [⇡$ahead_count](fg:green) [⇣$behind_count](fg:yellow)"
 
 untracked = "[?$count](fg:yellow) "
 stashed = "[S$count](fg:yellow) "
