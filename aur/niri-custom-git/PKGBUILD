@@ -1,6 +1,6 @@
 pkgname=niri-custom-git
 _pkgname=niri
-pkgver=r2409.e837e39
+pkgver=r2472.2776005
 pkgrel=1
 pkgdesc='A scrollable-tiling Wayland compositor'
 arch=(x86_64 aarch64)
