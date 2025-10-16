@@ -164,7 +164,7 @@ binds {
    Mod+O repeat=false { toggle-overview; }
    Mod+Shift+P { power-off-monitors; }
 
-   Mod+Shift+Escape { spawn "uwsm" "stop"; } // preserve the shift in case of accidental press
+   Mod+Shift+Escape { spawn "runapp" "loginctl" "terminate-user" "''"; } // preserve the shift in case of accidental press
 
    // [[ Keyboard ]]
    //
@@ -269,10 +269,10 @@ binds {
    Mod+A { spawn "runapp" "/home/bluewy/.config/niri/dmenu/do-dmenu.nu"; }
    Mod+X { spawn "runapp" "nu" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
 
-   XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-   XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-   XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-   XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+   XF86AudioRaiseVolume allow-when-locked=true { spawn "runapp" "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+   XF86AudioLowerVolume allow-when-locked=true { spawn "runapp" "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+   XF86AudioMute        allow-when-locked=true { spawn "runapp" "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+   XF86AudioMicMute     allow-when-locked=true { spawn "runapp" "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 }
 
 // [ Environment ]
@@ -295,30 +295,30 @@ spawn-at-startup "uwsm" "finalize"
 
 // [[ Rice ]]
 //
-spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "one_dark_adwaita"
-spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Sweet-Rainbow"
-spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "cursor-theme" "Bibata-Modern-Classic"
-spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "cursor-size" "24"
-spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
+spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "one_dark_adwaita"
+spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Sweet-Rainbow"
+spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "cursor-theme" "Bibata-Modern-Classic"
+spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "cursor-size" "24"
+spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
 
 // [[ Polkit ]]
 //
-spawn-at-startup "nu" "-c" "try { pidof io.elementary.desktop.agent-polkit } catch { exec uwsm app -- /usr/lib/policykit-1-pantheon/io.elementary.desktop.agent-polkit }"
+spawn-at-startup "nu" "-c" "try { pidof io.elementary.desktop.agent-polkit } catch { exec runapp /usr/lib/policykit-1-pantheon/io.elementary.desktop.agent-polkit }"
 
 // [[ Idle Listener ]]
 //
-spawn-at-startup "nu" "-c" "try { pidof hypridle } catch { exec uwsm app -- hypridle }"
-spawn-at-startup "nu" "-c" "try { pidof wayland-pipewire-idle-inhibit } catch { exec uwsm app -- wayland-pipewire-idle-inhibit }"
+spawn-at-startup "nu" "-c" "try { pidof hypridle } catch { runapp hypridle }"
+spawn-at-startup "nu" "-c" "try { pidof wayland-pipewire-idle-inhibit } catch { runapp wayland-pipewire-idle-inhibit }"
 
 // [[ Clipboard ]]
 //
-spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type text --watch cliphist store' } catch { exec uwsm app -- wl-paste --type text --watch cliphist store }"
-spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type image --watch cliphist store'} catch { exec uwsm app -- wl-paste --type image --watch cliphist store }"
+spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type text --watch cliphist store' } catch { runapp wl-paste --type text --watch cliphist store }"
+spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type image --watch cliphist store'} catch { runapp wl-paste --type image --watch cliphist store }"
 
 // [[ Widget ]]
 //
-spawn-at-startup "nu" "-c" "ps --long | par-each {|row| if $row.command == '/usr/bin/gjs -m /usr/share/mshell/main.js' {$row}} | is-empty | if $in { exec uwsm app -- mshell }"
+spawn-at-startup "nu" "-c" "ps --long | par-each {|row| if $row.command == '/usr/bin/gjs -m /usr/share/mshell/main.js' {$row}} | is-empty | if $in { runapp mshell }"
 
 // [[ Other ]]
 //
-spawn-at-startup "nu" "-c" "try { pidof keepassxc } catch { exec uwsm app -- keepassxc }"
+spawn-at-startup "nu" "-c" "try { pidof keepassxc } catch { runapp keepassxc }"
