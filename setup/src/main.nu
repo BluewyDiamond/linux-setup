@@ -1,4 +1,4 @@
-#!/usr/bin/env nu
+#!/usr/bin/env -S nu '--experimental-options=[reorder-cell-paths pipefail enforce-runtime-annotations]'
 
 use std/log
 
