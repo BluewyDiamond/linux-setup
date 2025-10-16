@@ -262,12 +262,12 @@ binds {
    // [[ Other ]]
    // assuming not compiled with systemd support
    //
-   Mod+T hotkey-overlay-title="Open a Terminal: wezterm" { spawn "uwsm" "app" "--" "wezterm"; }
-   Mod+D hotkey-overlay-title="Open App Launcher: fuzzel" { spawn "uwsm" "app" "--" "fuzzel" "--launch-prefix=uwsm app -- "; }
-   Mod+B allow-when-locked=true { spawn "uwsm" "app" "--" "hyprlock"; }
+   Mod+T hotkey-overlay-title="Open a Terminal: wezterm" { spawn "runapp" "wezterm"; }
+   Mod+D hotkey-overlay-title="Open App Launcher: fuzzel" { spawn "runapp" "fuzzel" "--launch-prefix=runapp"; }
+   Mod+B allow-when-locked=true { spawn "runapp" "hyprlock"; }
 
-   Mod+A { spawn "~/.config/niri/dmenu/do-dmenu.nu"; }
-   Mod+X { spawn "nu" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
+   Mod+A { spawn "runapp" "/home/bluewy/.config/niri/dmenu/do-dmenu.nu"; }
+   Mod+X { spawn "runapp" "nu" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
 
    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
@@ -279,6 +279,14 @@ binds {
 //
 environment {
    DISPLAY ":0"
+
+   SDL_VIDEODRIVER "wayland,x11"
+   CLUTTER_BACKEND "wayland"
+   QT_QPA_PLATFORM "wayland;xcb"
+
+   QT_QPA_PLATFORMTHEME "qt6ct"
+
+   _JAVA_AWT_WM_NONREPARENTING "1"
 }
 
 // [ Autostart ]

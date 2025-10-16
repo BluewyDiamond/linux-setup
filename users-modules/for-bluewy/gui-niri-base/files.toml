@@ -2,5 +2,5 @@
 group = "bluewy"
 operation = "link"
 owner = "bluewy"
-source = "../../../files/bin-any@raphael/niri-custom"
-target = "/home/bluewy/.local/bin/niri-custom"
+source = "../../../files/niri-custom-service-any@any/niri-custom.service"
+target = "/home/bluewy/.config/systemd/user/niri-custom.service"
