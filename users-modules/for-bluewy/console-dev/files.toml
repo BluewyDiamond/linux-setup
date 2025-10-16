@@ -1,4 +1,11 @@
 [[items-install]]
+group = "root"
+operation = "copy"
+owner = "root"
+source = "../../../files/bin-any@any/nu-custom"
+target = "/usr/bin/nu-custom"
+
+[[items-install]]
 group = "bluewy"
 operation = "link"
 owner = "bluewy"

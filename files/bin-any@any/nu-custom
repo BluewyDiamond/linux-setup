@@ -1,0 +1,3 @@
+#!/usr/bin/env nu
+
+nu --experimental-options=[reorder-cell-paths pipefail enforce-runtime-annotations]

@@ -38,6 +38,8 @@ $env.config.hooks.display_output = {
    table --theme psql --width (term size | get columns)
 }
 
+$env.config.display_errors.exit_code = true
+
 # [[ XDG ]]
 
 $env.XDG_CONFIG_HOME = $env.HOME | path join '.config'
