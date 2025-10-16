@@ -1,4 +1,6 @@
-export def collect-config-file-abs-paths [config_file_abs_path: path]: nothing -> list<path> {
+export def collect-config-file-abs-paths [
+   config_file_abs_path: path
+]: nothing -> list<path> {
    mut config_file_abs_paths_to_process = [$config_file_abs_path]
    mut config_file_abs_paths_collected = []
 
@@ -41,18 +43,18 @@ export def build-config [
 ]: nothing -> record<package_groups: list<record<from: string, name: string, ignore: bool>>, files_to_spawn: list<record<owner: string, target_file_abs_path: path, content: string>>, items_to_install: list<record<operation: string, owner: string, source_item_abs_path: path, target_item_abs_path: path>>, unit_groups: list<record<user: string, dir_abs_path: string, enable_list: list<string>>>> {
    let config_file_abs_paths = collect-config-file-abs-paths $config_file_rel_path
 
-   let config_groups_raw = $config_file_abs_paths | each {|config_file_abs_path|
+   let raw_config_groups = $config_file_abs_paths | each {|config_file_abs_path|
       {
          config_file_rel_path: $config_file_abs_path
-         config_raw: (open $config_file_abs_path)
+         raw_config: (open $config_file_abs_path)
       }
    }
 
-   let files_to_spawn = $config_groups_raw.config_raw | each {|config_raw|
-      $config_raw
+   let files_to_spawn = $raw_config_groups.raw_config | each {|raw_config|
+      $raw_config
       | get -o files-spawn
       | default []
-      | each {|file_spawn|
+      | each --flatten {|file_spawn|
          {
             owner: $file_spawn.owner
             group: $file_spawn.group
@@ -60,15 +62,16 @@ export def build-config [
             content: $file_spawn.content
          }
       }
-   } | flatten | uniq
+   } | uniq
 
-   let items_to_install = $config_groups_raw | each {|config_group_raw|
-      let config_dir_rel_path = $config_group_raw.config_file_rel_path | path dirname
+   let items_to_install = $raw_config_groups | each {|raw_config_group|
+      let config_dir_rel_path = $raw_config_group.config_file_rel_path
+      | path dirname
 
-      $config_group_raw.config_raw
+      $raw_config_group.raw_config
       | get -o items-install
       | default []
-      | each {|item_install_raw|
+      | each --flatten {|item_install_raw|
          {
             operation: $item_install_raw.operation
             owner: $item_install_raw.owner
@@ -83,15 +86,15 @@ export def build-config [
             target_item_abs_path: $item_install_raw.target
          }
       }
-   } | flatten | uniq
+   } | uniq
 
-   let package_groups = $config_groups_raw | each {|config_group_raw|
-      let config_dir_rel_path = $config_group_raw.config_file_rel_path | path dirname
+   let package_groups = $raw_config_groups | each {|raw_config_group|
+      let config_dir_rel_path = $raw_config_group.config_file_rel_path | path dirname
 
-      $config_group_raw.config_raw
+      $raw_config_group.raw_config
       | get -o packages
       | default []
-      | each {|package_raw_group|
+      | each --flatten {|package_raw_group|
          let dir_abs_path = if ($package_raw_group.path? == null) {
             null
          } else {
@@ -105,7 +108,7 @@ export def build-config [
             dir_abs_path: $dir_abs_path
          }
       }
-   } | flatten | uniq
+   } | uniq
 
    let duplicated_packages = $package_groups.name | uniq -d
 
@@ -116,11 +119,11 @@ export def build-config [
       }
    }
 
-   let unit_groups = $config_groups_raw.config_raw | each {|config_raw|
-      $config_raw
+   let unit_groups = $raw_config_groups.raw_config | each {|raw_config|
+      $raw_config
       | get -o units
       | default []
-      | each {|unit|
+      | each --flatten {|unit|
          {
             user: ($unit | get user)
             dir_abs_path: ($unit | get path)
@@ -128,7 +131,6 @@ export def build-config [
          }
       }
    }
-   | flatten
    | group-by {|row|
       $"($row.user):($row.dir_abs_path)"
    }

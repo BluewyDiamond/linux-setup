@@ -60,7 +60,7 @@ export def cleanup-units [unit_groups] {
             }
          )
 
-         let units_ignore_list = $unit_group.enable_list | each {|unit_to_enable|
+         let units_ignore_list = $unit_group.enable_list | each --flatten {|unit_to_enable|
             if (is-admin) and ($unit_group.user == root) {
                systemctl list-dependencies --plain --no-pager $unit_to_enable
                | lines
@@ -81,7 +81,6 @@ export def cleanup-units [unit_groups] {
                error make {msg: "i cant have this fail atm"}
             }
          }
-         | flatten
          | uniq
 
          let units_to_disable = $units_enabled | where {|unit_to_enabled|
