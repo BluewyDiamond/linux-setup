@@ -50,11 +50,11 @@ export def build-config [
       }
    }
 
-   let files_to_spawn = $raw_config_groups.raw_config | each {|raw_config|
+   let files_to_spawn = $raw_config_groups.raw_config
+   | each --flatten {|raw_config|
       $raw_config
       | get -o files-spawn
-      | default []
-      | each --flatten {|file_spawn|
+      | each {|file_spawn|
          {
             owner: $file_spawn.owner
             group: $file_spawn.group
@@ -64,14 +64,14 @@ export def build-config [
       }
    } | uniq
 
-   let items_to_install = $raw_config_groups | each {|raw_config_group|
+   let items_to_install = $raw_config_groups
+   | each --flatten {|raw_config_group|
       let config_dir_rel_path = $raw_config_group.config_file_rel_path
       | path dirname
 
       $raw_config_group.raw_config
       | get -o items-install
-      | default []
-      | each --flatten {|item_install_raw|
+      | each {|item_install_raw|
          {
             operation: $item_install_raw.operation
             owner: $item_install_raw.owner
@@ -88,13 +88,12 @@ export def build-config [
       }
    } | uniq
 
-   let package_groups = $raw_config_groups | each {|raw_config_group|
+   let package_groups = $raw_config_groups | each --flatten {|raw_config_group|
       let config_dir_rel_path = $raw_config_group.config_file_rel_path | path dirname
 
       $raw_config_group.raw_config
       | get -o packages
-      | default []
-      | each --flatten {|package_raw_group|
+      | each {|package_raw_group|
          let dir_abs_path = if ($package_raw_group.path? == null) {
             null
          } else {
@@ -119,11 +118,11 @@ export def build-config [
       }
    }
 
-   let unit_groups = $raw_config_groups.raw_config | each {|raw_config|
+   let unit_groups = $raw_config_groups.raw_config
+   | each --flatten {|raw_config|
       $raw_config
       | get -o units
-      | default []
-      | each --flatten {|unit|
+      | each {|unit|
          {
             user: ($unit | get user)
             dir_abs_path: ($unit | get path)
