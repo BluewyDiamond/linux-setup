@@ -40,7 +40,7 @@ export def collect-config-file-abs-paths [
 
 export def build-config [
    config_file_rel_path: path
-]: nothing -> record<package_groups: list<record<from: string, name: string, ignore: bool>>, files_to_spawn: list<record<owner: string, target_file_abs_path: path, content: string>>, items_to_install: list<record<operation: string, owner: string, source_item_abs_path: path, target_item_abs_path: path>>, unit_groups: list<record<user: string, dir_abs_path: string, enable_list: list<string>>>> {
+]: nothing -> record<package_groups: table<from: string, name: string, ignore: oneof<bool, nothing>, dir_abs_path: oneof<path, nothing>>, files_to_spawn: table<owner: string, group: string, target_file_abs_path: path, content: string>, items_to_install: table<operation: string, owner: string, group: string, source_item_abs_path: path, target_item_abs_path: path>, unit_groups: table<user: string, dir_abs_path: string, enable_list: list<string>>> {
    let config_file_abs_paths = collect-config-file-abs-paths $config_file_rel_path
 
    let raw_config_groups = $config_file_abs_paths | each {|config_file_abs_path|
@@ -88,7 +88,8 @@ export def build-config [
       }
    } | uniq
 
-   let package_groups = $raw_config_groups | each --flatten {|raw_config_group|
+   let package_groups: table<from: string, name: string, ignore: oneof<bool, nothing>, dir_abs_path: oneof<path, nothing>> = $raw_config_groups
+   | each --flatten {|raw_config_group|
       let config_dir_rel_path = $raw_config_group.config_file_rel_path | path dirname
 
       $raw_config_group.raw_config
