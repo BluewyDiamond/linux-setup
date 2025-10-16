@@ -3,7 +3,8 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
-local shell_command = { "/usr/bin/nu", "-l" }
+local shell_command =
+   { "/usr/bin/nu", "-l", "--experimental-options=[reorder-cell-paths pipefail enforce-runtime-annotations]" }
 
 local config = {}
 
