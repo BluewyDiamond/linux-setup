@@ -8,18 +8,18 @@ def 'main start' [] {
    systemctl --user --wait start niri-custom.service
 
    let systemd_env = systemctl --user show-environment | lines | split column '=' key value
-   let joined_env = $systemd_env | join -o $shell_env key
+   let joined_env = $shell_env | join -o $systemd_env key
 
    let action_table = $joined_env | par-each {|row|
-      if $row.value_ == null {
+      if $row.value == null {
          return {unset: $row.key}
       }
 
-      if $row.value == null {
+      if $row.value_ == null {
          return
       }
 
-      if $row.value != $row.value_ {
+      if $row.value_ != $row.value {
          return {update: $row.key}
       }
    }
