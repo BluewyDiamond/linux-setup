@@ -35,7 +35,7 @@ def 'compact column' [
 $env.config.show_banner = false
 
 $env.config.hooks.display_output = {
-   table --theme psql --width (term size | get columns) -e
+   table --theme psql --width (term size | get columns)
 }
 
 # [[ XDG ]]
@@ -258,6 +258,15 @@ do {||
    }
 
    $starship_init_file | save -f $starship_init_file_abs_path
+}
+
+# [[ Misc ]]
+
+# keeps my shell in sync with systemd and dbus
+try {
+   dbus-update-activation-environment --all --systemd
+} catch {|error|
+   $error | print
 }
 
 # [[ Visuals ]]

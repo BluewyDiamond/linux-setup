@@ -1,0 +1,25 @@
+#!/usr/bin/env nu
+
+let nu_env = env | lines | split column '=' key value
+systemctl --user --wait start niri-custom.service
+let systemd_env = systemctl --user show-environment | lines | split column '=' key value
+let joined_env = $systemd_env | join -o $nu_env key
+
+let systemd_env_to_unset = $joined_env | par-each {|row|
+   if $row.value_ != null {
+      return
+   }
+
+   $row.key
+}
+
+let systemd_env_to_update = $joined_env | par-each {|row|
+   if $row.value == $row.value_ {
+      return
+   }
+
+   $row.key
+}
+
+systemctl --user unset-environment ...$systemd_env_to_unset
+systemctl --user import-environment ...$systemd_env_to_update

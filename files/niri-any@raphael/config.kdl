@@ -300,7 +300,7 @@ environment {
 spawn-at-startup "systemctl" "--user" "start" "xwayland-satellite.service"
 
 // update systemd + dbus environment
-spawn-at-startup "dbus-update-activation-environment" "--systemd" "--all"
+spawn-at-startup "dbus-update-activation-environment" "--all" "--systemd"
 
 // [[ Rice ]]
 
