@@ -9,6 +9,10 @@ After=graphical-session-pre.target
 Slice=session.slice
 Type=notify
 ExecStart=/usr/bin/niri --session
+
 # alternatively when type is not notify
 # wait 2 seconds for niri to setup
 # ExecStartPost=/bin/sleep 2
+
+# assuming apps are attached to the defined slice
+ExecStopPost=systemctl --user stop app-graphical.slice
