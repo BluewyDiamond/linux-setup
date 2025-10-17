@@ -1,5 +1,5 @@
 // [ Inputs & Outputs ]
-//
+
 input {
    keyboard {
       xkb {
@@ -31,7 +31,7 @@ output "HDMI-A-2" {
 }
 
 // [ Behaviours & Aesthetics ]
-//
+
 prefer-no-csd
 
 overview {
@@ -156,10 +156,10 @@ xwayland-satellite {
 }
 
 // [ Binds ]
-//
+
 binds {
    // [[ WM ]]
-   //
+
    Mod+Slash { show-hotkey-overlay; }
    Mod+O repeat=false { toggle-overview; }
    Mod+Shift+P { power-off-monitors; }
@@ -167,18 +167,18 @@ binds {
    Mod+Shift+Escape { spawn "runapp" "loginctl" "terminate-user" "''"; } // preserve the shift in case of accidental press
 
    // [[ Keyboard ]]
-   //
+ 
    Mod+Space { switch-layout "next"; }
    Mod+Shift+Space { switch-layout "prev"; }
 
    // [[ Screenshot ]]
-   //
+
    Print { screenshot; }
    Ctrl+Print { screenshot-screen; }
    Alt+Print { screenshot-window; }
 
    // [[ Window ]]
-   //
+
    Mod+U     { focus-window-up; }
    Mod+I     { focus-column-right; }
    Mod+E     { focus-window-down; }
@@ -221,7 +221,7 @@ binds {
    Mod+Q { close-window; }
 
    // [[ Workspace ]]
-   //
+
    Mod+1 { focus-workspace "one"; }
    Mod+2 { focus-workspace "two"; }
    Mod+3 { focus-workspace "three"; }
@@ -248,7 +248,7 @@ binds {
    Mod+Ctrl+Alt+E         { move-window-to-workspace-down; }
 
    // [[ Monitor Binds ]]
-   //
+
    Mod+Shift+U     { focus-monitor-up; }
    Mod+Shift+I     { focus-monitor-right; }
    Mod+Shift+E     { focus-monitor-down; }
@@ -260,8 +260,9 @@ binds {
    Mod+Shift+Ctrl+N     { move-window-to-monitor-left; }
 
    // [[ Other ]]
-   // assuming not compiled with systemd support
-   //
+   // note: avoid double systemd wrapping by disabling systemd at niri compile
+   //    time
+
    Mod+T hotkey-overlay-title="Open a Terminal: wezterm" { spawn "runapp" "wezterm"; }
    Mod+D hotkey-overlay-title="Open App Launcher: fuzzel" { spawn "runapp" "fuzzel" "--launch-prefix=runapp"; }
    Mod+B allow-when-locked=true { spawn "runapp" "hyprlock"; }
@@ -276,7 +277,7 @@ binds {
 }
 
 // [ Environment ]
-//
+
 environment {
    DISPLAY ":0"
 
@@ -290,11 +291,9 @@ environment {
 }
 
 // [ Autostart ]
-//
-spawn-at-startup "uwsm" "finalize"
 
 // [[ Rice ]]
-//
+
 spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "one_dark_adwaita"
 spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Sweet-Rainbow"
 spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "cursor-theme" "Bibata-Modern-Classic"
@@ -302,23 +301,23 @@ spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "curso
 spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
 
 // [[ Polkit ]]
-//
+
 spawn-at-startup "nu" "-c" "try { pidof io.elementary.desktop.agent-polkit } catch { exec runapp /usr/lib/policykit-1-pantheon/io.elementary.desktop.agent-polkit }"
 
 // [[ Idle Listener ]]
-//
+
 spawn-at-startup "nu" "-c" "try { pidof hypridle } catch { runapp hypridle }"
 spawn-at-startup "nu" "-c" "try { pidof wayland-pipewire-idle-inhibit } catch { runapp wayland-pipewire-idle-inhibit }"
 
 // [[ Clipboard ]]
-//
+
 spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type text --watch cliphist store' } catch { runapp wl-paste --type text --watch cliphist store }"
 spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type image --watch cliphist store'} catch { runapp wl-paste --type image --watch cliphist store }"
 
 // [[ Widget ]]
-//
+
 spawn-at-startup "nu" "-c" "ps --long | par-each {|row| if $row.command == '/usr/bin/gjs -m /usr/share/mshell/main.js' {$row}} | is-empty | if $in { runapp mshell }"
 
 // [[ Other ]]
-//
+
 spawn-at-startup "nu" "-c" "try { pidof keepassxc } catch { runapp keepassxc }"
