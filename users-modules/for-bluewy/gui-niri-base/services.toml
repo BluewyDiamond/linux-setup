@@ -1,4 +1,0 @@
-[[units]]
-enable = ["xwayland-satellite.service"]
-path = "/home/bluewy/.config/systemd/user"
-user = "bluewy"
