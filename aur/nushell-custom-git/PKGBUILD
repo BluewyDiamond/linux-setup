@@ -1,0 +1,24 @@
+pkgname=nushell-custom-git
+_pkgname=nushell-custom
+pkgver=1
+pkgrel=1
+pkgdesc='Enables some experimental options'
+arch=(any)
+depends=(nushell)
+provides=($_pkgname)
+conflicts=($_pkgname $_pkgname-bin $_pkgname-git)
+
+package() {
+    echo "
+       #!/usr/bin/env nu
+       exec nu --experimental-options=[reorder-cell-paths pipefail enforce-runtime-annotations]
+    " > "/usr/bin/nu-custom"
+}
+
+post_install() {
+  echo "/usr/bin/nu-custom" >> /etc/shells
+}
+
+post_remove() {
+  sed -i '/^/usr/bin/nu-custom$/d' /etc/example.conf
+}
