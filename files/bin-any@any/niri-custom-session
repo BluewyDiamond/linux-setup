@@ -4,13 +4,15 @@ def main [] { }
 
 def 'main start' [] {
    let shell_env = env | lines | split column '=' key value
-
    systemctl --user --wait start niri-custom.service
 
-   let systemd_env = systemctl --user show-environment | lines | split column '=' key value
-   let joined_env = $shell_env | join -o $systemd_env key
+   let systemd_env = systemctl --user show-environment
+   | lines
+   | split column '=' key value
 
-   let action_table = $joined_env | par-each {|row|
+   let shell_and_systemd_env = $shell_env | join -o $systemd_env key
+
+   let unset_or_update = $shell_and_systemd_env | par-each {|row|
       if $row.value == null {
          return {unset: $row.key}
       }
@@ -24,8 +26,8 @@ def 'main start' [] {
       }
    }
 
-   let systemd_env_to_unset = $action_table | get -o unset | compact
-   let systemd_env_to_update = $action_table | get -o update | compact
+   let systemd_env_to_unset = $unset_or_update | get -o unset | compact
+   let systemd_env_to_update = $unset_or_update | get -o update | compact
 
    if ($systemd_env_to_unset | is-not-empty) {
       systemctl --user unset-environment ...$systemd_env_to_unset
@@ -37,5 +39,13 @@ def 'main start' [] {
 }
 
 def 'main stop' [] {
-   systemctl --user stop app-graphical.slice background-graphical.slice session-graphical.slice graphical-session.target
+   (
+      systemctl
+      --user
+      stop
+      app-graphical.slice
+      background-graphical.slice
+      session-graphical.slice
+      graphical-session.target
+   )
 }
