@@ -1,31 +1,41 @@
 #!/usr/bin/env nu
 
-let shell_env = env | lines | split column '=' key value
-systemctl --user --wait start niri-custom.service
-let systemd_env = systemctl --user show-environment | lines | split column '=' key value
-let joined_env = $systemd_env | join -o $shell_env key
+def main [] { }
 
-let action_table = $joined_env | par-each {|row|
-   if $row.value_ == null {
-      return {unset: $row.key}
+def 'main start' [] {
+   let shell_env = env | lines | split column '=' key value
+
+   systemctl --user --wait start niri-custom.service
+
+   let systemd_env = systemctl --user show-environment | lines | split column '=' key value
+   let joined_env = $systemd_env | join -o $shell_env key
+
+   let action_table = $joined_env | par-each {|row|
+      if $row.value_ == null {
+         return {unset: $row.key}
+      }
+
+      if $row.value == null {
+         return
+      }
+
+      if $row.value != $row.value_ {
+         return {update: $row.key}
+      }
    }
 
-   if $row.value == null {
-      return
+   let systemd_env_to_unset = $action_table | get -o unset | compact
+   let systemd_env_to_update = $action_table | get -o update | compact
+
+   if ($systemd_env_to_unset | is-not-empty) {
+      systemctl --user unset-environment ...$systemd_env_to_unset
    }
 
-   if $row.value != $row.value_ {
-      return {update: $row.key}
+   if ($systemd_env_to_update | is-not-empty) {
+      systemctl --user import-environment ...$systemd_env_to_update
    }
 }
 
-let systemd_env_to_unset = $action_table | get -o unset | compact
-let systemd_env_to_update = $action_table | get -o update | compact
-
-if ($systemd_env_to_unset | is-not-empty) {
-   systemctl --user unset-environment ...$systemd_env_to_unset
-}
-
-if ($systemd_env_to_update | is-not-empty) {
-   systemctl --user import-environment ...$systemd_env_to_update
+def 'main stop' [] {
+   systemctl --user stop app-graphical.slice background-graphical.slice session-graphical.slice graphical-session.target
 }

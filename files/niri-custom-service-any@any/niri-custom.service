@@ -6,7 +6,7 @@ Wants=graphical-session-pre.target
 After=graphical-session-pre.target
 
 [Service]
-Slice=session.slice
+Slice=session-graphical.slice
 Type=notify
 ExecStart=/usr/bin/niri --session
 
