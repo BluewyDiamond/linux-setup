@@ -165,6 +165,8 @@ binds {
    Mod+Shift+P { power-off-monitors; }
 
    // preserve the shift in case of accidental press
+   // note: portal, wireplumber and pipewire are still active as their are not
+   //    tied to the defined lifetime
    Mod+Shift+Escape { spawn "systemctl" "--user" "stop" "graphical-session.target"; }
    Mod+Shift+Alt+Escape { quit; }
 
@@ -302,11 +304,11 @@ spawn-at-startup "dbus-update-activation-environment" "--systemd" "--all"
 
 // [[ Rice ]]
 
-spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "one_dark_adwaita"
-spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Sweet-Rainbow"
-spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "cursor-theme" "Bibata-Modern-Classic"
-spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "cursor-size" "24"
-spawn-at-startup "runapp" "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "one_dark_adwaita"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Sweet-Rainbow"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "cursor-theme" "Bibata-Modern-Classic"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "cursor-size" "24"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
 
 // [[ Polkit ]]
 
