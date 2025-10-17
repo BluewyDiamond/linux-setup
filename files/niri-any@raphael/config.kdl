@@ -164,7 +164,9 @@ binds {
    Mod+O repeat=false { toggle-overview; }
    Mod+Shift+P { power-off-monitors; }
 
-   Mod+Shift+Escape { spawn "runapp" "loginctl" "terminate-user" "''"; } // preserve the shift in case of accidental press
+   // preserve the shift in case of accidental press
+   Mod+Shift+Escape { spawn "systemctl" "--user" "stop" "graphical-session.target"; }
+   Mod+Shift+Alt+Escape { quit; }
 
    // [[ Keyboard ]]
  
