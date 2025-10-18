@@ -39,13 +39,8 @@ def 'main start' [] {
 }
 
 def 'main stop' [] {
-   (
-      systemctl
-      --user
-      stop
-      app-graphical.slice
-      background-graphical.slice
-      session-graphical.slice
-      graphical-session.target
-   )
+   systemctl --user stop app-graphical.slice
+   systemctl --user stop background-graphical.slice
+   systemctl --user stop session-graphical.slice
+   systemctl --user stop graphical-session.target
 }
