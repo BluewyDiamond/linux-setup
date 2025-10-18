@@ -1,8 +1,0 @@
-packages = [
-   # [ gui.niri.base ]
-   #
-   { from = "lcl", name = "niri-custom-git", path = "../../../aur/niri-custom-git" },
-   { from = "std", name = "xwayland-satellite" },
-   { from = "std", name = "xdg-desktop-portal-gnome" },
-   { from = "std", name = "xdg-desktop-portal-gtk" },
-]

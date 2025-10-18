@@ -2,6 +2,13 @@
 group = "bluewy"
 operation = "link"
 owner = "bluewy"
+source = "../../../files/nushell-any@any"
+target = "/home/bluewy/.config/nushell"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
 source = "../../../files/fastfetch-any@any"
 target = "/home/bluewy/.config/fastfetch"
 

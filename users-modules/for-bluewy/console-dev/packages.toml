@@ -1,5 +1,4 @@
 packages = [
-   { from = "std", name = "nushell-custom" },
 
    { from = "std", name = "rustup" },
    { from = "std", name = "jdk21-openjdk" },

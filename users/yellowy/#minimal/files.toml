@@ -2,13 +2,6 @@
 group = "yellowy"
 operation = "link"
 owner = "yellowy"
-source = "../../../files/fastfetch-any@any"
-target = "/home/yellowy/.config/fastfetch"
-
-[[items-install]]
-group = "yellowy"
-operation = "link"
-owner = "yellowy"
 source = "../../../files/nushell-any@any"
 target = "/home/yellowy/.config/nushell"
 
@@ -16,8 +9,8 @@ target = "/home/yellowy/.config/nushell"
 group = "yellowy"
 operation = "link"
 owner = "yellowy"
-source = "../../../files/nvim-any@any"
-target = "/home/yellowy/.config/nvim"
+source = "../../../files/fastfetch-any@any"
+target = "/home/yellowy/.config/fastfetch"
 
 [[items-install]]
 group = "yellowy"
@@ -25,6 +18,13 @@ operation = "link"
 owner = "yellowy"
 source = "../../../files/starship-any@any/starship.toml"
 target = "/home/yellowy/.config/starship.toml"
+
+[[items-install]]
+group = "yellowy"
+operation = "link"
+owner = "yellowy"
+source = "../../../files/nvim-any@any"
+target = "/home/yellowy/.config/nvim"
 
 [[items-install]]
 group = "yellowy"

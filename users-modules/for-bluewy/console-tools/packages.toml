@@ -1,5 +1,0 @@
-packages = [
-   { from = "std", name = "zellij" },
-   { from = "std", name = "paru" },
-   { from = "std", name = "downgrade" },
-]

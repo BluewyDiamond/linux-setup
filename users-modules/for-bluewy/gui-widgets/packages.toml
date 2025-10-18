@@ -1,3 +1,0 @@
-packages = [
-   { from = "lcl", name = "mshell-git", path = "../../../aur/mshell-git" },
-]

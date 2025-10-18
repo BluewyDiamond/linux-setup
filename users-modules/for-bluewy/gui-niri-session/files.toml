@@ -2,6 +2,20 @@
 group = "bluewy"
 operation = "link"
 owner = "bluewy"
+source = "../../../files/niri-custom-service-any@any/niri-custom.service"
+target = "/home/bluewy/.config/systemd/user/niri-custom.service"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "../../../files/bin-any@any/niri-custom-session"
+target = "/home/bluewy/.local/bin/niri-custom-session"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
 source = "../../../files/hypr-any@raphael"
 target = "/home/bluewy/.config/hypr"
 
