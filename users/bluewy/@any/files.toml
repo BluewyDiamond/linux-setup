@@ -32,3 +32,10 @@ operation = "link"
 owner = "bluewy"
 source = "../../../files/xkb-any@any"
 target = "/home/bluewy/.config/xkb"
+
+[[items-install]]
+group = "bluewy"
+operation = "link"
+owner = "bluewy"
+source = "/dev/null"
+target = "/home/bluewy/.config/systemd/user/at-spi-dbus-bus.service"

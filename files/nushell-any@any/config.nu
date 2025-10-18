@@ -71,7 +71,6 @@ $env.PATH = $env.PATH | append [
 # [[ Other ]]
 
 $env.EDITOR = "nvim"
-$env.NO_AT_BRIDGE = 1
 
 # [ Alias ]
 # note: for some reason, the rename of the original built-in command will have
