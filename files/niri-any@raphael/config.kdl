@@ -167,7 +167,7 @@ binds {
    // preserve the shift in case of accidental press
    // note: portal, wireplumber and pipewire are still active as their are not
    //    tied to the defined lifetime
-   Mod+Shift+Escape { spawn "niri-custom-session" "stop"; }
+   Mod+Shift+Escape { spawn "uwsm" "stop"; }
    Mod+Shift+Alt+Escape { quit; }
 
    // [[ Keyboard ]]
