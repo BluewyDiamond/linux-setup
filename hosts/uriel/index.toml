@@ -18,6 +18,7 @@ include = [
    "../../hosts-modules/for-bluewy/bluetooth/services.toml",
    "../../hosts-modules/for-bluewy/rtcwake-for-mc-server-#gpu-nvidia/files.toml",
    "../../hosts-modules/for-bluewy/rtcwake-for-mc-server-#gpu-nvidia/services.toml",
+   "../../hosts-modules/for-bluewy/ssh/packages.toml",
 
    "../../users/bluewy/@uriel/index.toml",
    "../../users/yellowy/#minimal/index.toml",

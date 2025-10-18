@@ -13,6 +13,7 @@ include = [
    "../../hosts-modules/for-bluewy/wireless-regdb-es-region/packages.toml",
    "../../hosts-modules/for-bluewy/bluetooth/packages.toml",
    "../../hosts-modules/for-bluewy/bluetooth/services.toml",
+   "../../hosts-modules/for-bluewy/ssh/packages.toml",
 
    "../../users/bluewy/@any/index.toml",
 ]
