@@ -35,7 +35,7 @@ def 'compact column' [
 $env.config.show_banner = false
 
 $env.config.hooks.display_output = {
-   table --theme psql --width (term size | get columns)
+   table --theme psql
 }
 
 # [[ XDG ]]
