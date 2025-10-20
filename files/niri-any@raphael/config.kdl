@@ -48,6 +48,7 @@ window-rule {
 
    open-fullscreen false
    open-maximized true
+   open-maximized-to-edges false
    open-focused true
 }
 
