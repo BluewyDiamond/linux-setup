@@ -1,0 +1,17 @@
+[[files]]
+source = '../../files/networkd-root@raphael/20-wired.network'
+target = '/etc/systemd/network/20-wired.network'
+action = 'copy'
+chmod = '655'
+owner = 'root'
+group = 'root'
+profiles = ['root@raphael']
+
+[[files]]
+source = '../../files/networkd-root@raphael/21-wireless.network'
+target = '/etc/systemd/network/21-wireless.network'
+action = 'copy'
+chmod = '655'
+owner = 'root'
+group = 'root'
+profiles = ['root@raphael']

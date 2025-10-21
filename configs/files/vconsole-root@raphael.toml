@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/vconsole-root@raphael/vconsole.conf'
+target = '/etc/vconsole.conf'
+action = 'copy'
+chmod = '655'
+owner = 'root'
+group = 'root'
+profiles = ['root@raphael', 'root@uriel', 'root@sariel']

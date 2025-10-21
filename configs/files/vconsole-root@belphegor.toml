@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/locale-root@belphegor/vconsole.conf'
+target = '/etc/vconsole.conf'
+action = 'copy'
+chmod = '655'
+owner = 'root'
+group = 'root'
+profiles = ['root@belphegor']

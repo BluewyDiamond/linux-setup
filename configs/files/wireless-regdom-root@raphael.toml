@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/wireless-regdom-root@raphael/wireless-regdom'
+target = '/etc/conf.d/wireless-regdom'
+action = 'copy'
+chmod = '655'
+owner = 'root'
+group = 'root'
+profiles = ['root@raphael', 'root@uriel', 'root@sariel', 'root@belphegor']

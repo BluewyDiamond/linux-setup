@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/networkmanager-root@uriel/wifi-backend.conf'
+target = '/etc/NetworkManager/conf.d/wifi-backend.conf'
+action = 'copy'
+chmod = '655'
+owner = 'root'
+group = 'root'
+profiles = ['root@uriel', 'root@sariel', 'root@belphegor']

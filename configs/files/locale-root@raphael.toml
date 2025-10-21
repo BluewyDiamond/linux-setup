@@ -1,0 +1,17 @@
+[[files]]
+source = '../../files/locale-root@raphael/locale.gen'
+target = '/etc/locale.gen'
+action = 'copy'
+chmod = '655'
+owner = 'root'
+group = 'root'
+profiles = ['root@raphael', 'root@uriel', 'root@sariel', 'root@belphegor']
+
+[[files]]
+source = '../../files/locale-root@raphael/locale.conf'
+target = '/etc/locale.conf'
+action = 'copy'
+chmod = '655'
+owner = 'root'
+group = 'root'
+profiles = ['root@raphael', 'root@uriel', 'root@sariel', 'root@belphegor']

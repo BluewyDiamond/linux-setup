@@ -1,0 +1,11 @@
+[Match]
+Name=eno1
+
+[Network]
+DHCP=yes
+
+[DHCPv4]
+RouteMetric=100
+
+[IPv6AcceptRA]
+RouteMetric=100
