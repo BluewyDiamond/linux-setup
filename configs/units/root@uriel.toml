@@ -1,0 +1,24 @@
+[[units]]
+user = 'root'
+path = '/etc/systemd/system'
+enable = [
+   "systemd-timesyncd.service",
+   "systemd-resolved.service",
+   "NetworkManager.service",
+
+   "ufw.service",
+   "ananicy-cpp.service",
+
+   "acer-battery-limiter.service",
+
+   "sshd.service",
+   "getty@tty1.service",
+
+   # by chwd
+   'nvidia-resume.service',
+   'nvidia-suspend.service',
+   'nvidia-powerd.service',
+   'nvidia-hibernate.service',
+   'switcheroo-control.service',
+]
+profiles = ['root@uriel']

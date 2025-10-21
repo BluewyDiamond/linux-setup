@@ -1,0 +1,18 @@
+[[units]]
+user = 'root'
+path = '/etc/systemd/system'
+enable = [
+   "systemd-timesyncd.service",
+   "systemd-resolved.service",
+   "NetworkManager.service",
+
+   'bluetooth.service',
+
+   'ufw.service',
+   'ananicy-cpp.service',
+
+   'lenovo-battery-limiter.service',
+
+   'cosmic-greeter.service',
+]
+profiles = ['root@sariel']

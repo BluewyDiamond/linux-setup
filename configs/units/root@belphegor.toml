@@ -1,0 +1,20 @@
+[[units]]
+user = 'root'
+path = '/etc/systemd/system'
+enable = [
+   'getty@tty1.service',
+
+   'systemd-networkd.service',
+   'systemd-network-generator.service',
+   'systemd-networkd-wait-online.service',
+   'systemd-resolved.service',
+   'iwd.service',
+
+   'systemd-timesyncd.service',
+
+   'bluetooth.service',
+
+   'ufw.service',
+   'ananicy-cpp.service',
+]
+profiles = ['root@belphegor']

@@ -1,0 +1,6 @@
+[[units]]
+user = 'bluewy'
+path = '/home/bluewy/.config/systemd/user'
+mask = ['xdg-user-dirs.service', 'at-spi-dbus-bus.service']
+enable = ['wireplumber.service', 'pipewire.service', 'psd.service']
+profiles = ['bluewy@raphael', 'bluewy@uriel']

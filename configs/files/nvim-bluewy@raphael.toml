@@ -6,3 +6,12 @@ chmod = '755'
 owner = 'bluewy'
 group = 'bluewy'
 profiles = ['bluewy@raphael', 'bluewy@uriel', 'bluewy@sariel']
+
+[[files]]
+source = '../../files/nvim-bluewy@raphael'
+target = '/home/yellowy/.config/nvim'
+action = 'link'
+chmod = '755'
+owner = 'yellowy'
+group = 'yellowy'
+profiles = ['yellowy@uriel']

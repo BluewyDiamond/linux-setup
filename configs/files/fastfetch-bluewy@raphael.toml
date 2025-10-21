@@ -6,3 +6,12 @@ chmod = '755'
 owner = 'bluewy'
 group = 'bluewy'
 profiles = ['bluewy@raphael', 'bluewy@uriel', 'bluewy@sariel']
+
+[[files]]
+source = '../../files/fastfetch-bluewy@raphael'
+target = '/home/yellowy/.config/fastfetch'
+action = 'link'
+chmod = '755'
+owner = 'yellowy'
+group = 'yellowy'
+profiles = ['yellowy@uriel']
