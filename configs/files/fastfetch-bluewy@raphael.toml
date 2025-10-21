@@ -2,7 +2,7 @@
 source = '../../files/fastfetch-bluewy@raphael'
 target = '/home/bluewy/.config/fastfetch'
 action = 'link'
-chmod = '751'
+chmod = '755'
 owner = 'bluewy'
 group = 'bluewy'
 profiles = ['bluewy@raphael', 'bluewy@uriel']
