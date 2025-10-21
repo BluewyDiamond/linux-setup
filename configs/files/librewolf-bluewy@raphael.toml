@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/librewolf-bluewy@raphael/librewolf.overrides.cfg'
+target = '/home/bluewy/.librewolf/librewolf.overrides.cfg'
+action = 'link'
+chmod = '644'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']

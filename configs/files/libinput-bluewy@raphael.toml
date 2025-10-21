@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/libinput-bluewy@raphael/local-overrides.quirks'
+target = '/etc/libinput/local-overrides.quirks'
+action = 'copy'
+chmod = '644'
+owner = 'root'
+group = 'root'
+profiles = ['root@raphael', 'root@uriel', 'root@sariel', 'root@belphegor']

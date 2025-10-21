@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/user-dirs-bluewy@raphael/user-dirs.dirs'
+target = '/home/bluewy/.config/user-dirs.dirs'
+action = 'link'
+chmod = '644'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']

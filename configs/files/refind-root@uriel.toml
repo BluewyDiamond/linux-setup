@@ -1,0 +1,17 @@
+[[files]]
+source = '../../files/refind-root@uriel/refind.conf'
+target = '/boot/EFI/refind/refind.conf'
+action = 'copy'
+chmod = '644'
+owner = 'root'
+group = 'root'
+profiles = ['root@uriel']
+
+[[files]]
+source = '../../files/refind-root@uriel/extra.conf'
+target = '/boot/EFI/refind/extra.conf'
+action = 'copy'
+chmod = '644'
+owner = 'root'
+group = 'root'
+profiles = ['root@uriel']

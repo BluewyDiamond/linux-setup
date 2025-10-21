@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/hypr-bluewy@raphael'
+target = '/home/bluewy/.config/hypr'
+action = 'link'
+chmod = '751'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']

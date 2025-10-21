@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/wezterm-bluewy@raphael'
+target = '/home/bluewy/.config/wezterm'
+action = 'link'
+chmod = '751'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']

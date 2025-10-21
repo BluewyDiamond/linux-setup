@@ -1,0 +1,17 @@
+[[files]]
+source = '../../files/xkb-root@raphael'
+target = '/etc/xkb'
+action = 'copy'
+chmod = '755'
+owner = 'root'
+group = 'root'
+profiles = ['root@raphael', 'root@uriel']
+
+[[files]]
+source = '../../files/xkb-root@raphael'
+target = '/home/bluewy/.config/xkb'
+action = 'link'
+chmod = '755'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']

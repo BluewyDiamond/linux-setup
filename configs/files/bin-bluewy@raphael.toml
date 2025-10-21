@@ -1,0 +1,26 @@
+[[files]]
+source = '../../files/bin-bluewy@raphael/gamescope-stuff'
+target = '/home/bluewy/.local/bin/gamescope-stuff'
+action = 'link'
+chmod = '744'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']
+
+[[files]]
+source = '../../files/bin-bluewy@raphael/proton-stuff'
+target = '/home/bluewy/.local/bin/proton-stuff'
+action = 'link'
+chmod = '744'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']
+
+[[files]]
+source = '../../files/bin-bluewy@raphael/steam-stuff'
+target = '/home/bluewy/.local/bin/steam-stuff'
+action = 'link'
+chmod = '744'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']

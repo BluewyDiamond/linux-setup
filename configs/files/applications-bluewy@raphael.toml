@@ -1,0 +1,17 @@
+[[files]]
+source = '../../files/applications-bluewy@raphael/heroic.desktop'
+target = '/home/bluewy/.local/share/applications/heroic.desktop'
+action = 'link'
+chmod = '644'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']
+
+[[files]]
+source = '../../files/applications-bluewy@raphael/obs.desktop'
+target = '/home/bluewy/.local/share/applications/obs.desktop'
+action = 'link'
+chmod = '644'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']

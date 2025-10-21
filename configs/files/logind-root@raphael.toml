@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/logind-root@raphael/big-runtime.conf'
+target = '/etc/systemd/logind.conf.d/big-runtime.conf'
+action = 'copy'
+chmod = '644'
+owner = 'root'
+group = 'root'
+profiles = ['root@raphael', 'root@uriel', 'root@sariel']

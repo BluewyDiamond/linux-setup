@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/booster-root@raphael/booster.yaml'
+target = '/etc/booster.yaml'
+action = 'copy'
+chmod = '644'
+owner = 'root'
+group = 'root'
+profiles = ['root@raphael', 'root@uriel', 'root@sariel', 'root@belphegor']

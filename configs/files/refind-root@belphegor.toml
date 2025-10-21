@@ -1,0 +1,17 @@
+[[files]]
+source = '../../files/refind-root@belphegor/refind.conf'
+target = '/boot/EFI/refind/refind.conf'
+action = 'copy'
+chmod = '644'
+owner = 'root'
+group = 'root'
+profiles = ['root@belphegor']
+
+[[files]]
+source = '../../files/refind-root@belphegor/extra.conf'
+target = '/boot/EFI/refind/extra.conf'
+action = 'copy'
+chmod = '644'
+owner = 'root'
+group = 'root'
+profiles = ['root@belphegor']

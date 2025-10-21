@@ -1,0 +1,17 @@
+[[files]]
+source = '../../files/lenovo-battery-limit-service-root@sariel/limit-lenovo-battery'
+target = '/usr/local/bin/limit-lenovo-battery'
+action = 'copy'
+chmod = '744'
+owner = 'root'
+group = 'root'
+profiles = ['root@sariel']
+
+[[files]]
+source = '../../files/lenovo-battery-limit-service-root@sariel/lenovo-battery-limiter.service'
+target = '/etc/systemd/lenovo-battery-limiter.service'
+action = 'copy'
+chmod = '644'
+owner = 'root'
+group = 'root'
+profiles = ['root@sariel']

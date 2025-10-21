@@ -1,0 +1,17 @@
+[[files]]
+source = '../../files/acer-battery-limit-service-root@uriel/limit-acer-battery'
+target = '/usr/local/bin/limit-acer-battery'
+action = 'copy'
+chmod = '744'
+owner = 'root'
+group = 'root'
+profiles = ['root@uriel']
+
+[[files]]
+source = '../../files/acer-battery-limit-service-root@uriel/acer-battery-limiter.service'
+target = '/etc/systemd/acer-battery-limiter.service'
+action = 'copy'
+chmod = '644'
+owner = 'root'
+group = 'root'
+profiles = ['root@uriel']

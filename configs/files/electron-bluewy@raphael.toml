@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/electron-bluewy@raphael/electron-flags.conf'
+target = '/home/bluewy/.config/electron-flags.conf'
+action = 'link'
+chmod = '644'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']

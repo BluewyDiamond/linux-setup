@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/starship-bluewy@raphael/starship.toml'
+target = '/home/bluewy/.config/starship.toml'
+action = 'link'
+chmod = '644'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']

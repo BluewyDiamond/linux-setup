@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/nvim-bluewy@raphael'
+target = '/home/bluewy/.config/nvim'
+action = 'link'
+chmod = '751'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'bluewy@uriel']
