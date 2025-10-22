@@ -2,17 +2,17 @@
 user = 'root'
 path = '/etc/systemd/system'
 enable = [
-   "systemd-timesyncd.service",
-   "systemd-resolved.service",
-   "NetworkManager.service",
+   'systemd-timesyncd.service',
+   'systemd-resolved.service',
+   'NetworkManager.service',
 
-   "ufw.service",
-   "ananicy-cpp.service",
+   'ufw.service',
+   'ananicy-cpp.service',
 
-   "acer-battery-limiter.service",
+   'acer-battery-limiter.service',
 
-   "sshd.service",
-   "getty@tty1.service",
+   'sshd.service',
+   'getty@tty1.service',
 
    # by chwd
    'nvidia-resume.service',

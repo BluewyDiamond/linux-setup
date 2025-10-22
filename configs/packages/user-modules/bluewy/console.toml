@@ -1,0 +1,14 @@
+[[packages]]
+install = [
+   { from = 'std', name = 'nushell-custom' },
+   { from = 'std', name = 'terminus-font' },
+   { from = 'std', name = 'fastfetch' },
+   { from = 'std', name = 'starship' },
+
+   { from = 'std', name = 'zellij' },
+
+   { from = 'std', name = 'flatpak' },
+   { from = 'std', name = 'paru' },
+   { from = 'std', name = 'downgrade' },
+]
+profiles = ['root@raphael', 'root@uriel', 'root@sariel', 'root@belphegor']

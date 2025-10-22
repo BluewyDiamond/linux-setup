@@ -1,0 +1,25 @@
+[[packages]]
+install = [
+   { from = 'std', name = 'linux-firmware' },
+   { from = 'std', name = 'sof-firmware' },
+   { from = 'std', name = 'intel-ucode' },
+
+   { from = 'std', name = 'linux-cachyos-headers' },
+   { from = 'std', name = 'linux-cachyos-nvidia-open' },
+   { from = 'std', name = 'linux-cachyos-lts-headers' },
+   { from = 'std', name = 'linux-cachyos-lts-nvidia-open' },
+
+   { from = 'aur', name = 'acer-wmi-battery-dkms' },
+
+   # by chwd
+   #
+   { from = 'std', name = 'intel-gmmlib' },
+   { from = 'std', name = 'intel-media-driver' },
+   { from = 'std', name = 'lib32-opencl-nvidia' },
+   { from = 'std', name = 'libva-nvidia-driver' },
+   { from = 'std', name = 'opencl-nvidia' },
+   { from = 'std', name = 'switcheroo-control' },
+   { from = 'std', name = 'nvidia-prime' },
+   { from = 'std', name = 'nvidia-settings' },
+]
+profiles = ['root@uriel']

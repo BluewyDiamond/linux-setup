@@ -1,0 +1,22 @@
+[[packages]]
+install = [
+   { from = 'std', name = 'refind' },
+   { from = 'std', name = 'booster' },
+
+   { from = 'std', name = 'base' },
+   { from = 'std', name = 'base-devel' },
+
+   { from = 'std', name = 'ufw' },
+
+   # by cachyos
+   #
+   { from = 'std', name = 'cachyos-hooks' },
+   { from = 'std', name = 'cachyos-keyring' },
+   { from = 'std', name = 'cachyos-mirrorlist' },
+   { from = 'std', name = 'cachyos-rate-mirrors' },
+   { from = 'std', name = 'cachyos-v3-mirrorlist' },
+   { from = 'std', name = 'cachyos-v4-mirrorlist' },
+   { from = 'std', name = 'cachyos-settings' },
+   { from = 'std', name = 'chwd' },
+]
+profiles = ['root@raphael', 'root@uriel', 'root@sariel', 'root@belphegor']

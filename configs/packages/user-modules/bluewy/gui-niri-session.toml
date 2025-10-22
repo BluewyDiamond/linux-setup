@@ -1,0 +1,27 @@
+[[packages]]
+install = [
+   { from = 'std', name = 'uwsm' },
+
+   { from = 'lcl', name = 'niri-custom-git', path = '../../../aur/niri-custom-git' },
+   { from = 'std', name = 'xwayland-satellite' },
+   { from = 'std', name = 'xdg-desktop-portal-gnome' },
+   { from = 'std', name = 'xdg-desktop-portal-gtk' },
+
+   { from = 'std', name = 'hypridle' },
+   { from = 'std', name = 'wayland-pipewire-idle-inhibit' },
+
+   { from = 'std', name = 'cliphist' },
+   { from = 'aur', name = 'runapp' },
+
+   { from = 'aur', name = 'wezterm-git' },
+   { from = 'std', name = 'libgit2' },
+
+   { from = 'std', name = 'pantheon-polkit-agent' },
+   { from = 'std', name = 'hyprlock' },
+   { from = 'std', name = 'fuzzel' },
+   { from = 'std', name = 'keepassxc' },
+   { from = 'std', name = 'satty' },
+
+   { from = 'lcl', name = 'mshell-git', path = '../../../aur/mshell-git' },
+]
+profiles = ['root@raphael', 'root@uriel']

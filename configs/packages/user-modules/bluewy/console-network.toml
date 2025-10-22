@@ -1,0 +1,3 @@
+[[packages]]
+install = [{ from = 'std', name = 'zerotier-one' }]
+profiles = ['root@raphael', 'root@uriel']

@@ -1,0 +1,3 @@
+[[packages]]
+install = [{ from = 'std', name = 'openssh' }, { from = 'std', name = 'sshfs' }]
+profiles = ['root@raphael', 'root@uriel', 'root@sariel', 'root@belphegor']

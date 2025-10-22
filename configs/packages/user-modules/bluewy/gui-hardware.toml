@@ -1,0 +1,3 @@
+[[packages]]
+packages = [{ from = 'std', name = 'gparted' }]
+profiles = ['root@raphael', 'root@uriel']

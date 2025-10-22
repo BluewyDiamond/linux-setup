@@ -1,0 +1,3 @@
+[[packages]]
+packages = [{ from = 'aur', name = 'xdg-ninja-git', ignore = true }]
+profiles = ['root@raphael', 'root@uriel']

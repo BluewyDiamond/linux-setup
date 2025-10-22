@@ -1,0 +1,6 @@
+[[packages]]
+install = [
+   { from = 'std', name = 'bluez' },
+   { from = 'std', name = 'bluez-utils' },
+]
+profiles = ['root@raphael', 'root@uriel', 'root@sariel']

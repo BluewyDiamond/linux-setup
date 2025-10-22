@@ -2,9 +2,9 @@
 user = 'root'
 path = '/etc/systemd/system'
 enable = [
-   "systemd-timesyncd.service",
-   "systemd-resolved.service",
-   "NetworkManager.service",
+   'systemd-timesyncd.service',
+   'systemd-resolved.service',
+   'NetworkManager.service',
 
    'bluetooth.service',
 

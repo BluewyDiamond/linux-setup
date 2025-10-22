@@ -1,0 +1,6 @@
+[[packages]]
+install = [
+   { from = 'std', name = 'networkmanager' },
+   { from = 'std', name = 'iwd' },
+]
+profiles = ['root@uriel', 'root@sariel', 'root@belphegor']

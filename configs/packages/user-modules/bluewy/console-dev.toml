@@ -1,0 +1,9 @@
+[[packages]]
+install = [
+   { from = 'std', name = 'rustup' },
+   { from = 'std', name = 'jdk21-openjdk' },
+
+   { from = 'std', name = 'git' },
+   { from = 'std', name = 'less' },
+]
+profiles = ['root@raphael', 'root@uriel', 'root@sariel', 'root@belphegor']

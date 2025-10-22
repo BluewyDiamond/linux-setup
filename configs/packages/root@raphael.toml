@@ -1,0 +1,21 @@
+[[packages]]
+install = [
+   { from = 'std', name = 'linux-firmware' },
+   { from = 'std', name = 'amd-ucode' },
+
+   { from = 'std', name = 'linux-cachyos' },
+   { from = 'std', name = 'linux-cachyos-lts' },
+   { from = 'std', name = 'linux-cachyos-rc' },
+
+   { from = 'std', name = 'iwd' },
+   { from = 'std', name = 'lact' },
+
+   { from = 'std', name = 'btrfs-progs' },
+   { from = 'std', name = 'sbctl' },
+
+   # by chwd
+   #
+   { from = 'std', name = 'lib32-opencl-mesa' },
+   { from = 'std', name = 'xf86-video-amdgpu' },
+]
+profiles = ['root@raphael']

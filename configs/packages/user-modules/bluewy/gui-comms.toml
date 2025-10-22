@@ -1,0 +1,10 @@
+[[packages]]
+install = [
+   { from = 'std', name = 'telegram-desktop' },
+
+   { from = 'aur', name = 'equibop-bin' },
+   { from = 'aur', name = 'piper-tts-bin' },
+   { from = 'aur', name = 'piper-voices-en-us' },
+   { from = 'std', name = 'speech-dispatcher' },
+]
+profiles = ['root@raphael', 'root@uriel']

@@ -1,0 +1,6 @@
+[[packages]]
+install = [
+   { from = 'std', name = 'mission-center' },
+   { from = 'std', name = 'qpwgraph' },
+]
+profiles = ['root@raphael', 'root@uriel']
