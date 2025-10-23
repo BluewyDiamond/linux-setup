@@ -1,7 +1,7 @@
 general {
-   lock_cmd = qs -c noctalia-shell ipc call lockScreen lock
+   lock_cmd = pidof hyprlock || hyprlock
    before_sleep_cmd = loginctl lock-session
-   after_sleep_cmd = nu -c 'niri msg -j outputs | from json | columns | par-each {|output| niri msg output $output on} | ignore'
+   after_sleep_cmd = hyprctl dispatch dpms on
 }
 
 listener {
@@ -23,8 +23,8 @@ listener {
 
 listener {
    timeout = 300
-   on-timeout = nu -c 'niri msg -j outputs | from json | columns | par-each {|output| niri msg output $output off} | ignore'
-   on-resume = nu -c 'niri msg -j outputs | from json | columns | par-each {|output| niri msg output $output on} | ignore'
+   on-timeout = hyprctl dispatch dpms off
+   on-resume = hyprctl dispatch dpms on
 }
 
 listener {

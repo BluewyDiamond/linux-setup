@@ -268,12 +268,12 @@ binds {
    // note: avoid double systemd wrapping by disabling systemd at niri compile
    //    time
 
-   Mod+T hotkey-overlay-title="Open a Terminal: wezterm" { spawn "runapp" "wezterm"; }
-   Mod+D hotkey-overlay-title="Open App Launcher: fuzzel" { spawn "runapp" "fuzzel" "--launch-prefix=runapp"; }
-   Mod+B allow-when-locked=true { spawn "runapp" "hyprlock"; }
+   Mod+T hotkey-overlay-title="Open a Terminal" { spawn "runapp" "wezterm"; }
+   Mod+D hotkey-overlay-title="Open App Launcher" { spawn "runapp" "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+   Mod+B allow-when-locked=true { spawn "runapp" "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 
    Mod+A { spawn "runapp" "/home/bluewy/.config/niri/dmenu/do-dmenu.nu"; }
-   Mod+X { spawn "runapp" "nu" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
+   Mod+X { spawn "runapp" "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
 
    XF86AudioRaiseVolume allow-when-locked=true { spawn "runapp" "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
    XF86AudioLowerVolume allow-when-locked=true { spawn "runapp" "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
@@ -297,19 +297,7 @@ environment {
 
 // [ Autostart ]
 
-// here to scope environment as systemd has not been fully updated
-spawn-at-startup "systemctl" "--user" "start" "xwayland-satellite.service"
-
-// update systemd + dbus environment
-spawn-at-startup "dbus-update-activation-environment" "--all" "--systemd"
-
-// [[ Rice ]]
-
-spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "one_dark_adwaita"
-spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Sweet-Rainbow"
-spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "cursor-theme" "Bibata-Modern-Classic"
-spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "cursor-size" "24"
-spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
+spawn-at-startup "systemctl" "--user" "start" "--wait" "xwayland-satellite.service"
 
 // [[ Polkit ]]
 
@@ -327,7 +315,7 @@ spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type image --watch cliph
 
 // [[ Widget ]]
 
-spawn-at-startup "nu" "-c" "ps --long | par-each {|row| if $row.command == '/usr/bin/gjs -m /usr/share/mshell/main.js' {$row}} | is-empty | if $in { runapp mshell }"
+spawn-at-startup "nu" "-c" "try { pidof qs } catch { exec runapp -i session-graphical.slice -- qs -c noctalia-shell }"
 
 // [[ Other ]]
 
