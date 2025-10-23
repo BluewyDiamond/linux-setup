@@ -1,5 +1,5 @@
 [[packages]]
-packages = [
+install = [
    { from = 'std', name = 'vscodium', ignore = true },
    { from = 'aur', name = 'obs-pipewire-audio-capture-bin' },
    { from = 'std', name = 'obs-studio' },

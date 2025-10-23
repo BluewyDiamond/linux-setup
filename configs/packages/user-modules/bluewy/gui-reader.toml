@@ -1,5 +1,5 @@
 [[packages]]
-packages = [
+install = [
    { from = 'std', name = 'nautilus' },
    { from = 'std', name = 'gvfs' },
    { from = 'std', name = 'gvfs-afc' },

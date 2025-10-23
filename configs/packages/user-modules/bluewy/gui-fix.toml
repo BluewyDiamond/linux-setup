@@ -1,3 +1,3 @@
 [[packages]]
-packages = [{ from = 'aur', name = 'glibc-eac', ignore = true }]
+install = [{ from = 'aur', name = 'glibc-eac', ignore = true }]
 profiles = ['root@raphael', 'root@uriel']
