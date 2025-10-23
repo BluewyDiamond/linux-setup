@@ -281,20 +281,6 @@ binds {
    XF86AudioMicMute     allow-when-locked=true { spawn "runapp" "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 }
 
-// [ Environment ]
-
-environment {
-   DISPLAY ":0"
-
-   SDL_VIDEODRIVER "wayland,x11"
-   CLUTTER_BACKEND "wayland"
-   QT_QPA_PLATFORM "wayland;xcb"
-
-   QT_QPA_PLATFORMTHEME "qt6ct"
-
-   _JAVA_AWT_WM_NONREPARENTING "1"
-}
-
 // [ Autostart ]
 
 spawn-at-startup "systemctl" "--user" "start" "--wait" "xwayland-satellite.service"
