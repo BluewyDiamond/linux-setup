@@ -294,7 +294,7 @@ environment {
 // necessary for manual integration with uwsm
 spawn-at-startup "systemctl" "--user" "import-environment DISPLAY"
 
-spawn-at-startup "systemctl" "--user" "start" "--wait" "xwayland-satellite.service"
+spawn-at-startup "systemctl" "--user" "start" "xwayland-satellite.service"
 
 // [[ Polkit ]]
 
