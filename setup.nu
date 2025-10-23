@@ -4,7 +4,7 @@
 def main [
    --config-dir (-c): path = . # full path to config directory
 ] {
-   build-config $config_dir
+   build-config2 $config_dir
 }
 
 def 'main install' [
@@ -104,6 +104,125 @@ def build-config [config_dir: path]: nothing -> record {
 
          $inner_unit_configs | upsert $path $units
       }
+   }
+
+   $config
+}
+
+def build-config2 [config_dir: path]: nothing -> any {
+   let target = $config_dir | path join '*' '**' '*.toml' | into glob
+
+   let config = ls $target
+   | get name
+   | reduce -f {} {|raw_config_file_rel_path config|
+      let raw_config_file_abs_path = $raw_config_file_rel_path | path expand
+      let raw_config = open $raw_config_file_abs_path
+
+      let config = do {
+         if $raw_config.files? == null {
+            return $config
+         }
+
+         $raw_config.files
+         | reduce -f $config {|raw_file config|
+            $raw_file.profiles
+            | reduce -f $config {|raw_profile config|
+               let files = $config
+               | get -o $raw_profile
+               | get -o files
+               | default []
+
+               let files = $files
+               | append {
+                  source: $raw_file.source
+                  target: $raw_file.target
+                  action: $raw_file.action
+                  chmod: $raw_file.chmod
+                  owner: $raw_file.owner
+                  group: $raw_file.group
+               }
+
+               $config | upsert ([$raw_profile files] | into cell-path) $files
+            }
+         }
+      }
+
+      let config = do {
+         if $raw_config.packages? == null {
+            return $config
+         }
+
+         $raw_config.packages
+         | reduce -f $config {|raw_package config|
+            $raw_package.profiles
+            | reduce -f $config {|raw_profile config|
+               let packages = $config
+               | get -o $raw_profile
+               | get -o packages
+               | default []
+
+               let packages = $packages
+               | append (
+                  $raw_package.install
+                  | each {|package|
+                     {
+                        from: $package.from
+                        name: $package.name
+                        ignore: ($package.ignore? | default false)
+                        path: $package.path?
+                     }
+                  }
+               )
+
+               $config
+               | upsert ([$raw_profile packages] | into cell-path) $packages
+            }
+         }
+      }
+
+      let config = do {
+         if $raw_config.units? == null {
+            return $config
+         }
+
+         $raw_config.units
+         | reduce -f $config {|raw_unit config|
+            $raw_unit.profiles
+            | reduce -f $config {|raw_profile config|
+               mut config = $config
+
+               if $raw_unit.enable? != null {
+                  let units_to_enable = $config
+                  | get -o $raw_profile
+                  | get -o units
+                  | get -o enable
+                  | default []
+
+                  let units_to_enable = $units_to_enable
+                  | append $raw_unit.enable
+
+                  $config = $config | upsert ([$raw_profile units enable] | into cell-path) $units_to_enable
+               }
+
+               if $raw_unit.mask? != null {
+                  let units_to_mask = $config
+                  | get -o $raw_profile
+                  | get -o units
+                  | get -o mask
+                  | default []
+
+                  let units_to_mask = $units_to_mask
+                  | append $raw_unit.mask
+
+                  $config = $config | upsert ([$raw_profile units mask] | into cell-path) $units_to_mask
+               }
+
+               $config
+            }
+         }
+      }
+
+      $config
    }
 
    $config
