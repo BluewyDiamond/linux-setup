@@ -281,7 +281,18 @@ binds {
    XF86AudioMicMute     allow-when-locked=true { spawn "runapp" "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 }
 
+// [ Environment ]
+
+environment {
+   // necessary for manual integration, it is here because setting it early
+   // will get overwritten by niri
+   DISPLAY ":0"
+}
+
 // [ Autostart ]
+
+// necessary for manual integration with uwsm
+spawn-at-startup "systemctl" "--user" "import-environment DISPLAY"
 
 spawn-at-startup "systemctl" "--user" "start" "--wait" "xwayland-satellite.service"
 
