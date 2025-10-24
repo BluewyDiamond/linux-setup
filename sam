@@ -256,7 +256,13 @@ def copy-file [$file] {
 
       [dir dir] => {
          if (
-            diff -rq $file.target_abs_path $file.source_abs_path
+            diff
+            -rq
+            $file.target_abs_path
+            $file.source_abs_path
+            | complete
+            | get exit_code
+            | $in == 0
          ) {
             log info (
                $"skipping because a match was found for target=($file.target_abs_path)"
