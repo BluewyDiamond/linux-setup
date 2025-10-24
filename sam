@@ -194,7 +194,7 @@ def install-file [file: record] {
 
                if ($target_file == $source_file) {
                   log info (
-                     $"skipping as target=($file.target_item_abs_path) matches with source"
+                     $"skipping as target=($file.target_abs_path) matches with source"
                   )
 
                   return
@@ -405,7 +405,9 @@ def build-config [config_dir: path]: nothing -> any {
                let files = $files
                | append {
                   source_abs_path: (
-                     $raw_config_file_abs_path | path join $raw_file.source
+                     $raw_config_file_abs_path
+                     | path dirname
+                     | path join $raw_file.source
                   )
 
                   target_abs_path: $raw_file.target
@@ -440,6 +442,7 @@ def build-config [config_dir: path]: nothing -> any {
                   | each {|package|
                      let path = if $package.path? != null {
                         $raw_config_file_abs_path
+                        | path dirname
                         | path join $package.path
                         | path expand
                      }
