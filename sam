@@ -37,9 +37,13 @@ def 'main install' [
    let config = build-config $config_dir
    let config = $config | get ($profiles | first) ...($profiles | drop 1)
 
-   #
-   # setup files
-   #
+   $config.files | each {|file|
+      try {
+         install-file $file
+      } catch {|error|
+         $error.rendered | print
+      }
+   }
 
    let installed_packages = pacman -Qq | lines
 
@@ -135,6 +139,188 @@ def 'main cleanup' [
    cleanup-packages $config.packages
 }
 
+def install-file [file: record] {
+   log info (
+      $"checking file to install as user=($file.owner)" +
+      $" with target=($file.target_abs_path)"
+   )
+
+   let source_abs_path_type = $file.source_abs_path | path type
+   let target_abs_path_type = $file.target_abs_path | path type
+
+   match $file.action {
+      copy => {
+         match [$source_abs_path_type $target_abs_path_type] {
+            [null _] => {
+               (
+                  log
+                  error
+                  $"skipping source=($file.source_abs_path) does not exist"
+               )
+            }
+
+            [_ null] => {
+               let target_dir_abs_path = $file.target_abs_path | path dirname
+
+               if not ($target_dir_abs_path | path exists) {
+                  mkdir $target_dir_abs_path
+               }
+
+               log info $"installing to target=($file.target_abs_path)"
+               cp -r $file.source_abs_path $file.target_abs_path
+            }
+
+            [dir dir] => {
+               if (
+                  diff -rq $file.target_abs_path $file.source_abs_path
+               ) {
+                  log info (
+                     $"skipping as target=($file.target_abs_path) matches with source"
+                  )
+
+                  return
+               }
+
+               log info $"installing to target=($file.target_abs_path)"
+               rm -r $file.target_abs_path
+               cp -r $file.source_abs_path $file.target_abs_path
+            }
+
+            [file file] => {
+               let target_file = open --raw $file.target_abs_path
+               let source_file = open --raw $file.source_abs_path
+
+               if ($target_file == $source_file) {
+                  log info (
+                     $"skipping as target=($file.target_item_abs_path) matches with source"
+                  )
+
+                  return
+               }
+
+               log info $"installing to target=($file.target_abs_path)"
+               rm $file.target_abs_path
+               cp $file.source_abs_path $file.target_abs_path
+            }
+
+            [symlink symlink] => {
+               if (
+                  ($file.source_abs_path | path expand) ==
+                  ($file.target_abs_path | path expand)
+               ) {
+                  log info (
+                     $"skipping as target=($file.target_abs_path) matches with source"
+                  )
+
+                  return
+               }
+
+               log info $"installing to target=($file.target_abs_path)"
+               unlink $file.target_abs_path
+               cp $file.source_abs_path $file.target_abs_path
+            }
+         }
+
+         apply-permissions $file.chmod $file.target_abs_path
+         apply-ownership $file.owner $file.group $file.target_abs_path
+      }
+
+      link => {
+         match [$source_abs_path_type $target_abs_path_type] {
+            [null _] => {
+               (
+                  log
+                  error
+                  $"skipping source=($file.source_abs_path) does not exist"
+               )
+            }
+
+            [_ null] => {
+
+               let target_parent_dir_abs_path = $file.target_abs_path | path dirname
+
+               if not ($target_parent_dir_abs_path | path exists) {
+                  mkdir $target_parent_dir_abs_path
+               }
+
+               log info $"installing to target=($file.target_abs_path)"
+               ln -s $file.source__abs_path $file.target_abs_path
+            }
+
+            [_ dir] => {
+               log info $"installing to target=($file.target_abs_path)"
+               rm -r $file.target_abs_path
+               ln -s $file.source_abs_path $file.target_abs_path
+            }
+
+            [_ file] => {
+               log info $"installing to target=($file.target_abs_path)"
+               rm $file.target_abs_path
+               ln -s $file.source_abs_path $file.target_abs_path
+            }
+
+            [_ symlink] => {
+               if (
+                  ($file.target_abs_path | path expand) ==
+                  $file.source_abs_path
+               ) {
+                  log info (
+                     $"skipping as target=($file.target_abs_path) matches with source"
+                  )
+
+                  return
+               }
+
+               log info $"installing to target=($file.target_abs_path)"
+               unlink $file.target_abs_path
+               ln -s $file.source_abs_path $file.target_abs_path
+            }
+
+            [_ _] => {
+               log error (
+                  $"skipped as not implemented to following action=($file.action)" +
+                  $" source=($file.source_abs_path)" +
+                  $" target=($file.target_abs_path)"
+               )
+            }
+         }
+
+         apply-ownership $file.owner $file.group $file.target_abs_path
+      }
+
+      _ => {
+         log error $"skipped as not implemeted for action=($file.action)"
+      }
+   }
+}
+
+def apply-ownership [
+   owner: string
+   group: string
+   target_abs_path: path
+]: nothing -> nothing {
+   if ($owner == $env.LOGNAME) {
+      return
+   }
+
+   let target_owner = ls -lD $target_abs_path | get 0 | get user
+
+   if ($target_owner == $owner) {
+      return
+   }
+
+   chown -R $"($owner):($group)" $target_abs_path
+}
+
+# TODO: check before applying though hopefully
+# the program itself does the check
+def apply-permissions [
+   chmod: string
+   target_abs_path: path
+] {
+   chmod $chmod $target_abs_path
+}
+
 def install-packages [
    packages
    installed_packages: list<string>
@@ -214,8 +400,11 @@ def build-config [config_dir: path]: nothing -> any {
 
                let files = $files
                | append {
-                  source: $raw_file.source
-                  target: $raw_file.target
+                  source_abs_path: (
+                     $raw_config_file_abs_path | path join $raw_file.source
+                  )
+
+                  target_abs_path: $raw_file.target
                   action: $raw_file.action
                   chmod: $raw_file.chmod
                   owner: $raw_file.owner
