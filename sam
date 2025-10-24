@@ -290,6 +290,16 @@ def install-file [file: record] {
                unlink $file.target_abs_path
                cp $file.source_abs_path $file.target_abs_path
             }
+
+            [_ _] => {
+               log error (
+                  $"skipped because not implemented for action=($file.action)" +
+                  $" source=($file.source_abs_path)" +
+                  $" target=($file.target_abs_path)"
+               )
+
+               return
+            }
          }
 
          apply-permissions $file.chmod $file.target_abs_path
@@ -355,6 +365,8 @@ def install-file [file: record] {
                   $" source=($file.source_abs_path)" +
                   $" target=($file.target_abs_path)"
                )
+
+               return
             }
          }
 
