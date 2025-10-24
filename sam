@@ -37,97 +37,121 @@ def 'main install' [
    let config = build-config $config_dir
    let config = $config | get ($profiles | first) ...($profiles | drop 1)
 
-   $config.files? | default [] | each {|file|
-      try {
-         install-file $file
-      } catch {|error|
-         $error.rendered | print
+   do {
+      if $config.files? == null or ($config.files | is-empty) {
+         log info "no files to manage"
+         return
       }
-   }
 
-   let packages = $config.packages? | default []
-
-   let installed_packages = if ($packages | is-not-empty) {
-      pacman -Qq | lines
-   } else {
-      []
-   }
-
-   let std_packages = $packages | where {|package|
-      $package.from == "std" and $package.ignore == false
-   }
-
-   let aur_packages = $packages | where {|package|
-      $package.from == "aur" and $package.ignore == false
-   }
-
-   let local_packages = $packages | where {|package|
-      $package.from == "lcl" and $package.ignore == false
-   }
-
-   (
-      install-packages
-      $std_packages
-      $installed_packages
-      "std"
-
-      {|missing_std_packages|
-         let missing_std_package_names = $missing_std_packages
-         | each {|missing_std_package|
-            $missing_std_package.name
-         }
-
+      $config.files | each {|file|
          try {
-            pacman -S ...$missing_std_package_names
-         } catch {|$error|
+            install-file $file
+         } catch {|error|
             $error.rendered | print
          }
       }
-   )
+   }
 
-   (
-      install-packages
-      $aur_packages
-      $installed_packages
-      "aur"
-
-      {|missing_aur_packages|
-         let missing_aur_package_names = $missing_aur_packages
-         | each {|missing_aur_package|
-            $missing_aur_package.name
-         }
-
-         try {
-            paru -S --aur ...$missing_aur_package_names
-         } catch {|$error|
-            $error.rendered | print
-         }
+   do {
+      if $config.packages? == null or ($config.packages | is-empty) {
+         log info "no packages to manage"
+         return
       }
-   )
 
-   (
-      install-packages
-      $local_packages
-      $installed_packages
-      "local"
+      let installed_packages = pacman -Qq | lines
 
-      {|missing_local_packages|
-         let missing_local_package_paths = $missing_local_packages
-         | each {|missing_local_packages|
-            $missing_local_packages.dir_abs_path
-         }
-
-         try {
-            paru -Bi ...$missing_local_package_paths
-         } catch {|$error|
-            $error.rendered | print
-         }
+      let std_packages = $config.packages | where {|package|
+         $package.from == "std" and $package.ignore == false
       }
-   )
 
-   #
-   # setup services
-   #
+      let aur_packages = $config.packages | where {|package|
+         $package.from == "aur" and $package.ignore == false
+      }
+
+      let local_packages = $config.packages | where {|package|
+         $package.from == "lcl" and $package.ignore == false
+      }
+
+      (
+         install-packages
+         $std_packages
+         $installed_packages
+         "std"
+
+         {|missing_std_packages|
+            let missing_std_package_names = $missing_std_packages
+            | each {|missing_std_package|
+               $missing_std_package.name
+            }
+
+            try {
+               pacman -S ...$missing_std_package_names
+            } catch {|$error|
+               $error.rendered | print
+            }
+         }
+      )
+
+      (
+         install-packages
+         $aur_packages
+         $installed_packages
+         "aur"
+
+         {|missing_aur_packages|
+            let missing_aur_package_names = $missing_aur_packages
+            | each {|missing_aur_package|
+               $missing_aur_package.name
+            }
+
+            try {
+               paru -S --aur ...$missing_aur_package_names
+            } catch {|$error|
+               $error.rendered | print
+            }
+         }
+      )
+
+      (
+         install-packages
+         $local_packages
+         $installed_packages
+         "local"
+
+         {|missing_local_packages|
+            let missing_local_package_paths = $missing_local_packages
+            | each {|missing_local_packages|
+               $missing_local_packages.dir_abs_path
+            }
+
+            try {
+               paru -Bi ...$missing_local_package_paths
+            } catch {|$error|
+               $error.rendered | print
+            }
+         }
+      )
+   }
+
+   do {
+      if $config.units == null or ($config.units | is-empty) {
+         log info "no units to manage"
+         return
+      }
+
+      $config.units | each {|unit|
+         let enabled_units = get-enabled-units $unit.dir_abs_path
+
+         if $enabled_units == null {
+            log error $"skipping because of lack of permissions for unit_path=($unit.path) owned-by=($unit.user)"
+            return null
+         }
+
+         do-unit $unit $enabled_units
+      }
+   }
+
+   null
 }
 
 def 'main cleanup' [
@@ -161,7 +185,7 @@ def install-file [file: record] {
                (
                   log
                   error
-                  $"skipping source=($file.source_abs_path) does not exist"
+                  $"skipping because of non-existance for source=($file.source_abs_path)"
                )
 
                return
@@ -183,7 +207,7 @@ def install-file [file: record] {
                   diff -rq $file.target_abs_path $file.source_abs_path
                ) {
                   log info (
-                     $"skipping as target=($file.target_abs_path) matches with source"
+                     $"skipping because a match was found for target=($file.target_abs_path)"
                   )
 
                   return
@@ -200,7 +224,7 @@ def install-file [file: record] {
 
                if ($target_file == $source_file) {
                   log info (
-                     $"skipping as target=($file.target_abs_path) matches with source"
+                     $"skipping because a match was found for target=($file.target_abs_path)"
                   )
 
                   return
@@ -217,7 +241,7 @@ def install-file [file: record] {
                   ($file.target_abs_path | path expand)
                ) {
                   log info (
-                     $"skipping as target=($file.target_abs_path) matches with source"
+                     $"skipping because a match was found for target=($file.target_abs_path)"
                   )
 
                   return
@@ -239,7 +263,7 @@ def install-file [file: record] {
                (
                   log
                   error
-                  $"skipping source=($file.source_abs_path) does not exist"
+                  $"skipping because of non-existance for source=($file.source_abs_path)"
                )
 
                return
@@ -275,7 +299,7 @@ def install-file [file: record] {
                   $file.source_abs_path
                ) {
                   log info (
-                     $"skipping as target=($file.target_abs_path) matches with source"
+                     $"skipping because a match was found for target=($file.target_abs_path)"
                   )
 
                   return
@@ -288,7 +312,7 @@ def install-file [file: record] {
 
             [_ _] => {
                log error (
-                  $"skipped as not implemented to following action=($file.action)" +
+                  $"skipped because not implemented for action=($file.action)" +
                   $" source=($file.source_abs_path)" +
                   $" target=($file.target_abs_path)"
                )
@@ -299,7 +323,7 @@ def install-file [file: record] {
       }
 
       _ => {
-         log error $"skipped as not implemeted for action=($file.action)"
+         log error $"skipped because not implemeted for action=($file.action)"
       }
    }
 }
@@ -344,16 +368,16 @@ def install-packages [
    }
 
    if ($missing_packages | is-empty) {
-      log info $"skipping as there is no ($label) packages to install"
+      log info $"skipping because there is no packages to install for ($label)"
       return
    }
 
-   log info $"installing ($label) packages"
+   log info $"installing packages for ($label)"
    do $on_install $missing_packages
 }
 
 def cleanup-packages [packages] {
-   log info 'checking to packages to cleanup'
+   log info 'checking packages to cleanup'
    let installed_package_names = pacman -Qq | lines
    let package_names = $packages | par-each {|package| $package.name }
 
@@ -370,7 +394,7 @@ def cleanup-packages [packages] {
       log info 'cleaning up packages'
       pacman -Rns ...$unlisted_packages_names
    } else {
-      log info 'skipping as there is no packages to cleanup'
+      log info 'skipping because there is no packages to cleanup'
    }
 }
 
@@ -383,6 +407,56 @@ def is-package-a-dependency []: string -> bool {
    }
 
    $pactree_output_complete | get stdout | lines | length | $in > 1
+}
+
+def do-unit [unit enabled_unit_names] {
+   log info (
+      $"checking services with user=($unit.user)"
+      + $" and dir_abs_path=($unit.dir_abs_path)"
+   )
+
+   let unit_names_to_enable = $unit.enable | where {|unit_name|
+      $unit_name not-in $enabled_unit_names
+   }
+
+   if ($unit_names_to_enable | is-empty) {
+      log info $"skipping because the units are already enabled"
+      return
+   }
+
+   $unit_names_to_enable | each {|unit_name_to_enable|
+      log info $"enabling service=($unit_name_to_enable) with user=($unit.user)"
+
+      if (is-admin) and ($unit.user == root) {
+         systemctl enable $unit_name_to_enable
+      } else if (is-admin) {
+         systemctl --user -M $"($unit.user)@" enable $unit_name_to_enable
+      } else if ($unit.user == $env.LOGNAME) {
+         systemctl --user enable $unit_name_to_enable
+      } else {
+         log error "skipped because there is no method"
+      }
+   }
+
+   # TODO: Mask units
+}
+
+def get-enabled-units [service_dir_abs_path: string] {
+   let g = $"($service_dir_abs_path)/*.wants/*"
+
+   try {
+      ls ($g | into glob) | get name | each {|item|
+         $item | path basename
+      }
+   } catch {|$error|
+      if (check-what-error $error ["Permission denied"]) {
+         return null
+      } else if (check-what-error $error ["Pattern, file or folder not found"]) {
+         return []
+      } else {
+         error make $error
+      }
+   }
 }
 
 def build-config [config_dir: path]: nothing -> any {
@@ -478,35 +552,19 @@ def build-config [config_dir: path]: nothing -> any {
          | reduce -f $config {|raw_unit config|
             $raw_unit.profiles
             | reduce -f $config {|raw_profile config|
-               mut config = $config
+               let units = $config
+               | get -o $raw_profile
+               | get -o units
+               | default []
 
-               if $raw_unit.enable? != null {
-                  let units_to_enable = $config
-                  | get -o $raw_profile
-                  | get -o units
-                  | get -o enable
-                  | default []
-
-                  let units_to_enable = $units_to_enable
-                  | append $raw_unit.enable
-
-                  $config = $config | upsert ([$raw_profile units enable] | into cell-path) $units_to_enable
+               let units = $units | append {
+                  dir_abs_path: $raw_unit.path
+                  user: $raw_unit.user
+                  mask: $raw_unit.mask?
+                  enable: $raw_unit.enable?
                }
 
-               if $raw_unit.mask? != null {
-                  let units_to_mask = $config
-                  | get -o $raw_profile
-                  | get -o units
-                  | get -o mask
-                  | default []
-
-                  let units_to_mask = $units_to_mask
-                  | append $raw_unit.mask
-
-                  $config = $config | upsert ([$raw_profile units mask] | into cell-path) $units_to_mask
-               }
-
-               $config
+               $config | upsert ([$raw_profile units] | into cell-path) $units
             }
          }
       }
