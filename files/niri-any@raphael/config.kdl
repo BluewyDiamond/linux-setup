@@ -35,7 +35,7 @@ output "HDMI-A-2" {
 prefer-no-csd
 
 overview {
-   backdrop-color "#1E2127"
+   backdrop-color "#21252b"
 
    workspace-shadow {
       off
@@ -96,7 +96,8 @@ window-rule {
 }
 
 layout {
-   background-color "#21252B"
+   // i wish i had an oled monitor
+   background-color "#000000"
    gaps 16
    center-focused-column "never"
 
