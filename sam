@@ -37,7 +37,7 @@ def 'main install' [
    let config = build-config $config_dir
    let config = $config | get ($profiles | first) ...($profiles | drop 1)
 
-   $config.files | each {|file|
+   $config.files? | default [] | each {|file|
       try {
          install-file $file
       } catch {|error|
@@ -45,17 +45,23 @@ def 'main install' [
       }
    }
 
-   let installed_packages = pacman -Qq | lines
+   let packages = $config.packages? | default []
 
-   let std_packages = $config.packages | where {|package|
+   let installed_packages = if ($packages | is-not-empty) {
+      pacman -Qq | lines
+   } else {
+      []
+   }
+
+   let std_packages = $packages | where {|package|
       $package.from == "std" and $package.ignore == false
    }
 
-   let aur_packages = $config.packages | where {|package|
+   let aur_packages = $packages | where {|package|
       $package.from == "aur" and $package.ignore == false
    }
 
-   let local_packages = $config.packages | where {|package|
+   let local_packages = $packages | where {|package|
       $package.from == "lcl" and $package.ignore == false
    }
 
@@ -248,7 +254,7 @@ def install-file [file: record] {
                }
 
                log info $"installing to target=($file.target_abs_path)"
-               ln -s $file.source__abs_path $file.target_abs_path
+               ln -s $file.source_abs_path $file.target_abs_path
             }
 
             [_ dir] => {
@@ -408,6 +414,7 @@ def build-config [config_dir: path]: nothing -> any {
                      $raw_config_file_abs_path
                      | path dirname
                      | path join $raw_file.source
+                     | path expand
                   )
 
                   target_abs_path: $raw_file.target
