@@ -141,7 +141,7 @@ def 'main cleanup' [
 
 def install-file [file: record] {
    log info (
-      $"checking file to install as user=($file.owner)" +
+      $"checking file to install with owner=($file.owner)" +
       $" with target=($file.target_abs_path)"
    )
 
@@ -157,6 +157,8 @@ def install-file [file: record] {
                   error
                   $"skipping source=($file.source_abs_path) does not exist"
                )
+
+               return
             }
 
             [_ null] => {
@@ -233,6 +235,8 @@ def install-file [file: record] {
                   error
                   $"skipping source=($file.source_abs_path) does not exist"
                )
+
+               return
             }
 
             [_ null] => {
