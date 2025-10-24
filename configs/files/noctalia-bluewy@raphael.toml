@@ -1,0 +1,8 @@
+[[files]]
+source = '../../files/noctalia-bluewy@raphael'
+target = '/home/bluewy/.config/noctalia'
+action = 'link'
+chmod = '755'
+owner = 'bluewy'
+group = 'bluewy'
+profiles = ['bluewy@raphael', 'uriel@raphael']
