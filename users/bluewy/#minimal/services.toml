@@ -1,4 +1,0 @@
-[[units]]
-mask = ["xdg-user-dirs.service"]
-path = "/home/bluewy/.config/systemd/user"
-user = "bluewy"

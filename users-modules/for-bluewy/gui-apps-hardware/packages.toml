@@ -1,5 +1,0 @@
-packages = [
-   # [ gui.apps.hardware ]
-   #
-   { from = "std", name = "gparted" },
-]

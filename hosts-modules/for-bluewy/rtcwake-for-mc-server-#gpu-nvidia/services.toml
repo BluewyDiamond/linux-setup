@@ -1,4 +1,0 @@
-[[units]]
-enable = ["rtcwake-for-mc-server-#gpu-nvidia.timer"]
-path = "/etc/systemd/system"
-user = "root"

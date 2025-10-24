@@ -1,4 +1,0 @@
-[[units]]
-enable = ["bluetooth.service"]
-path = "/etc/systemd/system"
-user = "root"

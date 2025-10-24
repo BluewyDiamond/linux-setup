@@ -1,6 +1,0 @@
-[[items-install]]
-group = "elisa"
-operation = "copy"
-owner = "elisa"
-source = "../../../files/psd-any@any/frequency.conf"
-target = "/home/elisa/.config/systemd/user/psd-resync.timer.d/frequency.conf"

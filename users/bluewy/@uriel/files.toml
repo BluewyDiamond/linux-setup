@@ -1,6 +1,0 @@
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/niri-any@raphael"
-target = "/home/bluewy/.config/niri"

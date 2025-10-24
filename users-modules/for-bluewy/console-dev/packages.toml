@@ -1,8 +1,0 @@
-packages = [
-
-   { from = "std", name = "rustup" },
-   { from = "std", name = "jdk21-openjdk" },
-
-   { from = "std", name = "git" },
-   { from = "std", name = "less" },
-]

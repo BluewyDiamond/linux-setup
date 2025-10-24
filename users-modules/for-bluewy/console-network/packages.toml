@@ -1,5 +1,0 @@
-packages = [
-   # [ console.network ]
-   #
-   { from = "std", name = "zerotier-one" },
-]

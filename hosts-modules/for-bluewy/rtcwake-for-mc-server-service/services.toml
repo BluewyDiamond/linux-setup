@@ -1,4 +1,0 @@
-[[units]]
-enable = ["rtcwake-for-mc-server.timer"]
-path = "/etc/systemd/system"
-user = "root"

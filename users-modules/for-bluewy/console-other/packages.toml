@@ -1,4 +1,0 @@
-packages = [
-   #
-   { from = "aur", name = "xdg-ninja-git", ignore = true },
-]

@@ -1,4 +1,0 @@
-[[units]]
-enable = ["wireplumber.service", "pipewire.service", "psd.service"]
-path = "/home/bluewy/.config/systemd/user"
-user = "bluewy"

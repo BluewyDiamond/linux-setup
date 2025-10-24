@@ -1,7 +1,0 @@
-packages = [
-   # console.monitor
-   #
-   { from = "std", name = "bottom" },
-   { from = "std", name = "bandwhich" },
-   { from = "std", name = "nvtop" },
-]

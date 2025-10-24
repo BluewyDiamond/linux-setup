@@ -1,7 +1,0 @@
-packages = [
-   # [ gui.apps.browse ]
-   #
-   { from = "std", name = "librewolf-bin" },
-   { from = "std", name = "profile-sync-daemon" },
-   { from = "std", name = "thunderbird" },
-]

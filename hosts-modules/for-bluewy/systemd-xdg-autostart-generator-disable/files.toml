@@ -1,6 +1,0 @@
-[[files-install]]
-operation = "link"
-owner = "root"
-group = "root"
-source = "/dev/null"
-target = "/etc/systemd/user-generators/systemd-xdg-autostart-generator"

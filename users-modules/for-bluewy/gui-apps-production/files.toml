@@ -1,6 +1,0 @@
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/applications-any@any/obs.desktop"
-target = "/home/bluewy/.local/share/applications/obs.desktop"

@@ -1,6 +1,0 @@
-[[items-install]]
-group = "bluewy"
-operation = "link"
-owner = "bluewy"
-source = "../../../files/speech-dispatcher-any@any"
-target = "/home/bluewy/.config/speech-dispatcher"

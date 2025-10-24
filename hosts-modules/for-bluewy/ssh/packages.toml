@@ -1,4 +1,0 @@
-packages = [
-   { from = "std", name = "openssh" },
-   { from = "std", name = "sshfs" },
-]
