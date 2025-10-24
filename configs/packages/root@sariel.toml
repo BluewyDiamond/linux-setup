@@ -28,20 +28,5 @@ install = [
 
    { from = 'std', name = 'lib32-opencl-mesa' },
    { from = 'std', name = 'xf86-video-amdgpu' },
-
-   # for elisa
-
-   { from = "std", name = "plasma-meta" },
-   { from = "std", name = "kde-applications-meta" },
-
-   { from = "std", name = "cosmic-session" },
-
-   { from = "std", name = "octopi" },
-   { from = "std", name = "flatpak" },
-
-   { from = "std", name = "profile-sync-daemon" },
-   { from = "std", name = "cachyos-firefox-settings" },
-   { from = "aur", name = "equibop-bin" },
-
 ]
 profiles = ['root@sariel']
