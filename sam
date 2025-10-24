@@ -1,4 +1,4 @@
-#!/usr/bin/env nu
+#!/usr/bin/env -S nu '--experimental-options=[reorder-cell-paths pipefail enforce-runtime-annotations]'
 
 use std/log
 
@@ -147,7 +147,11 @@ def 'main install' [
             return null
          }
 
-         do-unit $unit $enabled_units
+         try {
+            do-unit $unit $enabled_units
+         } catch {|error|
+            $error.rendered | print
+         }
       }
    }
 
@@ -166,7 +170,42 @@ def 'main cleanup' [
    let config = build-config $config_dir
    let config = $config | get ($profiles | first) ...($profiles | drop 1)
 
-   cleanup-packages $config.packages
+   do {
+      if $config.packages? == null or ($config.packages | is-empty) {
+         log info "no packages to manage"
+         return
+      }
+
+      try {
+         cleanup-packages $config.packages
+      } catch {|error|
+         $error.rendered | print
+      }
+   }
+
+   do {
+      if $config.units == null or ($config.units | is-empty) {
+         log info "no units to manage"
+         return
+      }
+
+      $config.units | each {|unit|
+         let enabled_units = get-enabled-units $unit.dir_abs_path
+
+         if $enabled_units == null {
+            log error $"skipping because of lack of permissions for unit_path=($unit.path) owned-by=($unit.user)"
+            return null
+         }
+
+         try {
+            cleanup-unit $unit $enabled_units
+         } catch {|error|
+            $error.rendered | print
+         }
+      }
+   }
+
+   null
 }
 
 def install-file [file: record] {
@@ -434,11 +473,74 @@ def do-unit [unit enabled_unit_names] {
       } else if ($unit.user == $env.LOGNAME) {
          systemctl --user enable $unit_name_to_enable
       } else {
-         log error "skipped because there is no method"
+         log error (
+            $"skipped because there is no method for"
+            + $" unit=($unit_name_to_enable) owned-by=($unit.user)"
+         )
       }
    }
 
    # TODO: Mask units
+}
+
+def cleanup-unit [unit enabled_unit_names] {
+   log info $"checking units with user=($unit.user) and dir_abs_path=($unit.dir_abs_path)"
+
+   let unit_names_to_ignore = $unit.enable | each --flatten {|unit_name_to_enable|
+      if (is-admin) and ($unit.user == root) {
+         systemctl list-dependencies --plain --no-pager $unit_name_to_enable
+         | lines
+         | str trim
+         | where $it =~ '\.service$|\.socket$|\.timer$'
+      } else if (is-admin) {
+         systemctl --user -M $"($unit.user)@" list-dependencies --plain --no-pager $unit_name_to_enable
+         | lines
+         | str trim
+         | where $it =~ '\.service$|\.socket$|\.timer$'
+      } else if ($unit.user == $env.LOGNAME) {
+         systemctl --user list-dependencies --plain --no-pager $unit_name_to_enable
+         | lines
+         | str trim
+         | where $it =~ '\.service$|\.socket$|\.timer$'
+      } else {
+         log error (
+            $"throwing error because there is no method for"
+            + $" unit=($unit_name_to_enable) owned-by=($unit.user)"
+         )
+
+         error make {msg: "i cant have this fail atm"}
+      }
+   }
+   | uniq
+
+   let unit_names_to_disable = $enabled_unit_names | where {|enabled_unit_name|
+      (
+         ($enabled_unit_name not-in $unit.enable) and
+         ($enabled_unit_name not-in $unit_names_to_ignore)
+      )
+   }
+
+   if ($unit_names_to_disable | is-empty) {
+      log info $"skipping because there is no units to cleanup"
+      return
+   }
+
+   $unit_names_to_disable | each {|unit_name_to_disable|
+      log info $"attempting to disable unit=($unit_name_to_disable) with user=($unit.user)"
+
+      if (is-admin) and ($unit.user == root) {
+         systemctl disable $unit_name_to_disable
+      } else if (is-admin) {
+         systemctl --user -M $"($unit.user)@" disable $unit_name_to_disable
+      } else if ($unit.user == $env.LOGNAME) {
+         systemctl --user disable $unit_name_to_disable
+      } else {
+         log error (
+            $"skipped because there is no method for"
+            + $" unit=($unit_name_to_disable) owned-by=($unit.user)"
+         )
+      }
+   }
 }
 
 def get-enabled-units [service_dir_abs_path: string] {
