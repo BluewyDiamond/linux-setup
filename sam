@@ -8,7 +8,7 @@ def main [] { }
 def 'main list' [
    --config-dir (-c): path = . # full path to config directory
 ]: nothing -> list {
-   build-config $config_dir | columns
+   build-config $config_dir | columns | sort
 }
 
 def 'main show' [
