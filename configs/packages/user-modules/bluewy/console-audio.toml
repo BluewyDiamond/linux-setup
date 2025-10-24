@@ -6,4 +6,4 @@ install = [
    { from = 'std', name = 'pipewire-jack' },
    { from = 'std', name = 'wireplumber' },
 ]
-profiles = ['root@raphael', 'root@uriel']
+profiles = ['root@raphael', 'root@uriel', 'root@sariel']

@@ -1,5 +1,7 @@
 #!/usr/bin/env nu
 
+use std/log
+
 # Reads *.toml recursively and does stuff.
 def main [] { }
 
@@ -35,9 +37,156 @@ def 'main install' [
    let config = build-config $config_dir
    let config = $config | get ($profiles | first) ...($profiles | drop 1)
 
+   #
    # setup files
-   # setup packages
+   #
+
+   let installed_packages = pacman -Qq | lines
+
+   let std_packages = $config.packages | where {|package|
+      $package.from == "std" and $package.ignore == false
+   }
+
+   let aur_packages = $config.packages | where {|package|
+      $package.from == "aur" and $package.ignore == false
+   }
+
+   let local_packages = $config.packages | where {|package|
+      $package.from == "lcl" and $package.ignore == false
+   }
+
+   (
+      install-packages
+      $std_packages
+      $installed_packages
+      "std"
+
+      {|missing_std_packages|
+         let missing_std_package_names = $missing_std_packages
+         | each {|missing_std_package|
+            $missing_std_package.name
+         }
+
+         try {
+            pacman -S ...$missing_std_package_names
+         } catch {|$error|
+            $error.rendered | print
+         }
+      }
+   )
+
+   (
+      install-packages
+      $aur_packages
+      $installed_packages
+      "aur"
+
+      {|missing_aur_packages|
+         let missing_aur_package_names = $missing_aur_packages
+         | each {|missing_aur_package|
+            $missing_aur_package.name
+         }
+
+         try {
+            paru -S --aur ...$missing_aur_package_names
+         } catch {|$error|
+            $error.rendered | print
+         }
+      }
+   )
+
+   (
+      install-packages
+      $local_packages
+      $installed_packages
+      "local"
+
+      {|missing_local_packages|
+         let missing_local_package_paths = $missing_local_packages
+         | each {|missing_local_packages|
+            $missing_local_packages.dir_abs_path
+         }
+
+         try {
+            paru -Bi ...$missing_local_package_paths
+         } catch {|$error|
+            $error.rendered | print
+         }
+      }
+   )
+
+   #
    # setup services
+   #
+}
+
+def 'main cleanup' [
+   --config-dir (-c): path = . # full path to config directory
+   ...profiles: string # list of profile names
+] {
+   if ($profiles | is-empty) {
+      error make {msg: "Missing parameter..."}
+   }
+
+   let profiles = $profiles | each {|profile| [$profile] | into cell-path }
+   let config = build-config $config_dir
+   let config = $config | get ($profiles | first) ...($profiles | drop 1)
+
+   cleanup-packages $config.packages
+}
+
+def install-packages [
+   packages
+   installed_packages: list<string>
+   label: string
+   on_install: closure
+]: nothing -> nothing {
+   log info $"checking ($label) packages to install"
+
+   let missing_packages = $packages | where {|package|
+      $package.name not-in $installed_packages
+   }
+
+   if ($missing_packages | is-empty) {
+      log info $"skipping as there is no ($label) packages to install"
+      return
+   }
+
+   log info $"installing ($label) packages"
+   do $on_install $missing_packages
+}
+
+def cleanup-packages [packages] {
+   log info 'checking to packages to cleanup'
+   let installed_package_names = pacman -Qq | lines
+   let package_names = $packages | par-each {|package| $package.name }
+
+   let unlisted_packages_names = $installed_package_names
+   | par-each {|installed_package_name|
+      if not ($installed_package_name | is-package-a-dependency) {
+         if $installed_package_name not-in $package_names {
+            $installed_package_name
+         }
+      }
+   }
+
+   if ($unlisted_packages_names | is-not-empty) {
+      log info 'cleaning up packages'
+      pacman -Rns ...$unlisted_packages_names
+   } else {
+      log info 'skipping as there is no packages to cleanup'
+   }
+}
+
+def is-package-a-dependency []: string -> bool {
+   let package = $in
+   let pactree_output_complete = pactree -rl $package | complete
+
+   if ($pactree_output_complete | get exit_code | $in != 0) {
+      return false
+   }
+
+   $pactree_output_complete | get stdout | lines | length | $in > 1
 }
 
 def build-config [config_dir: path]: nothing -> any {
@@ -96,11 +245,17 @@ def build-config [config_dir: path]: nothing -> any {
                | append (
                   $raw_package.install
                   | each {|package|
+                     let path = if $package.path? != null {
+                        $raw_config_file_abs_path
+                        | path join $package.path
+                        | path expand
+                     }
+
                      {
                         from: $package.from
                         name: $package.name
                         ignore: ($package.ignore? | default false)
-                        path: $package.path?
+                        path: $path
                      }
                   }
                )

@@ -1,6 +1,9 @@
 [[packages]]
 install = [
-   { from = 'std', name = 'nushell-custom' },
+   { from = 'lcl', name = 'nushell-custom', path = '../../../../aur/nushell-custom' },
+   # already pulled by nushell-custom, though it is here just in case the above
+   # fails (unlikely)
+   { from = 'std', name = 'nushell' },
    { from = 'std', name = 'terminus-font' },
    { from = 'std', name = 'fastfetch' },
    { from = 'std', name = 'starship' },

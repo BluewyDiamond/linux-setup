@@ -6,6 +6,7 @@ install = [
    { from = 'std', name = 'base' },
    { from = 'std', name = 'base-devel' },
 
+   { from = 'std', name = 'wireless-regdb' },
    { from = 'std', name = 'ufw' },
 
    # by cachyos
