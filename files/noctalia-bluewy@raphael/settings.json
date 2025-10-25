@@ -251,7 +251,7 @@
         "discord": false,
         "discord_armcord": false,
         "discord_dorion": false,
-        "discord_equibop": false,
+        "discord_equibop": true,
         "discord_lightcord": false,
         "discord_vesktop": false,
         "discord_webcord": false,
@@ -259,11 +259,11 @@
         "foot": false,
         "fuzzel": false,
         "ghostty": false,
-        "gtk": false,
-        "kcolorscheme": false,
+        "gtk": true,
+        "kcolorscheme": true,
         "kitty": false,
         "pywalfox": false,
-        "qt": false,
+        "qt": true,
         "vicinae": false
     },
     "ui": {

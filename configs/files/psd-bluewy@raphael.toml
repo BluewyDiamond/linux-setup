@@ -1,13 +1,4 @@
 [[files]]
-source = '../../files/psd-root@raphael/librewolf'
-target = '/usr/share/psd/browsers/librewolf'
-action = 'copy'
-chmod = '644'
-owner = 'root'
-group = 'root'
-profiles = ['root@raphael', 'root@uriel', 'root@sariel']
-
-[[files]]
 source = '../../files/psd-root@raphael/frequency.conf'
 target = '/etc/systemd/user/psd-resync.timer.d/frequency.conf'
 action = 'copy'

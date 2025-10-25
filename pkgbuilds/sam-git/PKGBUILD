@@ -3,7 +3,6 @@ _pkgname=sam
 pkgver=r00.0000000
 pkgrel=1
 pkgdesc='A way to manage dots'
-arch=(any)
 url="https://github.com/BluewyDiamond/$_pkgname"
 depends=(nushell)
 provides=($_pkgname)

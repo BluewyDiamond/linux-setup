@@ -1,0 +1,12 @@
+pkgname=librewolf-psd
+_pkgname=$pkgname
+pkgver=1
+pkgrel=1
+pkgdesc='Adds librewolf profile for profile sync daemon'
+depends=(librewolf profile-sync-daemon)
+provides=($_pkgname)
+conflicts=($_pkgname)
+
+package() {
+   install -Dm644 "$srcdir/../librewolf" "$pkgdir/usr/share/psd/browsers/librewolf"
+}

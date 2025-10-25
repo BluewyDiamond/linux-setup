@@ -1,6 +1,6 @@
 [[packages]]
 install = [
-   { from = 'lcl', name = 'nushell-custom', path = '../../../../aur/nushell-custom' },
+   { from = 'lcl', name = 'nushell-custom', path = '../../../../pkgbuilds/nushell-custom' },
    # already pulled by nushell-custom, though it is here just in case the above
    # fails (unlikely)
    { from = 'std', name = 'nushell' },
@@ -14,6 +14,6 @@ install = [
    { from = 'std', name = 'paru' },
    { from = 'std', name = 'downgrade' },
 
-   { from = 'lcl', name = 'sam-git', path = '../../../../aur/sam-git' },
+   { from = 'lcl', name = 'sam-git', path = '../../../../pkgbuilds/sam-git' },
 ]
 profiles = ['root@raphael', 'root@uriel', 'root@sariel', 'root@belphegor']
