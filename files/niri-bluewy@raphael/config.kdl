@@ -48,7 +48,7 @@ window-rule {
 
    open-fullscreen false
    open-maximized true
-   open-maximized-to-edges false
+   // open-maximized-to-edges false
    open-focused true
 }
 
@@ -266,20 +266,20 @@ binds {
    Mod+Shift+Ctrl+N     { move-window-to-monitor-left; }
 
    // [[ Other ]]
-   // note: avoid double systemd wrapping by disabling systemd at niri compile
-   //    time
+   // note: keep in mind niri will wrap it in a scope if systemd feature is
+   // enabled
 
-   Mod+T hotkey-overlay-title="Open a Terminal" { spawn "runapp" "wezterm"; }
-   Mod+D hotkey-overlay-title="Open App Launcher" { spawn "runapp" "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-   Mod+B allow-when-locked=true { spawn "runapp" "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+   Mod+T hotkey-overlay-title="Open a Terminal" { spawn "wezterm"; }
+   Mod+D hotkey-overlay-title="Open App Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+   Mod+B allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 
-   Mod+A { spawn "runapp" "/home/bluewy/.config/niri/dmenu/do-dmenu.nu"; }
-   Mod+X { spawn "runapp" "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+   Mod+A { spawn "/home/bluewy/.config/niri/dmenu/do-dmenu.nu"; }
+   Mod+X { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
 
-   XF86AudioRaiseVolume allow-when-locked=true { spawn "runapp" "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-   XF86AudioLowerVolume allow-when-locked=true { spawn "runapp" "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-   XF86AudioMute        allow-when-locked=true { spawn "runapp" "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-   XF86AudioMicMute     allow-when-locked=true { spawn "runapp" "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+   XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+   XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+   XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+   XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 }
 
 // [ Environment ]
@@ -299,22 +299,22 @@ spawn-at-startup "systemctl" "--user" "start" "xwayland-satellite.service"
 
 // [[ Polkit ]]
 
-spawn-at-startup "nu" "-c" "try { pidof io.elementary.desktop.agent-polkit } catch { exec runapp /usr/lib/policykit-1-pantheon/io.elementary.desktop.agent-polkit }"
+spawn-at-startup "nu" "-c" "try { pidof io.elementary.desktop.agent-polkit } catch { exec /usr/lib/policykit-1-pantheon/io.elementary.desktop.agent-polkit }"
 
 // [[ Idle Listener ]]
 
-spawn-at-startup "nu" "-c" "try { pidof hypridle } catch { runapp hypridle }"
-spawn-at-startup "nu" "-c" "try { pidof wayland-pipewire-idle-inhibit } catch { runapp wayland-pipewire-idle-inhibit }"
+spawn-at-startup "nu" "-c" "try { pidof hypridle } catch { exec hypridle }"
+spawn-at-startup "nu" "-c" "try { pidof wayland-pipewire-idle-inhibit } catch { exec wayland-pipewire-idle-inhibit }"
 
 // [[ Clipboard ]]
 
-spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type text --watch cliphist store' } catch { runapp wl-paste --type text --watch cliphist store }"
-spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type image --watch cliphist store'} catch { runapp wl-paste --type image --watch cliphist store }"
+spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type text --watch cliphist store' } catch { exec wl-paste --type text --watch cliphist store }"
+spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type image --watch cliphist store'} catch { exec wl-paste --type image --watch cliphist store }"
 
 // [[ Widget ]]
 
-spawn-at-startup "nu" "-c" "try { pidof qs } catch { exec runapp -i session-graphical.slice -- qs -c noctalia-shell }"
+spawn-at-startup "nu" "-c" "try { pidof qs } catch { exec qs -c noctalia-shell }"
 
 // [[ Other ]]
 
-spawn-at-startup "nu" "-c" "try { pidof keepassxc } catch { runapp keepassxc }"
+spawn-at-startup "nu" "-c" "try { pidof keepassxc } catch { exec keepassxc }"
