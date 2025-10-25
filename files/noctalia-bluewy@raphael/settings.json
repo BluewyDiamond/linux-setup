@@ -6,7 +6,7 @@
         ],
         "position": "center",
         "sortByMostUsed": true,
-        "terminalCommand": "",
+        "terminalCommand": "wezterm",
         "useApp2Unit": true
     },
     "audio": {
