@@ -1,13 +1,15 @@
 {
     "appLauncher": {
         "backgroundOpacity": 1,
+        "customLaunchPrefix": "niri msg action spawn --",
+        "customLaunchPrefixEnabled": true,
         "enableClipboardHistory": true,
         "pinnedExecs": [
         ],
         "position": "center",
         "sortByMostUsed": true,
         "terminalCommand": "wezterm",
-        "useApp2Unit": true
+        "useApp2Unit": false
     },
     "audio": {
         "cavaFrameRate": 60,
@@ -55,6 +57,7 @@
             ],
             "left": [
                 {
+                    "characterCount": 2,
                     "hideUnoccupied": false,
                     "id": "Workspace",
                     "labelMode": "none"
@@ -196,6 +199,7 @@
         "wallpaperChange": ""
     },
     "location": {
+        "analogClockInCalendar": false,
         "name": "L'Alfas del Pi",
         "showCalendarEvents": true,
         "showWeekNumberInCalendar": false,

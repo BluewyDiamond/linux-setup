@@ -306,13 +306,9 @@ spawn-at-startup "nu" "-c" "try { pidof io.elementary.desktop.agent-polkit } cat
 spawn-at-startup "nu" "-c" "try { pidof hypridle } catch { exec hypridle }"
 spawn-at-startup "nu" "-c" "try { pidof wayland-pipewire-idle-inhibit } catch { exec wayland-pipewire-idle-inhibit }"
 
-// [[ Clipboard ]]
-
-spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type text --watch cliphist store' } catch { exec wl-paste --type text --watch cliphist store }"
-spawn-at-startup "nu" "-c" "try { pgrep -fx 'wl-paste --type image --watch cliphist store'} catch { exec wl-paste --type image --watch cliphist store }"
-
 // [[ Widget ]]
 
+// note: this also starts cliphist and stuff it needs
 spawn-at-startup "nu" "-c" "try { pidof qs } catch { exec qs -c noctalia-shell }"
 
 // [[ Other ]]
