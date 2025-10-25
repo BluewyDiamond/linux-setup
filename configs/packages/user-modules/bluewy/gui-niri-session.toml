@@ -16,6 +16,7 @@ install = [
    { from = 'std', name = 'wayland-pipewire-idle-inhibit' },
 
    { from = 'std', name = 'cliphist' },
+   { from = 'std', name = 'cava' },
    { from = 'std', name = 'noctalia-shell' },
    { from = 'std', name = 'satty' },
 
